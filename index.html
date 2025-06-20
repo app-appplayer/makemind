@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,6 +52,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
+        }
+
+        nav > div:first-child {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex: 1;
         }
 
         .logo {
@@ -442,35 +450,477 @@
             color: var(--secondary);
             font-weight: 500;
         }
+
+        /* Language Selector */
+        .language-selector {
+            position: relative;
+            margin-left: auto;
+        }
+
+        .language-selector select {
+            padding: 8px 30px 8px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: white;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235f6368' d='M2 4l4 4 4-4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+
+        .language-selector select:hover {
+            border-color: var(--primary);
+        }
+
+        .language-selector select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .language-selector {
+                margin-top: 10px;
+            }
+        }
     </style>
+    <script>
+        // Translation data
+        const translations = {
+            en: {
+                // Navigation
+                "nav.overview": "Overview",
+                "nav.packages": "Packages",
+                "nav.architecture": "Architecture",
+                "nav.useCases": "Use Cases",
+                "nav.viewOnGitHub": "View on GitHub",
+                
+                // Hero
+                "hero.title": "Connect AI to Everything",
+                "hero.subtitle": "Open standard protocol for connecting AI and applications",
+                "hero.getStarted": "Get Started",
+                "hero.github": "View on GitHub",
+                
+                // Overview
+                "overview.title": "What is MCP Ecosystem?",
+                "overview.subtitle": "Model Context Protocol (MCP) provides a standardized way for AI to access tools and data",
+                "overview.workflow": "Integration Workflow",
+                "overview.step1.title": "AI Request",
+                "overview.step1.desc": "User requests task from AI",
+                "overview.step2.title": "MCP Communication",
+                "overview.step2.desc": "Access tools via standard protocol",
+                "overview.step3.title": "UI Generation",
+                "overview.step3.desc": "Dynamically compose interface",
+                "overview.step4.title": "Deliver Results",
+                "overview.step4.desc": "Instantly provide to user",
+                
+                // Architecture
+                "architecture.title": "System Architecture",
+                "architecture.subtitle": "Unified architecture spanning from embedded to cloud platforms",
+                
+                // Packages
+                "packages.title": "Core Packages",
+                "packages.subtitle": "Perfect harmony of specialized packages for each layer",
+                
+                // Package descriptions
+                "package.mcp_client.desc": "Client implementation for connecting Flutter/Dart applications to MCP servers",
+                "package.mcp_server.desc": "Server implementation for exposing data and functionality from Flutter apps to AI",
+                "package.mcp_llm.desc": "Advanced package for integration with various LLM providers",
+                "package.flutter_mcp.desc": "Complete agent system integrating MCP components",
+                "package.flutter_mcp_ui_runtime.desc": "Runtime engine for rendering dynamic UI from JSON definitions",
+                "package.mcp_ui_builder.desc": "Visual builder for creating MCP UI with drag and drop",
+                "package.autostudio_embedded.desc": "MCP implementation for embedded systems",
+                
+                // Features
+                "feature.mcp2025": "MCP 2025-03-26 standard support",
+                "feature.oauth": "Built-in OAuth 2.1 authentication",
+                "feature.transport": "Multiple transport types (STDIO, SSE, HTTP)",
+                "feature.subscription": "Real-time resource subscriptions",
+                "feature.expose": "Expose Resources, Tools, Prompts",
+                "feature.session": "Session management and event streams",
+                "feature.monitoring": "Performance monitoring and metrics",
+                "feature.multiVersion": "Multiple protocol version support",
+                "feature.providers": "Claude, OpenAI, Together AI support",
+                "feature.batch": "40-60% performance improvement with batch processing",
+                "feature.loadBalance": "Multi-client load balancing",
+                "feature.rag": "RAG capabilities and vector search",
+                "feature.background": "Background service execution",
+                "feature.systemTray": "System tray support (desktop)",
+                "feature.security": "Secure storage and encryption",
+                "feature.native": "Platform-specific native implementation",
+                "feature.widgets": "65+ Flutter widget support",
+                "feature.reactive": "Reactive state management",
+                "feature.expression": "Expression binding",
+                "feature.mcpReady": "MCP protocol ready",
+                "feature.preview": "Real-time preview",
+                "feature.property": "Property editor",
+                "feature.jsonExport": "JSON import/export",
+                "feature.templates": "Template library",
+                "feature.arduino": "Arduino, ESP32, STM32 support",
+                "feature.tier": "5-tier architecture",
+                "feature.docker": "Docker-based unified build",
+                "feature.hal": "Hardware abstraction layer",
+                
+                // Status
+                "status.production": "Production Ready",
+                "status.beta": "Beta",
+                "status.application": "Application",
+                
+                // Use Cases
+                "useCases.title": "Innovative Use Cases",
+                "useCases.subtitle": "New possibilities enabled by the MCP ecosystem",
+                "useCase.aiApp.title": "AI Autonomous App Development",
+                "useCase.aiApp.desc": "AI automatically generates entire applications from requirements. Fully automated development experience from UI to logic.",
+                "useCase.smartHome.title": "Smart Home Integration",
+                "useCase.smartHome.desc": "AI analyzes IoT sensor data and generates dashboards in real-time. Automatically optimizes UI by learning user patterns.",
+                "useCase.enterprise.title": "Enterprise AI Agent",
+                "useCase.enterprise.desc": "Securely connects enterprise data to AI and automatically generates custom reports and dashboards. Provides real-time business insights.",
+                "useCase.adaptiveUI.title": "Adaptive Mobile UI",
+                "useCase.adaptiveUI.desc": "Provides UI that changes in real-time based on user behavior. Can instantly modify UI from server without app updates.",
+                "useCase.industrial.title": "Industrial IoT Monitoring",
+                "useCase.industrial.desc": "Connects all IoT devices from factory equipment to agricultural sensors with AI. Detects and responds to anomalies in real-time.",
+                "useCase.education.title": "Education Platform",
+                "useCase.education.desc": "AI dynamically adjusts curriculum and UI based on learner's level and progress. Provides personalized learning experience.",
+                
+                // Getting Started
+                "getStarted.title": "Getting Started",
+                "getStarted.subtitle": "Create your first MCP application in 5 minutes",
+                "getStarted.viewDocs": "View Full Documentation",
+                
+                // Community
+                "community.title": "Building the Ecosystem Together",
+                "community.subtitle": "Creating the future of AI with the open source community",
+                "community.packages": "Active Packages",
+                "community.compliance": "Standard Compliance",
+                "community.platforms": "Supported Platforms",
+                "community.possibilities": "Possibilities",
+                
+                // Footer
+                "footer.docs": "Documentation",
+                "footer.contact": "Contact",
+                "footer.copyright": "© 2025 MCP Ecosystem. Open source project."
+            },
+            ko: {
+                // Navigation
+                "nav.overview": "개요",
+                "nav.packages": "패키지",
+                "nav.architecture": "아키텍처",
+                "nav.useCases": "활용 사례",
+                "nav.viewOnGitHub": "GitHub에서 보기",
+                
+                // Hero
+                "hero.title": "Connect AI to Everything",
+                "hero.subtitle": "AI와 애플리케이션을 연결하는 개방형 표준 프로토콜",
+                "hero.getStarted": "시작하기",
+                "hero.github": "GitHub에서 보기",
+                
+                // Overview
+                "overview.title": "MCP 생태계란?",
+                "overview.subtitle": "Model Context Protocol(MCP)은 AI가 도구와 데이터에 접근하는 표준화된 방법을 제공합니다",
+                "overview.workflow": "통합 워크플로우",
+                "overview.step1.title": "AI 요청",
+                "overview.step1.desc": "사용자가 AI에게 작업 요청",
+                "overview.step2.title": "MCP 통신",
+                "overview.step2.desc": "표준 프로토콜로 도구 접근",
+                "overview.step3.title": "UI 생성",
+                "overview.step3.desc": "동적으로 인터페이스 구성",
+                "overview.step4.title": "결과 전달",
+                "overview.step4.desc": "사용자에게 즉시 제공",
+                
+                // Architecture
+                "architecture.title": "시스템 아키텍처",
+                "architecture.subtitle": "임베디드부터 클라우드까지, 모든 플랫폼을 아우르는 통합 아키텍처",
+                
+                // Packages
+                "packages.title": "핵심 패키지",
+                "packages.subtitle": "각 계층을 담당하는 전문화된 패키지들의 완벽한 조화",
+                
+                // Package descriptions
+                "package.mcp_client.desc": "Flutter/Dart 애플리케이션을 MCP 서버에 연결하는 클라이언트 구현",
+                "package.mcp_server.desc": "Flutter 앱에서 AI에게 데이터와 기능을 제공하는 서버 구현",
+                "package.mcp_llm.desc": "다양한 LLM 제공자와의 통합을 위한 고급 패키지",
+                "package.flutter_mcp.desc": "MCP 컴포넌트들을 통합한 완전한 에이전트 시스템",
+                "package.flutter_mcp_ui_runtime.desc": "JSON 정의로부터 동적 UI를 렌더링하는 런타임 엔진",
+                "package.mcp_ui_builder.desc": "드래그 앤 드롭으로 MCP UI를 만드는 비주얼 빌더",
+                "package.autostudio_embedded.desc": "임베디드 시스템을 위한 MCP 구현",
+                
+                // Features (Korean translations)
+                "feature.mcp2025": "MCP 2025-03-26 표준 완벽 지원",
+                "feature.oauth": "OAuth 2.1 인증 내장",
+                "feature.transport": "다중 전송 방식 (STDIO, SSE, HTTP)",
+                "feature.subscription": "실시간 리소스 구독",
+                "feature.expose": "Resources, Tools, Prompts 노출",
+                "feature.session": "세션 관리 및 이벤트 스트림",
+                "feature.monitoring": "성능 모니터링 및 메트릭스",
+                "feature.multiVersion": "다중 프로토콜 버전 지원",
+                "feature.providers": "Claude, OpenAI, Together AI 지원",
+                "feature.batch": "배치 처리로 40-60% 성능 향상",
+                "feature.loadBalance": "멀티 클라이언트 로드 밸런싱",
+                "feature.rag": "RAG 기능 및 벡터 검색",
+                "feature.background": "백그라운드 서비스 실행",
+                "feature.systemTray": "시스템 트레이 지원 (데스크톱)",
+                "feature.security": "보안 저장소 및 암호화",
+                "feature.native": "플랫폼별 네이티브 구현",
+                "feature.widgets": "65+ Flutter 위젯 지원",
+                "feature.reactive": "반응형 상태 관리",
+                "feature.expression": "표현식 바인딩",
+                "feature.mcpReady": "MCP 프로토콜 연동 준비",
+                "feature.preview": "실시간 미리보기",
+                "feature.property": "속성 편집기",
+                "feature.jsonExport": "JSON 가져오기/내보내기",
+                "feature.templates": "템플릿 라이브러리",
+                "feature.arduino": "Arduino, ESP32, STM32 지원",
+                "feature.tier": "5단계 티어 아키텍처",
+                "feature.docker": "Docker 기반 통합 빌드",
+                "feature.hal": "하드웨어 추상화 계층",
+                
+                // Status
+                "status.production": "Production Ready",
+                "status.beta": "Beta",
+                "status.application": "Application",
+                
+                // Use Cases
+                "useCases.title": "혁신적인 활용 사례",
+                "useCases.subtitle": "MCP 생태계로 가능해지는 새로운 가능성들",
+                "useCase.aiApp.title": "AI 자율 앱 개발",
+                "useCase.aiApp.desc": "요구사항만 전달하면 AI가 자동으로 전체 애플리케이션을 생성합니다. UI부터 로직까지 완전 자동화된 개발 경험을 제공합니다.",
+                "useCase.smartHome.title": "스마트 홈 통합",
+                "useCase.smartHome.desc": "IoT 센서 데이터를 AI가 분석하고, 실시간으로 대시보드를 생성합니다. 사용자 패턴을 학습해 자동으로 UI를 최적화합니다.",
+                "useCase.enterprise.title": "기업 AI 에이전트",
+                "useCase.enterprise.desc": "기업 데이터를 안전하게 AI에 연결하고, 맞춤형 보고서와 대시보드를 자동 생성합니다. 실시간 비즈니스 인사이트를 제공합니다.",
+                "useCase.adaptiveUI.title": "적응형 모바일 UI",
+                "useCase.adaptiveUI.desc": "사용자 행동에 따라 실시간으로 변화하는 UI를 제공합니다. 앱 업데이트 없이 서버에서 즉시 UI를 변경할 수 있습니다.",
+                "useCase.industrial.title": "산업용 IoT 모니터링",
+                "useCase.industrial.desc": "공장 설비부터 농업 센서까지, 모든 IoT 기기를 AI와 연결합니다. 이상 징후를 실시간으로 감지하고 대응합니다.",
+                "useCase.education.title": "교육 플랫폼",
+                "useCase.education.desc": "학습자의 수준과 진도에 맞춰 AI가 커리큘럼과 UI를 동적으로 조정합니다. 개인화된 학습 경험을 제공합니다.",
+                
+                // Getting Started
+                "getStarted.title": "시작하기",
+                "getStarted.subtitle": "5분 안에 첫 MCP 애플리케이션 만들기",
+                "getStarted.viewDocs": "전체 문서 보기",
+                
+                // Community
+                "community.title": "함께 만들어가는 생태계",
+                "community.subtitle": "오픈소스 커뮤니티와 함께 AI의 미래를 만들어갑니다",
+                "community.packages": "활발한 패키지",
+                "community.compliance": "표준 준수율",
+                "community.platforms": "지원 플랫폼",
+                "community.possibilities": "가능성",
+                
+                // Footer
+                "footer.docs": "문서",
+                "footer.contact": "문의",
+                "footer.copyright": "© 2025 MCP Ecosystem. 오픈소스 프로젝트."
+            },
+            ja: {
+                // Navigation
+                "nav.overview": "概要",
+                "nav.packages": "パッケージ",
+                "nav.architecture": "アーキテクチャ",
+                "nav.useCases": "活用事例",
+                "nav.viewOnGitHub": "GitHubで見る",
+                
+                // Hero
+                "hero.title": "Connect AI to Everything",
+                "hero.subtitle": "AIとアプリケーションを接続するオープン標準プロトコル",
+                "hero.getStarted": "始める",
+                "hero.github": "GitHubで見る",
+                
+                // Overview
+                "overview.title": "MCPエコシステムとは？",
+                "overview.subtitle": "Model Context Protocol（MCP）は、AIがツールとデータにアクセスする標準化された方法を提供します",
+                "overview.workflow": "統合ワークフロー",
+                "overview.step1.title": "AIリクエスト",
+                "overview.step1.desc": "ユーザーがAIにタスクを要求",
+                "overview.step2.title": "MCP通信",
+                "overview.step2.desc": "標準プロトコルでツールアクセス",
+                "overview.step3.title": "UI生成",
+                "overview.step3.desc": "動的にインターフェース構成",
+                "overview.step4.title": "結果配信",
+                "overview.step4.desc": "ユーザーに即座に提供",
+                
+                // Architecture
+                "architecture.title": "システムアーキテクチャ",
+                "architecture.subtitle": "組み込みからクラウドまで、すべてのプラットフォームを網羅する統合アーキテクチャ",
+                
+                // Packages
+                "packages.title": "コアパッケージ",
+                "packages.subtitle": "各レイヤーを担当する専門化されたパッケージの完璧な調和",
+                
+                // Package descriptions
+                "package.mcp_client.desc": "Flutter/DartアプリケーションをMCPサーバーに接続するクライアント実装",
+                "package.mcp_server.desc": "FlutterアプリからAIにデータと機能を提供するサーバー実装",
+                "package.mcp_llm.desc": "様々なLLMプロバイダーとの統合のための高度なパッケージ",
+                "package.flutter_mcp.desc": "MCPコンポーネントを統合した完全なエージェントシステム",
+                "package.flutter_mcp_ui_runtime.desc": "JSON定義から動的UIをレンダリングするランタイムエンジン",
+                "package.mcp_ui_builder.desc": "ドラッグ＆ドロップでMCP UIを作成するビジュアルビルダー",
+                "package.autostudio_embedded.desc": "組み込みシステム用のMCP実装",
+                
+                // Features (Japanese translations)
+                "feature.mcp2025": "MCP 2025-03-26標準完全サポート",
+                "feature.oauth": "OAuth 2.1認証内蔵",
+                "feature.transport": "複数転送方式（STDIO、SSE、HTTP）",
+                "feature.subscription": "リアルタイムリソース購読",
+                "feature.expose": "Resources、Tools、Prompts公開",
+                "feature.session": "セッション管理とイベントストリーム",
+                "feature.monitoring": "パフォーマンス監視とメトリクス",
+                "feature.multiVersion": "複数プロトコルバージョン対応",
+                "feature.providers": "Claude、OpenAI、Together AI対応",
+                "feature.batch": "バッチ処理で40-60%性能向上",
+                "feature.loadBalance": "マルチクライアントロードバランシング",
+                "feature.rag": "RAG機能とベクトル検索",
+                "feature.background": "バックグラウンドサービス実行",
+                "feature.systemTray": "システムトレイ対応（デスクトップ）",
+                "feature.security": "セキュア保存と暗号化",
+                "feature.native": "プラットフォーム別ネイティブ実装",
+                "feature.widgets": "65+ Flutterウィジェット対応",
+                "feature.reactive": "リアクティブ状態管理",
+                "feature.expression": "式バインディング",
+                "feature.mcpReady": "MCPプロトコル連携準備完了",
+                "feature.preview": "リアルタイムプレビュー",
+                "feature.property": "プロパティエディタ",
+                "feature.jsonExport": "JSONインポート/エクスポート",
+                "feature.templates": "テンプレートライブラリ",
+                "feature.arduino": "Arduino、ESP32、STM32対応",
+                "feature.tier": "5段階ティアアーキテクチャ",
+                "feature.docker": "Dockerベース統合ビルド",
+                "feature.hal": "ハードウェア抽象化レイヤー",
+                
+                // Status
+                "status.production": "本番環境対応",
+                "status.beta": "ベータ版",
+                "status.application": "アプリケーション",
+                
+                // Use Cases
+                "useCases.title": "革新的な活用事例",
+                "useCases.subtitle": "MCPエコシステムで可能になる新しい可能性",
+                "useCase.aiApp.title": "AI自律アプリ開発",
+                "useCase.aiApp.desc": "要件を伝えるだけでAIが自動的にアプリケーション全体を生成します。UIからロジックまで完全自動化された開発体験を提供します。",
+                "useCase.smartHome.title": "スマートホーム統合",
+                "useCase.smartHome.desc": "IoTセンサーデータをAIが分析し、リアルタイムでダッシュボードを生成します。ユーザーパターンを学習して自動的にUIを最適化します。",
+                "useCase.enterprise.title": "企業AIエージェント",
+                "useCase.enterprise.desc": "企業データを安全にAIに接続し、カスタムレポートとダッシュボードを自動生成します。リアルタイムビジネスインサイトを提供します。",
+                "useCase.adaptiveUI.title": "適応型モバイルUI",
+                "useCase.adaptiveUI.desc": "ユーザー行動に応じてリアルタイムで変化するUIを提供します。アプリ更新なしでサーバーから即座にUIを変更できます。",
+                "useCase.industrial.title": "産業用IoTモニタリング",
+                "useCase.industrial.desc": "工場設備から農業センサーまで、すべてのIoTデバイスをAIと接続します。異常を検知してリアルタイムで対応します。",
+                "useCase.education.title": "教育プラットフォーム",
+                "useCase.education.desc": "学習者のレベルと進捗に合わせてAIがカリキュラムとUIを動的に調整します。パーソナライズされた学習体験を提供します。",
+                
+                // Getting Started
+                "getStarted.title": "はじめに",
+                "getStarted.subtitle": "5分で最初のMCPアプリケーションを作成",
+                "getStarted.viewDocs": "完全なドキュメントを見る",
+                
+                // Community
+                "community.title": "一緒に作るエコシステム",
+                "community.subtitle": "オープンソースコミュニティと共にAIの未来を創造します",
+                "community.packages": "アクティブなパッケージ",
+                "community.compliance": "標準準拠率",
+                "community.platforms": "対応プラットフォーム",
+                "community.possibilities": "可能性",
+                
+                // Footer
+                "footer.docs": "ドキュメント",
+                "footer.contact": "お問い合わせ",
+                "footer.copyright": "© 2025 MCPエコシステム。オープンソースプロジェクト。"
+            }
+        };
+
+        // Language management
+        let currentLang = 'en';
+        
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('mcpLang', lang);
+            document.documentElement.lang = lang;
+            translatePage();
+        }
+
+        function translatePage() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const translation = translations[currentLang][key] || translations['en'][key] || key;
+                
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = translation;
+                } else {
+                    element.textContent = translation;
+                }
+            });
+            
+            // Update language selector
+            const langSelect = document.getElementById('languageSelect');
+            if (langSelect) {
+                langSelect.value = currentLang;
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get saved language or browser language
+            const savedLang = localStorage.getItem('mcpLang');
+            const browserLang = navigator.language.substring(0, 2);
+            
+            if (savedLang && translations[savedLang]) {
+                currentLang = savedLang;
+            } else if (translations[browserLang]) {
+                currentLang = browserLang;
+            }
+            
+            setLanguage(currentLang);
+            
+            // Set up language selector
+            const langSelect = document.getElementById('languageSelect');
+            if (langSelect) {
+                langSelect.addEventListener('change', (e) => {
+                    setLanguage(e.target.value);
+                });
+            }
+        });
+    </script>
 </head>
 <body>
     <!-- Header -->
     <header>
         <nav class="container">
-            <div class="logo">MCP Ecosystem</div>
-            <ul class="nav-links">
-                <li><a href="#overview">개요</a></li>
-                <li><a href="#packages">패키지</a></li>
-                <li><a href="#architecture">아키텍처</a></li>
-                <li><a href="#use-cases">활용 사례</a></li>
-                <li><a href="https://github.com/yourusername/mcp-ecosystem">GitHub</a></li>
-            </ul>
+            <div>
+                <div class="logo">MCP Ecosystem</div>
+                <ul class="nav-links">
+                    <li><a href="#overview" data-i18n="nav.overview">Overview</a></li>
+                    <li><a href="#packages" data-i18n="nav.packages">Packages</a></li>
+                    <li><a href="#architecture" data-i18n="nav.architecture">Architecture</a></li>
+                    <li><a href="#use-cases" data-i18n="nav.useCases">Use Cases</a></li>
+                    <li><a href="https://github.com/yourusername/mcp-ecosystem" data-i18n="nav.viewOnGitHub">View on GitHub</a></li>
+                </ul>
+            </div>
+            <div class="language-selector">
+                <select id="languageSelect">
+                    <option value="en">English</option>
+                    <option value="ko">한국어</option>
+                    <option value="ja">日本語</option>
+                </select>
+            </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Connect AI to Everything</h1>
-            <p class="subtitle">AI와 애플리케이션을 연결하는 개방형 표준 프로토콜</p>
+            <h1 data-i18n="hero.title">Connect AI to Everything</h1>
+            <p class="subtitle" data-i18n="hero.subtitle">Open standard protocol for connecting AI and applications</p>
             <div class="cta-buttons">
                 <a href="#get-started" class="btn btn-primary">
-                    <span>시작하기</span>
+                    <span data-i18n="hero.getStarted">Get Started</span>
                     <span>→</span>
                 </a>
                 <a href="https://github.com/yourusername/mcp-ecosystem" class="btn btn-secondary">
-                    <span>GitHub에서 보기</span>
+                    <span data-i18n="hero.github">View on GitHub</span>
                 </a>
             </div>
         </div>
@@ -479,35 +929,35 @@
     <!-- Overview Section -->
     <section id="overview" class="container">
         <div class="section-header">
-            <h2>MCP 생태계란?</h2>
-            <p>Model Context Protocol(MCP)은 AI가 도구와 데이터에 접근하는 표준화된 방법을 제공합니다</p>
+            <h2 data-i18n="overview.title">What is MCP Ecosystem?</h2>
+            <p data-i18n="overview.subtitle">Model Context Protocol (MCP) provides a standardized way for AI to access tools and data</p>
         </div>
 
         <div class="integration-flow">
-            <h3 style="text-align: center; margin-bottom: 40px;">통합 워크플로우</h3>
+            <h3 style="text-align: center; margin-bottom: 40px;" data-i18n="overview.workflow">Integration Workflow</h3>
             <div class="flow-steps">
                 <div class="flow-step">
                     <div class="flow-step-number">1</div>
-                    <h4>AI 요청</h4>
-                    <p>사용자가 AI에게 작업 요청</p>
+                    <h4 data-i18n="overview.step1.title">AI Request</h4>
+                    <p data-i18n="overview.step1.desc">User requests task from AI</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-step-number">2</div>
-                    <h4>MCP 통신</h4>
-                    <p>표준 프로토콜로 도구 접근</p>
+                    <h4 data-i18n="overview.step2.title">MCP Communication</h4>
+                    <p data-i18n="overview.step2.desc">Access tools via standard protocol</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-step-number">3</div>
-                    <h4>UI 생성</h4>
-                    <p>동적으로 인터페이스 구성</p>
+                    <h4 data-i18n="overview.step3.title">UI Generation</h4>
+                    <p data-i18n="overview.step3.desc">Dynamically compose interface</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-step-number">4</div>
-                    <h4>결과 전달</h4>
-                    <p>사용자에게 즉시 제공</p>
+                    <h4 data-i18n="overview.step4.title">Deliver Results</h4>
+                    <p data-i18n="overview.step4.desc">Instantly provide to user</p>
                 </div>
             </div>
         </div>
@@ -517,8 +967,8 @@
     <section id="architecture" class="architecture">
         <div class="container">
             <div class="section-header">
-                <h2>시스템 아키텍처</h2>
-                <p>임베디드부터 클라우드까지, 모든 플랫폼을 아우르는 통합 아키텍처</p>
+                <h2 data-i18n="architecture.title">System Architecture</h2>
+                <p data-i18n="architecture.subtitle">Unified architecture spanning from embedded to cloud platforms</p>
             </div>
 
             <div class="arch-diagram">
@@ -569,8 +1019,8 @@
     <!-- Packages Section -->
     <section id="packages" class="container">
         <div class="section-header">
-            <h2>핵심 패키지</h2>
-            <p>각 계층을 담당하는 전문화된 패키지들의 완벽한 조화</p>
+            <h2 data-i18n="packages.title">Core Packages</h2>
+            <p data-i18n="packages.subtitle">Perfect harmony of specialized packages for each layer</p>
         </div>
 
         <div class="packages">
@@ -580,16 +1030,16 @@
                     <h3 class="package-name">mcp_client</h3>
                     <span class="package-version">v1.0.0</span>
                 </div>
-                <p class="package-description">
-                    Flutter/Dart 애플리케이션을 MCP 서버에 연결하는 클라이언트 구현
+                <p class="package-description" data-i18n="package.mcp_client.desc">
+                    Client implementation for connecting Flutter/Dart applications to MCP servers
                 </p>
                 <ul class="package-features">
-                    <li>MCP 2025-03-26 표준 완벽 지원</li>
-                    <li>OAuth 2.1 인증 내장</li>
-                    <li>다중 전송 방식 (STDIO, SSE, HTTP)</li>
-                    <li>실시간 리소스 구독</li>
+                    <li data-i18n="feature.mcp2025">MCP 2025-03-26 standard support</li>
+                    <li data-i18n="feature.oauth">Built-in OAuth 2.1 authentication</li>
+                    <li data-i18n="feature.transport">Multiple transport types (STDIO, SSE, HTTP)</li>
+                    <li data-i18n="feature.subscription">Real-time resource subscriptions</li>
                 </ul>
-                <span class="package-status status-production">Production Ready</span>
+                <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
             </div>
 
             <div class="package-card">
@@ -597,16 +1047,16 @@
                     <h3 class="package-name">mcp_server</h3>
                     <span class="package-version">v1.0.2</span>
                 </div>
-                <p class="package-description">
-                    Flutter 앱에서 AI에게 데이터와 기능을 제공하는 서버 구현
+                <p class="package-description" data-i18n="package.mcp_server.desc">
+                    Server implementation for exposing data and functionality from Flutter apps to AI
                 </p>
                 <ul class="package-features">
-                    <li>Resources, Tools, Prompts 노출</li>
-                    <li>세션 관리 및 이벤트 스트림</li>
-                    <li>성능 모니터링 및 메트릭스</li>
-                    <li>다중 프로토콜 버전 지원</li>
+                    <li data-i18n="feature.expose">Expose Resources, Tools, Prompts</li>
+                    <li data-i18n="feature.session">Session management and event streams</li>
+                    <li data-i18n="feature.monitoring">Performance monitoring and metrics</li>
+                    <li data-i18n="feature.multiVersion">Multiple protocol version support</li>
                 </ul>
-                <span class="package-status status-production">Production Ready</span>
+                <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
             </div>
 
             <div class="package-card">
@@ -614,16 +1064,16 @@
                     <h3 class="package-name">mcp_llm</h3>
                     <span class="package-version">v1.0.1</span>
                 </div>
-                <p class="package-description">
-                    다양한 LLM 제공자와의 통합을 위한 고급 패키지
+                <p class="package-description" data-i18n="package.mcp_llm.desc">
+                    Advanced package for integration with various LLM providers
                 </p>
                 <ul class="package-features">
-                    <li>Claude, OpenAI, Together AI 지원</li>
-                    <li>배치 처리로 40-60% 성능 향상</li>
-                    <li>멀티 클라이언트 로드 밸런싱</li>
-                    <li>RAG 기능 및 벡터 검색</li>
+                    <li data-i18n="feature.providers">Claude, OpenAI, Together AI support</li>
+                    <li data-i18n="feature.batch">40-60% performance improvement with batch processing</li>
+                    <li data-i18n="feature.loadBalance">Multi-client load balancing</li>
+                    <li data-i18n="feature.rag">RAG capabilities and vector search</li>
                 </ul>
-                <span class="package-status status-production">Production Ready</span>
+                <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
             </div>
 
             <div class="package-card">
@@ -631,16 +1081,16 @@
                     <h3 class="package-name">flutter_mcp</h3>
                     <span class="package-version">v1.0.3</span>
                 </div>
-                <p class="package-description">
-                    MCP 컴포넌트들을 통합한 완전한 에이전트 시스템
+                <p class="package-description" data-i18n="package.flutter_mcp.desc">
+                    Complete agent system integrating MCP components
                 </p>
                 <ul class="package-features">
-                    <li>백그라운드 서비스 실행</li>
-                    <li>시스템 트레이 지원 (데스크톱)</li>
-                    <li>보안 저장소 및 암호화</li>
-                    <li>플랫폼별 네이티브 구현</li>
+                    <li data-i18n="feature.background">Background service execution</li>
+                    <li data-i18n="feature.systemTray">System tray support (desktop)</li>
+                    <li data-i18n="feature.security">Secure storage and encryption</li>
+                    <li data-i18n="feature.native">Platform-specific native implementation</li>
                 </ul>
-                <span class="package-status status-production">Production Ready</span>
+                <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
             </div>
 
             <!-- UI Runtime Packages -->
@@ -649,16 +1099,16 @@
                     <h3 class="package-name">flutter_mcp_ui_runtime</h3>
                     <span class="package-version">v0.1.0</span>
                 </div>
-                <p class="package-description">
-                    JSON 정의로부터 동적 UI를 렌더링하는 런타임 엔진
+                <p class="package-description" data-i18n="package.flutter_mcp_ui_runtime.desc">
+                    Runtime engine for rendering dynamic UI from JSON definitions
                 </p>
                 <ul class="package-features">
-                    <li>65+ Flutter 위젯 지원</li>
-                    <li>반응형 상태 관리</li>
-                    <li>표현식 바인딩</li>
-                    <li>MCP 프로토콜 연동 준비</li>
+                    <li data-i18n="feature.widgets">65+ Flutter widget support</li>
+                    <li data-i18n="feature.reactive">Reactive state management</li>
+                    <li data-i18n="feature.expression">Expression binding</li>
+                    <li data-i18n="feature.mcpReady">MCP protocol ready</li>
                 </ul>
-                <span class="package-status status-beta">Beta</span>
+                <span class="package-status status-beta" data-i18n="status.beta">Beta</span>
             </div>
 
             <div class="package-card">
@@ -666,16 +1116,16 @@
                     <h3 class="package-name">mcp_ui_builder</h3>
                     <span class="package-version">v1.0.0</span>
                 </div>
-                <p class="package-description">
-                    드래그 앤 드롭으로 MCP UI를 만드는 비주얼 빌더
+                <p class="package-description" data-i18n="package.mcp_ui_builder.desc">
+                    Visual builder for creating MCP UI with drag and drop
                 </p>
                 <ul class="package-features">
-                    <li>실시간 미리보기</li>
-                    <li>속성 편집기</li>
-                    <li>JSON 가져오기/내보내기</li>
-                    <li>템플릿 라이브러리</li>
+                    <li data-i18n="feature.preview">Real-time preview</li>
+                    <li data-i18n="feature.property">Property editor</li>
+                    <li data-i18n="feature.jsonExport">JSON import/export</li>
+                    <li data-i18n="feature.templates">Template library</li>
                 </ul>
-                <span class="package-status status-beta">Application</span>
+                <span class="package-status status-beta" data-i18n="status.application">Application</span>
             </div>
 
             <!-- Embedded Package -->
@@ -684,21 +1134,21 @@
                     <h3 class="package-name">autostudio-embedded</h3>
                     <span class="package-version">v0.4.0</span>
                 </div>
-                <p class="package-description">
-                    임베디드 시스템을 위한 MCP 구현
+                <p class="package-description" data-i18n="package.autostudio_embedded.desc">
+                    MCP implementation for embedded systems
                 </p>
                 <ul class="package-features">
-                    <li>Arduino, ESP32, STM32 지원</li>
-                    <li>5단계 티어 아키텍처</li>
-                    <li>Docker 기반 통합 빌드</li>
-                    <li>하드웨어 추상화 계층</li>
+                    <li data-i18n="feature.arduino">Arduino, ESP32, STM32 support</li>
+                    <li data-i18n="feature.tier">5-tier architecture</li>
+                    <li data-i18n="feature.docker">Docker-based unified build</li>
+                    <li data-i18n="feature.hal">Hardware abstraction layer</li>
                 </ul>
                 <div class="badges">
                     <span class="badge">C/C++</span>
-                    <span class="badge">임베디드</span>
+                    <span class="badge">Embedded</span>
                     <span class="badge">IoT</span>
                 </div>
-                <span class="package-status status-beta">Beta</span>
+                <span class="package-status status-beta" data-i18n="status.beta">Beta</span>
             </div>
         </div>
     </section>
@@ -707,45 +1157,45 @@
     <section id="use-cases" class="use-cases">
         <div class="container">
             <div class="section-header">
-                <h2>혁신적인 활용 사례</h2>
-                <p>MCP 생태계로 가능해지는 새로운 가능성들</p>
+                <h2 data-i18n="useCases.title">Innovative Use Cases</h2>
+                <p data-i18n="useCases.subtitle">New possibilities enabled by the MCP ecosystem</p>
             </div>
 
             <div class="use-case-grid">
                 <div class="use-case">
                     <div class="use-case-icon">🤖</div>
-                    <h3>AI 자율 앱 개발</h3>
-                    <p>요구사항만 전달하면 AI가 자동으로 전체 애플리케이션을 생성합니다. UI부터 로직까지 완전 자동화된 개발 경험을 제공합니다.</p>
+                    <h3 data-i18n="useCase.aiApp.title">AI Autonomous App Development</h3>
+                    <p data-i18n="useCase.aiApp.desc">AI automatically generates entire applications from requirements. Fully automated development experience from UI to logic.</p>
                 </div>
 
                 <div class="use-case">
                     <div class="use-case-icon">🏠</div>
-                    <h3>스마트 홈 통합</h3>
-                    <p>IoT 센서 데이터를 AI가 분석하고, 실시간으로 대시보드를 생성합니다. 사용자 패턴을 학습해 자동으로 UI를 최적화합니다.</p>
+                    <h3 data-i18n="useCase.smartHome.title">Smart Home Integration</h3>
+                    <p data-i18n="useCase.smartHome.desc">AI analyzes IoT sensor data and generates dashboards in real-time. Automatically optimizes UI by learning user patterns.</p>
                 </div>
 
                 <div class="use-case">
                     <div class="use-case-icon">🏢</div>
-                    <h3>기업 AI 에이전트</h3>
-                    <p>기업 데이터를 안전하게 AI에 연결하고, 맞춤형 보고서와 대시보드를 자동 생성합니다. 실시간 비즈니스 인사이트를 제공합니다.</p>
+                    <h3 data-i18n="useCase.enterprise.title">Enterprise AI Agent</h3>
+                    <p data-i18n="useCase.enterprise.desc">Securely connects enterprise data to AI and automatically generates custom reports and dashboards. Provides real-time business insights.</p>
                 </div>
 
                 <div class="use-case">
                     <div class="use-case-icon">📱</div>
-                    <h3>적응형 모바일 UI</h3>
-                    <p>사용자 행동에 따라 실시간으로 변화하는 UI를 제공합니다. 앱 업데이트 없이 서버에서 즉시 UI를 변경할 수 있습니다.</p>
+                    <h3 data-i18n="useCase.adaptiveUI.title">Adaptive Mobile UI</h3>
+                    <p data-i18n="useCase.adaptiveUI.desc">Provides UI that changes in real-time based on user behavior. Can instantly modify UI from server without app updates.</p>
                 </div>
 
                 <div class="use-case">
                     <div class="use-case-icon">🔧</div>
-                    <h3>산업용 IoT 모니터링</h3>
-                    <p>공장 설비부터 농업 센서까지, 모든 IoT 기기를 AI와 연결합니다. 이상 징후를 실시간으로 감지하고 대응합니다.</p>
+                    <h3 data-i18n="useCase.industrial.title">Industrial IoT Monitoring</h3>
+                    <p data-i18n="useCase.industrial.desc">Connects all IoT devices from factory equipment to agricultural sensors with AI. Detects and responds to anomalies in real-time.</p>
                 </div>
 
                 <div class="use-case">
                     <div class="use-case-icon">🎓</div>
-                    <h3>교육 플랫폼</h3>
-                    <p>학습자의 수준과 진도에 맞춰 AI가 커리큘럼과 UI를 동적으로 조정합니다. 개인화된 학습 경험을 제공합니다.</p>
+                    <h3 data-i18n="useCase.education.title">Education Platform</h3>
+                    <p data-i18n="useCase.education.desc">AI dynamically adjusts curriculum and UI based on learner's level and progress. Provides personalized learning experience.</p>
                 </div>
             </div>
         </div>
@@ -754,8 +1204,8 @@
     <!-- Getting Started Section -->
     <section id="get-started" class="container">
         <div class="section-header">
-            <h2>시작하기</h2>
-            <p>5분 안에 첫 MCP 애플리케이션 만들기</p>
+            <h2 data-i18n="getStarted.title">Getting Started</h2>
+            <p data-i18n="getStarted.subtitle">Create your first MCP application in 5 minutes</p>
         </div>
 
         <div class="code-snippet">
@@ -776,8 +1226,8 @@ $ flutter run
         </div>
 
         <div style="text-align: center; margin-top: 40px;">
-            <a href="https://docs.mcp-ecosystem.io/getting-started" class="btn btn-primary">
-                전체 문서 보기
+            <a href="https://docs.mcp-ecosystem.io/getting-started" class="btn btn-primary" data-i18n="getStarted.viewDocs">
+                View Full Documentation
             </a>
         </div>
     </section>
@@ -785,26 +1235,26 @@ $ flutter run
     <!-- Community Section -->
     <section class="container" style="padding-bottom: 100px;">
         <div class="section-header">
-            <h2>함께 만들어가는 생태계</h2>
-            <p>오픈소스 커뮤니티와 함께 AI의 미래를 만들어갑니다</p>
+            <h2 data-i18n="community.title">Building the Ecosystem Together</h2>
+            <p data-i18n="community.subtitle">Creating the future of AI with the open source community</p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: center;">
             <div>
                 <h3 style="font-size: 36px; color: var(--primary); margin-bottom: 10px;">9+</h3>
-                <p>활발한 패키지</p>
+                <p data-i18n="community.packages">Active Packages</p>
             </div>
             <div>
                 <h3 style="font-size: 36px; color: var(--accent); margin-bottom: 10px;">100%</h3>
-                <p>표준 준수율</p>
+                <p data-i18n="community.compliance">Standard Compliance</p>
             </div>
             <div>
                 <h3 style="font-size: 36px; color: var(--warning); margin-bottom: 10px;">6+</h3>
-                <p>지원 플랫폼</p>
+                <p data-i18n="community.platforms">Supported Platforms</p>
             </div>
             <div>
                 <h3 style="font-size: 36px; color: var(--error); margin-bottom: 10px;">∞</h3>
-                <p>가능성</p>
+                <p data-i18n="community.possibilities">Possibilities</p>
             </div>
         </div>
     </section>
@@ -814,11 +1264,11 @@ $ flutter run
         <div class="container">
             <ul class="footer-links">
                 <li><a href="https://github.com/yourusername/mcp-ecosystem">GitHub</a></li>
-                <li><a href="https://docs.mcp-ecosystem.io">문서</a></li>
+                <li><a href="https://docs.mcp-ecosystem.io" data-i18n="footer.docs">Documentation</a></li>
                 <li><a href="https://discord.gg/mcp-ecosystem">Discord</a></li>
-                <li><a href="mailto:contact@mcp-ecosystem.io">문의</a></li>
+                <li><a href="mailto:contact@mcp-ecosystem.io" data-i18n="footer.contact">Contact</a></li>
             </ul>
-            <p>&copy; 2025 MCP Ecosystem. 오픈소스 프로젝트.</p>
+            <p data-i18n="footer.copyright">&copy; 2025 MCP Ecosystem. Open source project.</p>
         </div>
     </footer>
 </body>
