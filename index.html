@@ -974,28 +974,28 @@
             <div class="arch-diagram">
                 <pre>
 ┌─────────────────────────────────────────────────────────────┐
-│                    MCP 생태계 (전체 시스템)                    │
+│                    MCP Ecosystem (Full System)                │
 ├─────────────────────────────────────────────────────────────┤
 │                                                               │
 │  ┌─────────────────┐    ┌─────────────────┐                 │
-│  │   AI/LLM 층     │    │   사용자 UI 층   │                 │
+│  │   AI/LLM Layer  │    │    User UI Layer │                 │
 │  │  (Claude, GPT)  │    │ (Flutter Apps)  │                 │
 │  └────────┬────────┘    └────────┬────────┘                 │
 │           │                       │                           │
 │  ┌────────▼────────────────────────▼────────┐                │
-│  │            flutter_mcp (통합 에이전트)      │                │
+│  │       flutter_mcp (Unified Agent)         │                │
 │  │  - Background Services                    │                │
 │  │  - System Integration                     │                │
 │  │  - Security & Storage                     │                │
 │  └──────┬─────────┬─────────┬───────────────┘                │
 │         │         │         │                                 │
 │  ┌──────▼──┐ ┌───▼───┐ ┌──▼────┐                           │
-│  │mcp_client│ │mcp_llm│ │mcp_   │  ◄─── MCP 프로토콜 층    │
+│  │mcp_client│ │mcp_llm│ │mcp_   │  ◄─── MCP Protocol Layer │
 │  │         │ │       │ │server │                           │
 │  └─────────┘ └───────┘ └───────┘                           │
 │                                                               │
 │  ┌─────────────────────────────────┐                         │
-│  │    MCP UI Runtime (makemind)    │  ◄─── 동적 UI 층      │
+│  │    MCP UI Runtime (makemind)    │  ◄─── Dynamic UI Layer │
 │  │  ┌─────────┐ ┌──────────────┐  │                         │
 │  │  │ Runtime │ │  Generator   │  │                         │
 │  │  └────┬────┘ └──────┬───────┘  │                         │
@@ -1005,7 +1005,7 @@
 │  └─────────────────────────────────┘                         │
 │                                                               │
 │  ┌─────────────────────────────────┐                         │
-│  │   autostudio-embedded (IoT)     │  ◄─── 임베디드 층      │
+│  │   autostudio-embedded (IoT)     │  ◄─── Embedded Layer   │
 │  │  - Arduino, ESP32, STM32        │                         │
 │  │  - Raspberry Pi, Host Systems   │                         │
 │  └─────────────────────────────────┘                         │
@@ -1210,15 +1210,15 @@
 
         <div class="code-snippet">
             <code>
-# Flutter MCP 설치<br>
+# Install Flutter MCP<br>
 $ flutter pub add flutter_mcp<br>
 <br>
-# 간단한 MCP 서버 생성<br>
+# Create a simple MCP server<br>
 $ dart create -t console my_mcp_server<br>
 $ cd my_mcp_server<br>
 $ dart pub add mcp_server<br>
 <br>
-# UI 빌더 실행<br>
+# Run UI Builder<br>
 $ git clone https://github.com/yourusername/mcp_ui_builder<br>
 $ cd mcp_ui_builder<br>
 $ flutter run
