@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Ecosystem - Connect AI to Everything</title>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --secondary: #5f6368;
+            --background: #ffffff;
+            --surface: #f8f9fa;
+            --text: #202124;
+            --border: #dadce0;
+            --accent: #34a853;
+            --warning: #fbbc04;
+            --error: #ea4335;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: 24px;
+            color: var(--secondary);
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Architecture Diagram */
+        .architecture {
+            background: var(--surface);
+        }
+
+        .arch-diagram {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .arch-diagram pre {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            color: var(--text);
+        }
+
+        /* Package Grid */
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .package-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .package-version {
+            font-size: 14px;
+            color: var(--secondary);
+            background: var(--surface);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .package-description {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .package-features {
+            list-style: none;
+        }
+
+        .package-features li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: var(--text);
+        }
+
+        .package-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .package-status {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-production {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-beta {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            background: var(--surface);
+        }
+
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .use-case {
+            text-align: center;
+        }
+
+        .use-case-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: white;
+        }
+
+        .use-case h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .use-case p {
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        /* Integration Flow */
+        .integration-flow {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            margin-top: 60px;
+        }
+
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .flow-step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .flow-arrow {
+            font-size: 30px;
+            color: var(--border);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #9aa0a6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero .subtitle {
+                font-size: 18px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .packages {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        /* Code Highlighting */
+        .code-snippet {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .code-snippet code {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Badges */
+        .badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            background: var(--surface);
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">MCP Ecosystem</div>
+            <ul class="nav-links">
+                <li><a href="#overview">개요</a></li>
+                <li><a href="#packages">패키지</a></li>
+                <li><a href="#architecture">아키텍처</a></li>
+                <li><a href="#use-cases">활용 사례</a></li>
+                <li><a href="https://github.com/yourusername/mcp-ecosystem">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Connect AI to Everything</h1>
+            <p class="subtitle">AI와 애플리케이션을 연결하는 개방형 표준 프로토콜</p>
+            <div class="cta-buttons">
+                <a href="#get-started" class="btn btn-primary">
+                    <span>시작하기</span>
+                    <span>→</span>
+                </a>
+                <a href="https://github.com/yourusername/mcp-ecosystem" class="btn btn-secondary">
+                    <span>GitHub에서 보기</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="container">
+        <div class="section-header">
+            <h2>MCP 생태계란?</h2>
+            <p>Model Context Protocol(MCP)은 AI가 도구와 데이터에 접근하는 표준화된 방법을 제공합니다</p>
+        </div>
+
+        <div class="integration-flow">
+            <h3 style="text-align: center; margin-bottom: 40px;">통합 워크플로우</h3>
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="flow-step-number">1</div>
+                    <h4>AI 요청</h4>
+                    <p>사용자가 AI에게 작업 요청</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-number">2</div>
+                    <h4>MCP 통신</h4>
+                    <p>표준 프로토콜로 도구 접근</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-number">3</div>
+                    <h4>UI 생성</h4>
+                    <p>동적으로 인터페이스 구성</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-number">4</div>
+                    <h4>결과 전달</h4>
+                    <p>사용자에게 즉시 제공</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <div class="section-header">
+                <h2>시스템 아키텍처</h2>
+                <p>임베디드부터 클라우드까지, 모든 플랫폼을 아우르는 통합 아키텍처</p>
+            </div>
+
+            <div class="arch-diagram">
+                <pre>
+┌─────────────────────────────────────────────────────────────┐
+│                    MCP 생태계 (전체 시스템)                    │
+├─────────────────────────────────────────────────────────────┤
+│                                                               │
+│  ┌─────────────────┐    ┌─────────────────┐                 │
+│  │   AI/LLM 층     │    │   사용자 UI 층   │                 │
+│  │  (Claude, GPT)  │    │ (Flutter Apps)  │                 │
+│  └────────┬────────┘    └────────┬────────┘                 │
+│           │                       │                           │
+│  ┌────────▼────────────────────────▼────────┐                │
+│  │            flutter_mcp (통합 에이전트)      │                │
+│  │  - Background Services                    │                │
+│  │  - System Integration                     │                │
+│  │  - Security & Storage                     │                │
+│  └──────┬─────────┬─────────┬───────────────┘                │
+│         │         │         │                                 │
+│  ┌──────▼──┐ ┌───▼───┐ ┌──▼────┐                           │
+│  │mcp_client│ │mcp_llm│ │mcp_   │  ◄─── MCP 프로토콜 층    │
+│  │         │ │       │ │server │                           │
+│  └─────────┘ └───────┘ └───────┘                           │
+│                                                               │
+│  ┌─────────────────────────────────┐                         │
+│  │    MCP UI Runtime (makemind)    │  ◄─── 동적 UI 층      │
+│  │  ┌─────────┐ ┌──────────────┐  │                         │
+│  │  │ Runtime │ │  Generator   │  │                         │
+│  │  └────┬────┘ └──────┬───────┘  │                         │
+│  │       └──────┬───────┘          │                         │
+│  │              ▼                  │                         │
+│  │         UI Core                 │                         │
+│  └─────────────────────────────────┘                         │
+│                                                               │
+│  ┌─────────────────────────────────┐                         │
+│  │   autostudio-embedded (IoT)     │  ◄─── 임베디드 층      │
+│  │  - Arduino, ESP32, STM32        │                         │
+│  │  - Raspberry Pi, Host Systems   │                         │
+│  └─────────────────────────────────┘                         │
+│                                                               │
+└─────────────────────────────────────────────────────────────┘
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="container">
+        <div class="section-header">
+            <h2>핵심 패키지</h2>
+            <p>각 계층을 담당하는 전문화된 패키지들의 완벽한 조화</p>
+        </div>
+
+        <div class="packages">
+            <!-- MCP Protocol Packages -->
+            <div class="package-card">
+                <div class="package-header">
+                    <h3 class="package-name">mcp_client</h3>
+                    <span class="package-version">v1.0.0</span>
+                </div>
+                <p class="package-description">
+                    Flutter/Dart 애플리케이션을 MCP 서버에 연결하는 클라이언트 구현
+                </p>
+                <ul class="package-features">
+                    <li>MCP 2025-03-26 표준 완벽 지원</li>
+                    <li>OAuth 2.1 인증 내장</li>
+                    <li>다중 전송 방식 (STDIO, SSE, HTTP)</li>
+                    <li>실시간 리소스 구독</li>
+                </ul>
+                <span class="package-status status-production">Production Ready</span>
+            </div>
+
+            <div class="package-card">
+                <div class="package-header">
+                    <h3 class="package-name">mcp_server</h3>
+                    <span class="package-version">v1.0.2</span>
+                </div>
+                <p class="package-description">
+                    Flutter 앱에서 AI에게 데이터와 기능을 제공하는 서버 구현
+                </p>
+                <ul class="package-features">
+                    <li>Resources, Tools, Prompts 노출</li>
+                    <li>세션 관리 및 이벤트 스트림</li>
+                    <li>성능 모니터링 및 메트릭스</li>
+                    <li>다중 프로토콜 버전 지원</li>
+                </ul>
+                <span class="package-status status-production">Production Ready</span>
+            </div>
+
+            <div class="package-card">
+                <div class="package-header">
+                    <h3 class="package-name">mcp_llm</h3>
+                    <span class="package-version">v1.0.1</span>
+                </div>
+                <p class="package-description">
+                    다양한 LLM 제공자와의 통합을 위한 고급 패키지
+                </p>
+                <ul class="package-features">
+                    <li>Claude, OpenAI, Together AI 지원</li>
+                    <li>배치 처리로 40-60% 성능 향상</li>
+                    <li>멀티 클라이언트 로드 밸런싱</li>
+                    <li>RAG 기능 및 벡터 검색</li>
+                </ul>
+                <span class="package-status status-production">Production Ready</span>
+            </div>
+
+            <div class="package-card">
+                <div class="package-header">
+                    <h3 class="package-name">flutter_mcp</h3>
+                    <span class="package-version">v1.0.3</span>
+                </div>
+                <p class="package-description">
+                    MCP 컴포넌트들을 통합한 완전한 에이전트 시스템
+                </p>
+                <ul class="package-features">
+                    <li>백그라운드 서비스 실행</li>
+                    <li>시스템 트레이 지원 (데스크톱)</li>
+                    <li>보안 저장소 및 암호화</li>
+                    <li>플랫폼별 네이티브 구현</li>
+                </ul>
+                <span class="package-status status-production">Production Ready</span>
+            </div>
+
+            <!-- UI Runtime Packages -->
+            <div class="package-card">
+                <div class="package-header">
+                    <h3 class="package-name">flutter_mcp_ui_runtime</h3>
+                    <span class="package-version">v0.1.0</span>
+                </div>
+                <p class="package-description">
+                    JSON 정의로부터 동적 UI를 렌더링하는 런타임 엔진
+                </p>
+                <ul class="package-features">
+                    <li>65+ Flutter 위젯 지원</li>
+                    <li>반응형 상태 관리</li>
+                    <li>표현식 바인딩</li>
+                    <li>MCP 프로토콜 연동 준비</li>
+                </ul>
+                <span class="package-status status-beta">Beta</span>
+            </div>
+
+            <div class="package-card">
+                <div class="package-header">
+                    <h3 class="package-name">mcp_ui_builder</h3>
+                    <span class="package-version">v1.0.0</span>
+                </div>
+                <p class="package-description">
+                    드래그 앤 드롭으로 MCP UI를 만드는 비주얼 빌더
+                </p>
+                <ul class="package-features">
+                    <li>실시간 미리보기</li>
+                    <li>속성 편집기</li>
+                    <li>JSON 가져오기/내보내기</li>
+                    <li>템플릿 라이브러리</li>
+                </ul>
+                <span class="package-status status-beta">Application</span>
+            </div>
+
+            <!-- Embedded Package -->
+            <div class="package-card">
+                <div class="package-header">
+                    <h3 class="package-name">autostudio-embedded</h3>
+                    <span class="package-version">v0.4.0</span>
+                </div>
+                <p class="package-description">
+                    임베디드 시스템을 위한 MCP 구현
+                </p>
+                <ul class="package-features">
+                    <li>Arduino, ESP32, STM32 지원</li>
+                    <li>5단계 티어 아키텍처</li>
+                    <li>Docker 기반 통합 빌드</li>
+                    <li>하드웨어 추상화 계층</li>
+                </ul>
+                <div class="badges">
+                    <span class="badge">C/C++</span>
+                    <span class="badge">임베디드</span>
+                    <span class="badge">IoT</span>
+                </div>
+                <span class="package-status status-beta">Beta</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="use-cases">
+        <div class="container">
+            <div class="section-header">
+                <h2>혁신적인 활용 사례</h2>
+                <p>MCP 생태계로 가능해지는 새로운 가능성들</p>
+            </div>
+
+            <div class="use-case-grid">
+                <div class="use-case">
+                    <div class="use-case-icon">🤖</div>
+                    <h3>AI 자율 앱 개발</h3>
+                    <p>요구사항만 전달하면 AI가 자동으로 전체 애플리케이션을 생성합니다. UI부터 로직까지 완전 자동화된 개발 경험을 제공합니다.</p>
+                </div>
+
+                <div class="use-case">
+                    <div class="use-case-icon">🏠</div>
+                    <h3>스마트 홈 통합</h3>
+                    <p>IoT 센서 데이터를 AI가 분석하고, 실시간으로 대시보드를 생성합니다. 사용자 패턴을 학습해 자동으로 UI를 최적화합니다.</p>
+                </div>
+
+                <div class="use-case">
+                    <div class="use-case-icon">🏢</div>
+                    <h3>기업 AI 에이전트</h3>
+                    <p>기업 데이터를 안전하게 AI에 연결하고, 맞춤형 보고서와 대시보드를 자동 생성합니다. 실시간 비즈니스 인사이트를 제공합니다.</p>
+                </div>
+
+                <div class="use-case">
+                    <div class="use-case-icon">📱</div>
+                    <h3>적응형 모바일 UI</h3>
+                    <p>사용자 행동에 따라 실시간으로 변화하는 UI를 제공합니다. 앱 업데이트 없이 서버에서 즉시 UI를 변경할 수 있습니다.</p>
+                </div>
+
+                <div class="use-case">
+                    <div class="use-case-icon">🔧</div>
+                    <h3>산업용 IoT 모니터링</h3>
+                    <p>공장 설비부터 농업 센서까지, 모든 IoT 기기를 AI와 연결합니다. 이상 징후를 실시간으로 감지하고 대응합니다.</p>
+                </div>
+
+                <div class="use-case">
+                    <div class="use-case-icon">🎓</div>
+                    <h3>교육 플랫폼</h3>
+                    <p>학습자의 수준과 진도에 맞춰 AI가 커리큘럼과 UI를 동적으로 조정합니다. 개인화된 학습 경험을 제공합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section id="get-started" class="container">
+        <div class="section-header">
+            <h2>시작하기</h2>
+            <p>5분 안에 첫 MCP 애플리케이션 만들기</p>
+        </div>
+
+        <div class="code-snippet">
+            <code>
+# Flutter MCP 설치<br>
+$ flutter pub add flutter_mcp<br>
+<br>
+# 간단한 MCP 서버 생성<br>
+$ dart create -t console my_mcp_server<br>
+$ cd my_mcp_server<br>
+$ dart pub add mcp_server<br>
+<br>
+# UI 빌더 실행<br>
+$ git clone https://github.com/yourusername/mcp_ui_builder<br>
+$ cd mcp_ui_builder<br>
+$ flutter run
+            </code>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="https://docs.mcp-ecosystem.io/getting-started" class="btn btn-primary">
+                전체 문서 보기
+            </a>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="container" style="padding-bottom: 100px;">
+        <div class="section-header">
+            <h2>함께 만들어가는 생태계</h2>
+            <p>오픈소스 커뮤니티와 함께 AI의 미래를 만들어갑니다</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: center;">
+            <div>
+                <h3 style="font-size: 36px; color: var(--primary); margin-bottom: 10px;">9+</h3>
+                <p>활발한 패키지</p>
+            </div>
+            <div>
+                <h3 style="font-size: 36px; color: var(--accent); margin-bottom: 10px;">100%</h3>
+                <p>표준 준수율</p>
+            </div>
+            <div>
+                <h3 style="font-size: 36px; color: var(--warning); margin-bottom: 10px;">6+</h3>
+                <p>지원 플랫폼</p>
+            </div>
+            <div>
+                <h3 style="font-size: 36px; color: var(--error); margin-bottom: 10px;">∞</h3>
+                <p>가능성</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="https://github.com/yourusername/mcp-ecosystem">GitHub</a></li>
+                <li><a href="https://docs.mcp-ecosystem.io">문서</a></li>
+                <li><a href="https://discord.gg/mcp-ecosystem">Discord</a></li>
+                <li><a href="mailto:contact@mcp-ecosystem.io">문의</a></li>
+            </ul>
+            <p>&copy; 2025 MCP Ecosystem. 오픈소스 프로젝트.</p>
+        </div>
+    </footer>
+</body>
+</html>
