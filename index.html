@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCP Ecosystem - Connect AI to Everything</title>
+    <title>makemind - MCP Ecosystem | Connect AI to Everything</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a73e8;
@@ -63,9 +66,26 @@
         }
 
         .logo {
-            font-size: 24px;
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .logo-brand {
+            font-family: 'Dancing Script', cursive;
+            font-size: 36px;
             font-weight: 700;
             color: var(--primary);
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        .logo-subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .nav-links {
@@ -486,6 +506,14 @@
             .language-selector {
                 margin-top: 10px;
             }
+            
+            .logo-brand {
+                font-size: 28px;
+            }
+            
+            .logo-subtitle {
+                font-size: 12px;
+            }
         }
     </style>
     <script>
@@ -890,7 +918,10 @@
     <header>
         <nav class="container">
             <div>
-                <div class="logo">MCP Ecosystem</div>
+                <div class="logo">
+                    <span class="logo-brand">makemind</span>
+                    <span class="logo-subtitle">MCP Ecosystem</span>
+                </div>
                 <ul class="nav-links">
                     <li><a href="#overview" data-i18n="nav.overview">Overview</a></li>
                     <li><a href="#packages" data-i18n="nav.packages">Packages</a></li>
