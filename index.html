@@ -242,6 +242,9 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .package-card:hover {
@@ -260,9 +263,6 @@
         }
 
         .package-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 15px;
         }
 
@@ -270,6 +270,9 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            margin-top: auto;
+            align-self: flex-end;
+            padding-top: 20px;
         }
 
         .package-links a {
@@ -679,6 +682,42 @@
                 "appPlayerPro.feature2": "App search and install",
                 "appPlayerPro.feature3": "Server registration and distribution",
                 "appPlayerPro.feature4": "Community sharing",
+                
+                // MCP Servers
+                "mcpServers.desc": "Apps with UI + Tools + Resources",
+                "mcpServers.feature1": "Server is a complete app",
+                "mcpServers.feature2": "UI definition + tools + prompts included",
+                "mcpServers.feature3": "LLM understandable and controllable",
+                "mcpServers.feature4": "Real-time update support",
+                
+                // Development Tools
+                "devTools.desc": "Integrated tools for MCP server development, management, and deployment",
+                "devTools.feature1": "Visual UI builder",
+                "devTools.feature2": "Server creation wizard",
+                "devTools.feature3": "Real-time preview and testing",
+                "devTools.feature4": "One-click deployment and sharing",
+                
+                // makemind UI DSL Packages
+                "makemind.core.desc": "Core models, constants, and utilities for Flutter MCP UI system",
+                "makemind.core.feature1": "77 widgets in 9 categories support",
+                "makemind.core.feature2": "Comprehensive validation framework",
+                "makemind.core.feature3": "Type-safe constants and property definitions",
+                "makemind.core.feature4": "DSL version management (v1.0.0)",
+                
+                "makemind.runtime.desc": "Runtime engine for rendering dynamic UI from JSON specifications",
+                "makemind.runtime.feature1": "Complete widget rendering system",
+                "makemind.runtime.feature2": "State management with computed properties",
+                "makemind.runtime.feature3": "Action system (tool, state, navigation, batch)",
+                "makemind.runtime.feature4": "Light/dark/system theme support",
+                "makemind.runtime.feature5": "Multi-language i18n support",
+                "makemind.runtime.feature6": "Background service support",
+                
+                "makemind.generator.desc": "JSON generation toolkit for creating UI definitions",
+                "makemind.generator.feature1": "Fluent API for UI generation",
+                "makemind.generator.feature2": "Templates for common patterns",
+                "makemind.generator.feature3": "Example applications included",
+                "makemind.generator.feature4": "Type-safe JSON generation",
+                
                 "appPlayer.workflow": "App Execution Flow",
                 "appPlayer.step1": "Browse Apps",
                 "appPlayer.step2": "Install",
@@ -859,6 +898,41 @@
                 "community.platforms": "지원 플랫폼",
                 "community.possibilities": "가능성",
                 
+                // MCP Servers
+                "mcpServers.desc": "UI와 도구, 리소스를 포함한 서버 = 앱 구조",
+                "mcpServers.feature1": "서버가 곧 하나의 완전한 앱",
+                "mcpServers.feature2": "UI 정의 + 도구 + 프롬프트 포함",
+                "mcpServers.feature3": "LLM이 이해하고 제어 가능",
+                "mcpServers.feature4": "실시간 업데이트 지원",
+                
+                // Development Tools
+                "devTools.desc": "MCP 서버 개발, 관리, 배포를 위한 통합 도구",
+                "devTools.feature1": "비주얼 UI 빌더",
+                "devTools.feature2": "서버 생성 마법사",
+                "devTools.feature3": "실시간 미리보기 및 테스트",
+                "devTools.feature4": "원클릭 배포 및 공유",
+                
+                // makemind UI DSL Packages
+                "makemind.core.desc": "Flutter MCP UI 시스템을 위한 핵심 모델, 상수, 유틸리티",
+                "makemind.core.feature1": "77개 위젯 9개 카테고리 지원",
+                "makemind.core.feature2": "포괄적인 검증 프레임워크",
+                "makemind.core.feature3": "타입 안전 상수 및 속성 정의",
+                "makemind.core.feature4": "DSL 버전 관리 (v1.0.0)",
+                
+                "makemind.runtime.desc": "JSON 사양에서 동적 UI를 렌더링하는 런타임 엔진",
+                "makemind.runtime.feature1": "완전한 위젯 렌더링 시스템",
+                "makemind.runtime.feature2": "계산된 속성을 사용한 상태 관리",
+                "makemind.runtime.feature3": "액션 시스템 (tool, state, navigation, batch)",
+                "makemind.runtime.feature4": "라이트/다크/시스템 테마 지원",
+                "makemind.runtime.feature5": "다국어 i18n 지원",
+                "makemind.runtime.feature6": "백그라운드 서비스 지원",
+                
+                "makemind.generator.desc": "UI 정의 생성을 위한 JSON 생성 툴킷",
+                "makemind.generator.feature1": "UI 생성을 위한 Fluent API",
+                "makemind.generator.feature2": "일반 패턴을 위한 템플릿",
+                "makemind.generator.feature3": "예제 애플리케이션 포함",
+                "makemind.generator.feature4": "타입 안전 JSON 생성",
+                
                 // Footer
                 "footer.docs": "문서",
                 "footer.contact": "문의",
@@ -972,6 +1046,41 @@
                 "community.platforms": "対応プラットフォーム",
                 "community.possibilities": "可能性",
                 
+                // MCP Servers
+                "mcpServers.desc": "UI + ツール + リソースを含むサーバー = アプリ構造",
+                "mcpServers.feature1": "サーバーが完全なアプリ",
+                "mcpServers.feature2": "UI定義 + ツール + プロンプト含む",
+                "mcpServers.feature3": "LLMが理解・制御可能",
+                "mcpServers.feature4": "リアルタイムアップデート対応",
+                
+                // Development Tools
+                "devTools.desc": "MCPサーバー開発、管理、デプロイのための統合ツール",
+                "devTools.feature1": "ビジュアルUIビルダー",
+                "devTools.feature2": "サーバー作成ウィザード",
+                "devTools.feature3": "リアルタイムプレビューとテスト",
+                "devTools.feature4": "ワンクリックデプロイと共有",
+                
+                // makemind UI DSL Packages
+                "makemind.core.desc": "Flutter MCP UIシステムのためのコアモデル、定数、ユーティリティ",
+                "makemind.core.feature1": "77ウィジェット9カテゴリサポート",
+                "makemind.core.feature2": "包括的な検証フレームワーク",
+                "makemind.core.feature3": "タイプセーフな定数とプロパティ定義",
+                "makemind.core.feature4": "DSLバージョン管理 (v1.0.0)",
+                
+                "makemind.runtime.desc": "JSON仕様から動的UIをレンダリングするランタイムエンジン",
+                "makemind.runtime.feature1": "完全なウィジェットレンダリングシステム",
+                "makemind.runtime.feature2": "計算されたプロパティによる状態管理",
+                "makemind.runtime.feature3": "アクションシステム (tool, state, navigation, batch)",
+                "makemind.runtime.feature4": "ライト/ダーク/システムテーマサポート",
+                "makemind.runtime.feature5": "多言語i18nサポート",
+                "makemind.runtime.feature6": "バックグラウンドサービスサポート",
+                
+                "makemind.generator.desc": "UI定義作成のためのJSON生成ツールキット",
+                "makemind.generator.feature1": "UI生成のためのFluent API",
+                "makemind.generator.feature2": "一般的なパターンのテンプレート",
+                "makemind.generator.feature3": "サンプルアプリケーション同梱",
+                "makemind.generator.feature4": "タイプセーフなJSON生成",
+                
                 // Footer
                 "footer.docs": "ドキュメント",
                 "footer.contact": "お問い合わせ",
@@ -1063,7 +1172,7 @@
     <section class="hero">
         <div class="container">
             <h1 data-i18n="hero.title">Let AI Execute Anything</h1>
-            <p class="subtitle" data-i18n="hero.subtitle">모든 제어를 자연어로. 모든 앱은 서버로.</p>
+            <p class="subtitle" data-i18n="hero.subtitle">Control everything with natural language. Every app is a server.</p>
         </div>
     </section>
 
@@ -1071,7 +1180,7 @@
     <section id="ecosystem" class="container">
         <div class="section-header">
             <h2 data-i18n="ecosystem.title">makemind Philosophy</h2>
-            <p data-i18n="ecosystem.subtitle">사용자의 상상과 명령을 기반으로, 어떤 장치든지 AI가 제어 가능한 실행 플랫폼으로 바꾸는 철학</p>
+            <p data-i18n="ecosystem.subtitle">A philosophy that transforms any device into an AI-controllable execution platform based on user's imagination and commands</p>
         </div>
 
         <div class="arch-diagram">
@@ -1083,8 +1192,8 @@
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
 │                    ┌─────────────────────────────┐                      │
-│                    │      AutoStudio             │                      │
-│                    │ (makemind implementation)   │                      │
+│                    │         AutoStudio          │                      │
+│                    │  (makemind implementation)  │                      │
 │                    └──────────────┬──────────────┘                      │
 │                                   │                                     │
 │               ┌───────────────────┼───────────────────┐                 │
@@ -1114,30 +1223,30 @@
         </div>
 
         <div class="integration-flow">
-            <h3 style="text-align: center; margin-bottom: 40px;" data-i18n="ecosystem.workflow">작동 흐름</h3>
+            <h3 style="text-align: center; margin-bottom: 40px;" data-i18n="ecosystem.workflow">How It Works</h3>
             <div class="flow-steps">
                 <div class="flow-step">
                     <div class="flow-step-number">1</div>
-                    <h4 data-i18n="ecosystem.step1.title">MCP Server 실행</h4>
-                    <p data-i18n="ecosystem.step1.desc">UI + Tools + Resources를 제공하는 서버</p>
+                    <h4 data-i18n="ecosystem.step1.title">Run MCP Server</h4>
+                    <p data-i18n="ecosystem.step1.desc">Server providing UI + Tools + Resources</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-step-number">2</div>
-                    <h4 data-i18n="ecosystem.step2.title">AppPlayer 연결</h4>
-                    <p data-i18n="ecosystem.step2.desc">MCP Client로서 서버에 접속</p>
+                    <h4 data-i18n="ecosystem.step2.title">AppPlayer Connect</h4>
+                    <p data-i18n="ecosystem.step2.desc">Connect to server as MCP Client</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-step-number">3</div>
-                    <h4 data-i18n="ecosystem.step3.title">동적 UI 렌더링</h4>
-                    <p data-i18n="ecosystem.step3.desc">서버의 UI 정의를 실시간 렌더링</p>
+                    <h4 data-i18n="ecosystem.step3.title">Dynamic UI Render</h4>
+                    <p data-i18n="ecosystem.step3.desc">Real-time rendering of server's UI definition</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
                     <div class="flow-step-number">4</div>
-                    <h4 data-i18n="ecosystem.step4.title">도구 실행 & 제어</h4>
-                    <p data-i18n="ecosystem.step4.desc">UI 액션을 통해 서버의 도구 실행</p>
+                    <h4 data-i18n="ecosystem.step4.title">Execute Tools & Control</h4>
+                    <p data-i18n="ecosystem.step4.desc">Execute server tools through UI actions</p>
                 </div>
             </div>
         </div>
@@ -1146,14 +1255,14 @@
     <!-- AutoStudio Section -->
     <section id="autostudio" class="container">
         <div class="section-header">
-            <h2 data-i18n="autoStudio.title">AutoStudio - makemind 구현체</h2>
-            <p data-i18n="autoStudio.subtitle">makemind 철학을 실현하는 완전한 구현체 생태계</p>
+            <h2 data-i18n="autoStudio.title">AutoStudio - makemind Implementation</h2>
+            <p data-i18n="autoStudio.subtitle">Complete implementation ecosystem that realizes the makemind philosophy</p>
         </div>
 
         <div class="integration-flow" style="margin-bottom: 60px;">
             <p style="text-align: center; font-size: 18px; color: var(--secondary); line-height: 1.8;">
-                AutoStudio는 makemind의 "모든 제어를 자연어로, 모든 앱은 서버로"라는 철학을 실현하는<br>
-                AppPlayer, MCP Servers, 개발 도구들을 포함한 전체 구현체 생태계입니다.
+                AutoStudio is a complete implementation ecosystem that realizes makemind's philosophy of<br>
+                "Control everything with natural language. Every app is a server." including AppPlayer, MCP Servers, and development tools.
             </p>
         </div>
 
@@ -1164,18 +1273,16 @@
                     <span class="package-version">Universal MCP Client</span>
                 </div>
                 <p class="package-description" data-i18n="appPlayer.desc">
-                    모든 MCP 서버를 앱처럼 실행하고 동적 UI를 렌더링하는 유니버설 플레이어
+                    Universal player that runs all MCP servers like apps and renders dynamic UI
                 </p>
                 <ul class="package-features">
-                    <li data-i18n="appPlayer.feature1">MCP 서버 자동 발견 및 연결</li>
-                    <li data-i18n="appPlayer.feature2">makemind UI DSL 실시간 렌더링</li>
-                    <li data-i18n="appPlayer.feature3">다중 전송 프로토콜 지원 (STDIO, SSE, HTTP)</li>
-                    <li data-i18n="appPlayer.feature4">크로스 플랫폼 (iOS, Android, Desktop)</li>
+                    <li data-i18n="appPlayer.feature1">Auto-discover and connect MCP servers</li>
+                    <li data-i18n="appPlayer.feature2">Real-time makemind UI DSL rendering</li>
+                    <li data-i18n="appPlayer.feature3">Multi-transport protocol support (STDIO, SSE, HTTP)</li>
+                    <li data-i18n="appPlayer.feature4">Cross-platform (iOS, Android, Desktop)</li>
                 </ul>
-                <div style="margin-top: 20px;">
-                    <a href="https://github.com/app-appplayer/app_player" class="btn btn-secondary">
-                        <span>GitHub</span>
-                    </a>
+                <div class="package-links">
+                    <a href="https://github.com/app-appplayer/app_player" class="github-link">GitHub</a>
                 </div>
             </div>
 
@@ -1185,13 +1292,13 @@
                     <span class="package-version">Apps as Servers</span>
                 </div>
                 <p class="package-description" data-i18n="mcpServers.desc">
-                    UI와 도구, 리소스를 포함한 서버 = 앱 구조
+                    Server with UI + Tools + Resources = App structure
                 </p>
                 <ul class="package-features">
                     <li data-i18n="mcpServers.feature1">Server is a complete app</li>
-                    <li data-i18n="mcpServers.feature2">UI 정의 + 도구 + 프롬프트 포함</li>
-                    <li data-i18n="mcpServers.feature3">LLM이 이해하고 제어 가능</li>
-                    <li data-i18n="mcpServers.feature4">실시간 업데이트 지원</li>
+                    <li data-i18n="mcpServers.feature2">UI definition + tools + prompts included</li>
+                    <li data-i18n="mcpServers.feature3">LLM understandable and controllable</li>
+                    <li data-i18n="mcpServers.feature4">Real-time update support</li>
                 </ul>
             </div>
 
@@ -1201,13 +1308,13 @@
                     <span class="package-version">IDE & Builder</span>
                 </div>
                 <p class="package-description" data-i18n="devTools.desc">
-                    MCP 서버 개발, 관리, 배포를 위한 통합 도구
+                    Integrated tools for MCP server development, management, and deployment
                 </p>
                 <ul class="package-features">
-                    <li data-i18n="devTools.feature1">비주얼 UI 빌더</li>
-                    <li data-i18n="devTools.feature2">서버 생성 마법사</li>
-                    <li data-i18n="devTools.feature3">실시간 미리보기 및 테스트</li>
-                    <li data-i18n="devTools.feature4">원클릭 배포 및 공유</li>
+                    <li data-i18n="devTools.feature1">Visual UI builder</li>
+                    <li data-i18n="devTools.feature2">Server creation wizard</li>
+                    <li data-i18n="devTools.feature3">Real-time preview and testing</li>
+                    <li data-i18n="devTools.feature4">One-click deployment and sharing</li>
                 </ul>
             </div>
         </div>
@@ -1219,26 +1326,22 @@
         <div class="container">
             <div class="section-header">
                 <h2 data-i18n="technology.title">Core Technology</h2>
-                <p data-i18n="technology.subtitle">AutoStudio를 구동하는 핵심 기술 스택</p>
+                <p data-i18n="technology.subtitle">Core technology stack powering AutoStudio</p>
             </div>
 
             <div class="packages">
                 <div class="package-card">
                     <div class="package-header">
                         <h3 class="package-name">flutter_mcp_ui_core</h3>
-                        <div class="package-links">
-                            <a href="https://github.com/app-appplayer/flutter_mcp_ui_core" class="github-link">GitHub</a>
-                            <a href="https://pub.dev/packages/flutter_mcp_ui_core" class="pubdev-link">pub.dev</a>
-                        </div>
                     </div>
                     <p class="package-description" data-i18n="makemind.core.desc">
-                        Flutter MCP UI 시스템을 위한 핵심 모델, 상수, 유틸리티
+                        Core models, constants, and utilities for Flutter MCP UI system
                     </p>
                     <ul class="package-features">
-                        <li data-i18n="makemind.core.feature1">77개 위젯 9개 카테고리 지원</li>
-                        <li data-i18n="makemind.core.feature2">포괄적인 검증 프레임워크</li>
-                        <li data-i18n="makemind.core.feature3">타입 안전 상수 및 속성 정의</li>
-                        <li data-i18n="makemind.core.feature4">DSL 버전 관리 (v1.0.0)</li>
+                        <li data-i18n="makemind.core.feature1">77 widgets in 9 categories support</li>
+                        <li data-i18n="makemind.core.feature2">Comprehensive validation framework</li>
+                        <li data-i18n="makemind.core.feature3">Type-safe constants and property definitions</li>
+                        <li data-i18n="makemind.core.feature4">DSL version management (v1.0.0)</li>
                     </ul>
                     <div class="badges">
                         <span class="badge">pub.dev</span>
@@ -1246,56 +1349,60 @@
                         <span class="badge">DSL</span>
                     </div>
                     <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
+                    <div class="package-links">
+                        <a href="https://github.com/app-appplayer/flutter_mcp_ui_core" class="github-link">GitHub</a>
+                        <a href="https://pub.dev/packages/flutter_mcp_ui_core" class="pubdev-link">pub.dev</a>
+                    </div>
                 </div>
 
                 <div class="package-card">
                     <div class="package-header">
                         <h3 class="package-name">flutter_mcp_ui_runtime</h3>
-                        <div class="package-links">
-                            <a href="https://github.com/app-appplayer/flutter_mcp_ui_runtime" class="github-link">GitHub</a>
-                            <a href="https://pub.dev/packages/flutter_mcp_ui_runtime" class="pubdev-link">pub.dev</a>
-                        </div>
                     </div>
                     <p class="package-description" data-i18n="makemind.runtime.desc">
-                        JSON 사양에서 동적 UI를 렌더링하는 런타임 엔진
+                        Runtime engine for rendering dynamic UI from JSON specifications
                     </p>
                     <ul class="package-features">
-                        <li data-i18n="makemind.runtime.feature1">완전한 위젯 렌더링 시스템</li>
-                        <li data-i18n="makemind.runtime.feature2">계산된 속성을 사용한 상태 관리</li>
-                        <li data-i18n="makemind.runtime.feature3">액션 시스템 (tool, state, navigation, batch)</li>
-                        <li data-i18n="makemind.runtime.feature4">라이트/다크/시스템 테마 지원</li>
-                        <li data-i18n="makemind.runtime.feature5">다국어 i18n 지원</li>
-                        <li data-i18n="makemind.runtime.feature6">백그라운드 서비스 지원</li>
+                        <li data-i18n="makemind.runtime.feature1">Complete widget rendering system</li>
+                        <li data-i18n="makemind.runtime.feature2">State management with computed properties</li>
+                        <li data-i18n="makemind.runtime.feature3">Action system (tool, state, navigation, batch)</li>
+                        <li data-i18n="makemind.runtime.feature4">Light/dark/system theme support</li>
+                        <li data-i18n="makemind.runtime.feature5">Multi-language i18n support</li>
+                        <li data-i18n="makemind.runtime.feature6">Background service support</li>
                     </ul>
                     <div class="badges">
                         <span class="badge">pub.dev</span>
                         <span class="badge">85% Complete</span>
                     </div>
                     <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
+                    <div class="package-links">
+                        <a href="https://github.com/app-appplayer/flutter_mcp_ui_runtime" class="github-link">GitHub</a>
+                        <a href="https://pub.dev/packages/flutter_mcp_ui_runtime" class="pubdev-link">pub.dev</a>
+                    </div>
                 </div>
 
                 <div class="package-card">
                     <div class="package-header">
                         <h3 class="package-name">flutter_mcp_ui_generator</h3>
-                        <div class="package-links">
-                            <a href="https://github.com/app-appplayer/flutter_mcp_ui_generator" class="github-link">GitHub</a>
-                            <a href="https://pub.dev/packages/flutter_mcp_ui_generator" class="pubdev-link">pub.dev</a>
-                        </div>
                     </div>
                     <p class="package-description" data-i18n="makemind.generator.desc">
-                        UI 정의 생성을 위한 JSON 생성 툴킷
+                        JSON generation toolkit for creating UI definitions
                     </p>
                     <ul class="package-features">
-                        <li data-i18n="makemind.generator.feature1">UI 생성을 위한 Fluent API</li>
-                        <li data-i18n="makemind.generator.feature2">일반 패턴을 위한 템플릿</li>
-                        <li data-i18n="makemind.generator.feature3">예제 애플리케이션 포함</li>
-                        <li data-i18n="makemind.generator.feature4">타입 안전 JSON 생성</li>
+                        <li data-i18n="makemind.generator.feature1">Fluent API for UI generation</li>
+                        <li data-i18n="makemind.generator.feature2">Templates for common patterns</li>
+                        <li data-i18n="makemind.generator.feature3">Example applications included</li>
+                        <li data-i18n="makemind.generator.feature4">Type-safe JSON generation</li>
                     </ul>
                     <div class="badges">
                         <span class="badge">pub.dev</span>
                         <span class="badge">Tools</span>
                     </div>
                     <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
+                    <div class="package-links">
+                        <a href="https://github.com/app-appplayer/flutter_mcp_ui_generator" class="github-link">GitHub</a>
+                        <a href="https://pub.dev/packages/flutter_mcp_ui_generator" class="pubdev-link">pub.dev</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1307,7 +1414,7 @@
     <section id="packages" class="container">
         <div class="section-header">
             <h2 data-i18n="packages.title">MCP Package Family</h2>
-            <p data-i18n="packages.subtitle">기초부터 응용까지, Model Context Protocol의 완전한 패키지 생태계</p>
+            <p data-i18n="packages.subtitle">Complete package ecosystem of Model Context Protocol from foundation to application</p>
         </div>
 
         <h3 style="text-align: center; margin: 40px 0 30px; color: var(--secondary);">Core MCP Packages</h3>
@@ -1315,61 +1422,61 @@
             <div class="package-card">
                 <div class="package-header">
                     <h3 class="package-name">mcp_client</h3>
-                    <div class="package-links">
-                        <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
-                        <a href="https://pub.dev/packages/mcp_client" class="pubdev-link">pub.dev</a>
-                    </div>
                 </div>
                 <p class="package-description" data-i18n="package.mcp_client.desc">
-                    Flutter/Dart 애플리케이션을 MCP 서버에 연결하는 클라이언트 구현
+                    Client implementation for connecting Flutter/Dart applications to MCP servers
                 </p>
                 <ul class="package-features">
-                    <li data-i18n="feature.mcp2025">MCP 2025-03-26 표준 완벽 지원</li>
-                    <li data-i18n="feature.oauth">OAuth 2.1 인증 내장</li>
-                    <li data-i18n="feature.transport">다중 전송 방식 (STDIO, SSE, HTTP)</li>
-                    <li data-i18n="feature.subscription">실시간 리소스 구독</li>
+                    <li data-i18n="feature.mcp2025">Full MCP 2025-03-26 standard support</li>
+                    <li data-i18n="feature.oauth">Built-in OAuth 2.1 authentication</li>
+                    <li data-i18n="feature.transport">Multiple transport types (STDIO, SSE, HTTP)</li>
+                    <li data-i18n="feature.subscription">Real-time resource subscriptions</li>
                 </ul>
                 <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
+                <div class="package-links">
+                    <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
+                    <a href="https://pub.dev/packages/mcp_client" class="pubdev-link">pub.dev</a>
+                </div>
             </div>
 
             <div class="package-card">
                 <div class="package-header">
                     <h3 class="package-name">mcp_server</h3>
-                    <div class="package-links">
-                        <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
-                        <a href="https://pub.dev/packages/mcp_server" class="pubdev-link">pub.dev</a>
-                    </div>
                 </div>
                 <p class="package-description" data-i18n="package.mcp_server.desc">
-                    Flutter/Dart 애플리케이션에서 LLM에게 도구, 리소스, 프롬프트를 노출
+                    Expose tools, resources, and prompts from Flutter/Dart applications to LLM
                 </p>
                 <ul class="package-features">
-                    <li data-i18n="feature.expose">Resources, Tools, Prompts 노출</li>
-                    <li data-i18n="feature.session">세션 관리 및 이벤트 스트림</li>
-                    <li data-i18n="feature.monitoring">성능 모니터링 및 메트릭스</li>
-                    <li data-i18n="feature.multiVersion">다중 프로토콜 버전 지원</li>
+                    <li data-i18n="feature.expose">Expose Resources, Tools, Prompts</li>
+                    <li data-i18n="feature.session">Session management and event streams</li>
+                    <li data-i18n="feature.monitoring">Performance monitoring and metrics</li>
+                    <li data-i18n="feature.multiVersion">Multiple protocol version support</li>
                 </ul>
                 <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
+                <div class="package-links">
+                    <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
+                    <a href="https://pub.dev/packages/mcp_server" class="pubdev-link">pub.dev</a>
+                </div>
             </div>
 
             <div class="package-card">
                 <div class="package-header">
                     <h3 class="package-name">mcp_llm</h3>
-                    <div class="package-links">
-                        <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
-                        <a href="https://pub.dev/packages/mcp_llm" class="pubdev-link">pub.dev</a>
-                    </div>
                 </div>
                 <p class="package-description" data-i18n="package.mcp_llm.desc">
-                    LLM(Claude, OpenAI 등)을 MCP 클라이언트/서버에 연결하는 브리지
+                    Bridge connecting LLMs (Claude, OpenAI, etc.) to MCP client/server
                 </p>
                 <ul class="package-features">
-                    <li data-i18n="feature.providers">Claude, OpenAI, Together AI 지원</li>
-                    <li data-i18n="feature.batch">배치 처리로 40-60% 성능 향상</li>
-                    <li data-i18n="feature.loadBalance">멀티 클라이언트 로드 밸런싱</li>
-                    <li data-i18n="feature.rag">RAG 기능 및 벡터 검색</li>
+                    <li data-i18n="feature.providers">Claude, OpenAI, Together AI support</li>
+                    <li data-i18n="feature.batch">40-60% performance improvement with batch processing</li>
+                    <li data-i18n="feature.loadBalance">Multi-client load balancing</li>
+                    <li data-i18n="feature.rag">RAG capabilities and vector search</li>
                 </ul>
                 <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
+                <div class="package-links">
+                    <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
+                    <a href="https://pub.dev/packages/mcp_llm" class="pubdev-link">pub.dev</a>
+                </div>
             </div>
         </div>
 
@@ -1378,21 +1485,21 @@
             <div class="package-card">
                 <div class="package-header">
                     <h3 class="package-name">flutter_mcp</h3>
-                    <div class="package-links">
-                        <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
-                        <a href="https://pub.dev/packages/flutter_mcp" class="pubdev-link">pub.dev</a>
-                    </div>
                 </div>
                 <p class="package-description" data-i18n="package.flutter_mcp.desc">
-                    위의 모든 MCP 컴포넌트들을 통합한 완전한 Flutter 플러그인
+                    Complete Flutter plugin integrating all MCP components above
                 </p>
                 <ul class="package-features">
-                    <li data-i18n="feature.background">백그라운드 서비스 실행</li>
-                    <li data-i18n="feature.systemTray">시스템 트레이 지원 (데스크톱)</li>
-                    <li data-i18n="feature.security">보안 저장소 및 암호화</li>
-                    <li data-i18n="feature.native">플랫폼별 네이티브 구현</li>
+                    <li data-i18n="feature.background">Background service execution</li>
+                    <li data-i18n="feature.systemTray">System tray support (desktop)</li>
+                    <li data-i18n="feature.security">Secure storage and encryption</li>
+                    <li data-i18n="feature.native">Platform-specific native implementation</li>
                 </ul>
                 <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
+                <div class="package-links">
+                    <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
+                    <a href="https://pub.dev/packages/flutter_mcp" class="pubdev-link">pub.dev</a>
+                </div>
             </div>
         </div>
     </section>
@@ -1448,8 +1555,8 @@
     <!-- Support Section -->
     <section class="container" style="padding-bottom: 100px;">
         <div class="section-header">
-            <h2 data-i18n="support.title">후원하기</h2>
-            <p data-i18n="support.subtitle">makemind 프로젝트를 지원해주세요</p>
+            <h2 data-i18n="support.title">Support</h2>
+            <p data-i18n="support.subtitle">Support the makemind project</p>
         </div>
 
         <div style="display: flex; justify-content: center;">
@@ -1458,10 +1565,10 @@
                     <h3 class="package-name">Patreon</h3>
                 </div>
                 <p class="package-description" data-i18n="support.patreon.desc">
-                    makemind 프로젝트를 후원하고 독점 콘텐츠를 받아보세요
+                    Support the makemind project and receive exclusive content
                 </p>
                 <a href="https://www.patreon.com/mcpdevstudio" class="btn btn-primary" style="margin-top: 20px;">
-                    <span data-i18n="support.patreon.button">후원하기</span>
+                    <span data-i18n="support.patreon.button">Become a Patron</span>
                 </a>
             </div>
         </div>
@@ -1470,8 +1577,8 @@
     <!-- Implementation Status Section -->
     <section class="container" style="padding-bottom: 80px;">
         <div class="section-header">
-            <h2 data-i18n="status.title">MCP UI DSL v1.0 구현 상태</h2>
-            <p data-i18n="status.subtitle">flutter_mcp_ui_runtime의 MCP UI DSL v1.0 사양 구현 현황</p>
+            <h2 data-i18n="status.title">MCP UI DSL v1.0 Implementation Status</h2>
+            <p data-i18n="status.subtitle">Implementation status of MCP UI DSL v1.0 specification in flutter_mcp_ui_runtime</p>
             <p style="margin-top: 10px;">
                 <a href="https://github.com/app-appplayer/flutter_mcp_ui_core/blob/main/doc/specification/MCP_UI_DSL_v1.0_Specification.md" 
                    class="btn btn-secondary" 
@@ -1484,42 +1591,42 @@
         <div class="use-case-grid">
             <div class="use-case">
                 <div class="use-case-icon">✅</div>
-                <h3>완료 (85%)</h3>
+                <h3>Completed (85%)</h3>
                 <ul style="text-align: left; padding: 0 20px;">
-                    <li>77개 위젯 지원</li>
-                    <li>액션 시스템 (MCP UI DSL v1.0)</li>
-                    <li>상태 관리 및 계산된 속성</li>
-                    <li>테마 시스템 (light/dark/system)</li>
-                    <li>다국어 i18n 지원</li>
+                    <li>77 widgets support</li>
+                    <li>Action system (MCP UI DSL v1.0)</li>
+                    <li>State management with computed properties</li>
+                    <li>Theme system (light/dark/system)</li>
+                    <li>Multi-language i18n support</li>
                 </ul>
             </div>
 
             <div class="use-case">
                 <div class="use-case-icon">🔧</div>
-                <h3>진행 중 (10%)</h3>
+                <h3>In Progress (10%)</h3>
                 <ul style="text-align: left; padding: 0 20px;">
-                    <li>고급 위젯 (chart, map, mediaPlayer)</li>
-                    <li>확장 입력 위젯</li>
-                    <li>성능 최적화</li>
+                    <li>Advanced widgets (chart, map, mediaPlayer)</li>
+                    <li>Extended input widgets</li>
+                    <li>Performance optimization</li>
                     <li>MCP UI Builder</li>
                 </ul>
             </div>
 
             <div class="use-case">
                 <div class="use-case-icon">🎯</div>
-                <h3>계획 (5%)</h3>
+                <h3>Planned (5%)</h3>
                 <ul style="text-align: left; padding: 0 20px;">
-                    <li>접근성 (WCAG 준수)</li>
-                    <li>애니메이션 시스템</li>
-                    <li>고급 성능 모니터링</li>
-                    <li>서버 스토어 (AppPlayer Pro)</li>
+                    <li>Accessibility (WCAG compliance)</li>
+                    <li>Animation system</li>
+                    <li>Advanced performance monitoring</li>
+                    <li>Server store (AppPlayer Pro)</li>
                 </ul>
             </div>
         </div>
 
         <div style="text-align: center; margin-top: 40px;">
             <p style="font-size: 18px; color: var(--secondary);">
-                <strong>834개의 테스트</strong>로 검증된 안정적인 프레임워크
+                <strong>834 tests</strong> verified stable framework
             </p>
         </div>
     </section>
@@ -1529,11 +1636,10 @@
         <div class="container">
             <ul class="footer-links">
                 <li><a href="https://github.com/app-appplayer">GitHub</a></li>
-                <li><a href="https://pub.dev/publishers/mcpstudio.org/packages" data-i18n="footer.docs">Packages</a></li>
-                <li><a href="https://discord.gg/makemind">Discord</a></li>
+                <li><a href="https://github.com/app-appplayer/flutter_mcp_ui_core/tree/main/doc" data-i18n="footer.docs">Documentation</a></li>
                 <li><a href="https://www.patreon.com/mcpdevstudio">Patreon</a></li>
             </ul>
-            <p data-i18n="footer.vision" style="font-style: italic; margin-bottom: 20px;">"makemind는 상상한 모든 제어를 실현합니다. AppPlayer는 그 첫 번째 실행기입니다."</p>
+            <p data-i18n="footer.vision" style="font-style: italic; margin-bottom: 20px;">"makemind realizes all imagined control. AppPlayer is its first executor."</p>
             <p data-i18n="footer.copyright">&copy; 2025 makemind. Open source project.</p>
         </div>
     </footer>
