@@ -1,513 +1,1074 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>makemind — package family for the Model Context Protocol</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #1a73e8;
-            --secondary: #5f6368;
-            --background: #ffffff;
-            --surface: #f8f9fa;
-            --text: #202124;
-            --muted: #5f6368;
-            --border: #dadce0;
-            --accent: #34a853;
-            --code-bg: #f4f5f7;
-        }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>makemind — A Dart and Flutter package family for the Model Context Protocol</title>
+<meta name="description" content="A Dart and Flutter package family for the Model Context Protocol. 32 packages across 7 layers — bundle schema, MCP client/server, transport-agnostic IO, knowledge subsystem, and a Material 3 UI runtime." />
+<meta name="theme-color" content="#FAFAF9" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0B0C10" media="(prefers-color-scheme: dark)" />
+<link rel="canonical" href="https://app-appplayer.github.io/makemind/" />
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="makemind" />
+<meta property="og:title" content="makemind — Dart & Flutter packages for the Model Context Protocol" />
+<meta property="og:description" content="32 packages. 7 layers. Bundle schema, MCP client/server, IO adapters, knowledge subsystem, and a Material 3 UI runtime — composable without ceremony." />
+<meta property="og:url" content="https://app-appplayer.github.io/makemind/" />
+<meta property="og:image" content="https://app-appplayer.github.io/makemind/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="makemind — 32 packages across 7 layers" />
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.65;
-            color: var(--text);
-            background: var(--background);
-        }
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="makemind" />
+<meta name="twitter:description" content="A Dart and Flutter package family for the Model Context Protocol. 32 packages, 7 layers." />
+<meta name="twitter:image" content="https://app-appplayer.github.io/makemind/og.png" />
 
-        code, pre, .mono {
-            font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
-        }
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="alternate icon" href="favicon.ico" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
-        a { color: var(--primary); text-decoration: none; }
-        a:hover { text-decoration: underline; }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF9;
+  --surface: #FFFFFF;
+  --surface-2: #F4F4F2;
+  --surface-3: #ECECE8;
+  --border: #E4E4E0;
+  --border-strong: #D1D1CB;
+  --text: #15161A;
+  --text-2: #5A5C66;
+  --text-3: #8E909A;
+  --text-mute: #B8BAC2;
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+  --accent: #2D6CDF;
+  --accent-soft: #E8F0FE;
+  --mint: #2BB39A;
+  --amber: #D49142;
+  --violet: #7B5BD9;
+  --pink: #C26A9E;
+  --coral: #D86A5A;
+  --sand: #A89A7E;
 
-        /* Header */
-        header {
-            border-bottom: 1px solid var(--border);
-            padding: 18px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(8px);
-        }
+  --layer-foundation: #15161A;
+  --layer-protocol:   #2D6CDF;
+  --layer-io:         #2BB39A;
+  --layer-domain:     #D49142;
+  --layer-knowledge:  #7B5BD9;
+  --layer-ui:         #C26A9E;
+  --layer-app:        #D86A5A;
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-        .logo-brand {
-            font-family: 'Dancing Script', cursive;
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--primary);
-            line-height: 1;
-        }
+  --shadow-sm: 0 1px 2px rgba(20,22,30,0.04);
+  --shadow-md: 0 4px 16px rgba(20,22,30,0.06), 0 1px 2px rgba(20,22,30,0.04);
+  --shadow-lg: 0 24px 60px rgba(20,22,30,0.10), 0 4px 12px rgba(20,22,30,0.04);
+}
+html[data-theme="dark"] {
+  --bg: #0B0C10;
+  --surface: #111319;
+  --surface-2: #161821;
+  --surface-3: #1C1F2A;
+  --border: #232633;
+  --border-strong: #2E3243;
+  --text: #ECEDF1;
+  --text-2: #9EA2B0;
+  --text-3: #62667A;
+  --text-mute: #404453;
 
-        .nav-links {
-            display: flex;
-            gap: 24px;
-            list-style: none;
-        }
+  --accent: #5E8FFA;
+  --accent-soft: rgba(94,143,250,0.12);
 
-        .nav-links a {
-            color: var(--secondary);
-            font-weight: 500;
-            font-size: 14px;
-        }
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
+}
 
-        .nav-links a:hover { color: var(--primary); text-decoration: none; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--bg); color: var(--text); font-family: var(--sans);
+  -webkit-font-smoothing: antialiased; line-height: 1.5;
+  font-feature-settings: 'cv11', 'ss01';
+}
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--accent); }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+code, pre { font-family: var(--mono); }
 
-        /* Hero */
-        .hero {
-            padding: 80px 0 60px;
-            border-bottom: 1px solid var(--border);
-        }
+/* Nav */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 14px 24px;
+  display: flex; align-items: center; gap: 28px;
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.01em; }
+.brand .glyph { width: 22px; height: 22px; border-radius: 6px;
+  background: linear-gradient(135deg, var(--layer-protocol), var(--layer-knowledge));
+  display: grid; place-items: center; color: white; font-size: 11px; font-weight: 800;
+}
+.nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--text-2); }
+.nav-links a:hover { color: var(--text); }
+.nav-spacer { flex: 1; }
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+.theme-toggle {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: grid; place-items: center; color: var(--text-2);
+  border: 1px solid var(--border);
+}
+.theme-toggle:hover { background: var(--surface-2); color: var(--text); }
+.btn-primary {
+  background: var(--text); color: var(--bg);
+  padding: 8px 14px; border-radius: 8px;
+  font-size: 13px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-primary:hover { opacity: 0.9; }
 
-        .hero h1 {
-            font-size: 36px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: var(--text);
-            letter-spacing: -0.5px;
-        }
+/* Hero */
+.hero {
+  max-width: 1200px; margin: 0 auto; padding: 80px 24px 56px;
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 11px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent);
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent); }
+.hero h1 {
+  margin-top: 18px;
+  font-size: 56px; line-height: 1.05; letter-spacing: -0.025em; font-weight: 700;
+  text-wrap: balance;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p.lede {
+  margin-top: 20px; font-size: 17px; line-height: 1.6; color: var(--text-2);
+  max-width: 540px; text-wrap: pretty;
+}
+.hero-cta { margin-top: 28px; display: flex; gap: 10px; align-items: center; }
+.btn-secondary {
+  padding: 10px 16px; border-radius: 9px;
+  border: 1px solid var(--border-strong); color: var(--text);
+  font-size: 14px; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-secondary:hover { background: var(--surface-2); }
+.btn-primary.lg { padding: 10px 18px; font-size: 14px; }
 
-        .hero p {
-            font-size: 18px;
-            color: var(--muted);
-            max-width: 720px;
-        }
+.hero-meta {
+  margin-top: 36px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex; gap: 32px;
+}
+.hero-meta div .k { font-family: var(--mono); font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; }
+.hero-meta div .v { font-size: 22px; font-weight: 600; margin-top: 4px; letter-spacing: -0.01em; }
 
-        /* Sections */
-        section {
-            padding: 64px 0;
-            border-bottom: 1px solid var(--border);
-        }
+/* Code preview */
+.hero-code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.code-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.code-head .dots { display: flex; gap: 6px; }
+.code-head .dots span { width: 10px; height: 10px; border-radius: 999px; background: var(--border-strong); }
+.code-head .file { font-family: var(--mono); font-size: 11px; color: var(--text-3); margin-left: 8px; }
+.code-tabs { margin-left: auto; display: flex; gap: 4px; }
+.code-tab {
+  font-family: var(--mono); font-size: 11px;
+  padding: 3px 8px; border-radius: 5px;
+  color: var(--text-3);
+}
+.code-tab.active { background: var(--surface-3); color: var(--text); }
+.code-body {
+  font-family: var(--mono); font-size: 13px; line-height: 1.7;
+  padding: 20px 22px; min-height: 320px;
+  overflow-x: auto;
+}
+.code-body .ln { color: var(--text-mute); user-select: none; display: inline-block; width: 28px; }
+.code-body .kw { color: var(--violet); }
+.code-body .st { color: var(--mint); }
+.code-body .fn { color: var(--accent); }
+.code-body .cm { color: var(--text-3); font-style: italic; }
+.code-body .nm { color: var(--text); }
 
-        section h2 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            color: var(--text);
-        }
+/* Section */
+section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
+.section-head { margin-bottom: 40px; max-width: 700px; }
+.section-head .eyebrow {
+  font-family: var(--mono); font-size: 11px; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;
+}
+.section-head h2 {
+  margin-top: 8px; font-size: 36px; letter-spacing: -0.02em; font-weight: 700;
+  line-height: 1.15;
+}
+.section-head p {
+  margin-top: 14px; color: var(--text-2); font-size: 16px; max-width: 600px;
+}
 
-        section p {
-            color: var(--text);
-            margin-bottom: 16px;
-            max-width: 820px;
-        }
+/* Architecture diagram */
+.arch {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+}
+.arch-side {
+  padding: 24px 20px;
+  border-right: 1px solid var(--border);
+  background: var(--surface-2);
+  display: flex; flex-direction: column;
+  gap: 4px;
+}
+.arch-side .h {
+  font-family: var(--mono); font-size: 10px; color: var(--text-3);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; font-weight: 600;
+}
+.layer-tab {
+  padding: 10px 12px; border-radius: 8px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer;
+  color: var(--text-2);
+  position: relative;
+}
+.layer-tab:hover { background: var(--surface-3); color: var(--text); }
+.layer-tab.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
+.layer-tab .swatch {
+  width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0;
+}
+.layer-tab .count {
+  margin-left: auto; font-family: var(--mono); font-size: 11px;
+  color: var(--text-3); padding: 1px 6px; border-radius: 4px; background: var(--surface-3);
+}
+.layer-tab.active .count { background: var(--surface-2); }
 
-        section p.muted { color: var(--muted); }
+.arch-main {
+  padding: 28px 32px;
+  min-height: 480px;
+  position: relative;
+}
+.arch-stack {
+  display: flex; flex-direction: column; gap: 6px;
+  position: relative;
+}
+.arch-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: stretch;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  border: 1px solid transparent;
+  transition: all 0.18s cubic-bezier(0.2,0,0,1);
+  cursor: pointer;
+}
+.arch-row:hover {
+  background: var(--surface-3);
+}
+.arch-row.active {
+  background: color-mix(in srgb, var(--row-color) 8%, var(--surface));
+  border-color: color-mix(in srgb, var(--row-color) 35%, transparent);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--row-color) 18%, transparent);
+}
+.arch-row.dimmed { opacity: 0.42; }
+.arch-row .label {
+  display: flex; align-items: center; gap: 10px;
+  min-width: 130px;
+}
+.arch-row .label .bar {
+  width: 3px; height: 22px; border-radius: 2px;
+  background: var(--row-color);
+}
+.arch-row .label .name {
+  font-weight: 600; font-size: 14px; letter-spacing: -0.005em;
+}
+.arch-row .pkgs {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+}
+.pkg-chip {
+  font-family: var(--mono); font-size: 12px;
+  padding: 4px 9px; border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  transition: all 0.15s;
+  font-weight: 500;
+}
+.pkg-chip:hover {
+  border-color: var(--row-color);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+.arch-row.active .pkg-chip {
+  background: var(--surface);
+}
+.arch-row .label .desc {
+  font-family: var(--mono); font-size: 10px; color: var(--text-3);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px;
+}
 
-        /* Architecture diagram */
-        .arch {
-            background: var(--code-bg);
-            border-radius: 8px;
-            padding: 24px;
-            overflow-x: auto;
-        }
+/* Layer details panel below */
+.arch-detail {
+  margin-top: 24px;
+  padding: 24px;
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+}
+.arch-detail h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.arch-detail p { color: var(--text-2); font-size: 14px; line-height: 1.6; }
+.arch-detail .why { color: var(--text-2); font-size: 13px; }
+.arch-detail .why ul { margin-top: 8px; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
 
-        .arch pre {
-            font-size: 13px;
-            line-height: 1.55;
-            color: var(--text);
-            white-space: pre;
-        }
+/* Packages */
+.pkg-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.pkg-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: all 0.15s;
+  position: relative;
+}
+.pkg-card::before {
+  content: ''; position: absolute; left: 0; top: 18px; bottom: 18px;
+  width: 3px; border-radius: 2px;
+  background: var(--card-color, var(--text-3));
+  opacity: 0.6;
+}
+.pkg-card:hover { border-color: var(--border-strong); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.pkg-card .pkg-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.pkg-card .pkg-name {
+  font-family: var(--mono); font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
+}
+.pkg-card .pkg-tier {
+  font-family: var(--mono); font-size: 9px; color: var(--text-3);
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.pkg-card .pkg-desc { font-size: 13px; color: var(--text-2); line-height: 1.55; flex: 1; }
+.pkg-card .pkg-links { display: flex; gap: 10px; margin-top: 4px; }
+.pkg-card .pkg-links a {
+  font-size: 12px; color: var(--text-3);
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.pkg-card .pkg-links a:hover { color: var(--accent); }
 
-        /* Package catalog */
-        .layer {
-            margin-bottom: 36px;
-        }
+.tier-filter {
+  display: flex; gap: 4px; flex-wrap: wrap;
+  background: var(--surface-2);
+  padding: 4px; border-radius: 10px; border: 1px solid var(--border);
+  margin-bottom: 24px; width: fit-content;
+}
+.tier-filter button {
+  padding: 6px 12px; border-radius: 7px;
+  font-size: 13px; font-weight: 500; color: var(--text-2);
+}
+.tier-filter button:hover { color: var(--text); }
+.tier-filter button.on {
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm);
+}
 
-        .layer-name {
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            padding: 4px 10px;
-            background: var(--surface);
-            border-radius: 4px;
-        }
+/* Composition */
+.compo-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+}
+.compo {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.compo .compo-head {
+  display: flex; align-items: center; gap: 10px;
+}
+.compo .compo-head .ico {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent);
+  font-family: var(--mono); font-size: 14px; font-weight: 700;
+}
+.compo h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.005em; }
+.compo p { color: var(--text-2); font-size: 13px; line-height: 1.55; }
+.compo .deps { display: flex; flex-wrap: wrap; gap: 5px; }
+.compo .deps .pkg-chip { font-size: 11px; padding: 3px 7px; }
 
-        .pkg-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 12px;
-        }
+/* Quickstart */
+.qs {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  overflow: hidden;
+}
+.qs-side {
+  padding: 24px;
+  background: var(--surface-2);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.qs-side .h {
+  font-family: var(--mono); font-size: 10px; color: var(--text-3);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; font-weight: 600;
+}
+.qs-step {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 12px; border-radius: 8px;
+  cursor: pointer; color: var(--text-2);
+}
+.qs-step:hover { background: var(--surface-3); color: var(--text); }
+.qs-step.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
+.qs-step .num {
+  width: 22px; height: 22px; border-radius: 999px;
+  background: var(--surface-3); color: var(--text-3);
+  display: grid; place-items: center;
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  flex-shrink: 0;
+}
+.qs-step.active .num { background: var(--accent); color: white; }
+.qs-step .body .title { font-size: 13px; font-weight: 600; }
+.qs-step .body .sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.qs-main {
+  padding: 28px 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.qs-main h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.qs-main p { color: var(--text-2); font-size: 14px; line-height: 1.6; }
+.qs-code {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-family: var(--mono); font-size: 13px; line-height: 1.7;
+  overflow-x: auto;
+}
+.qs-code .cm { color: var(--text-3); font-style: italic; }
+.qs-code .kw { color: var(--violet); }
+.qs-code .st { color: var(--mint); }
+.qs-code .fn { color: var(--accent); }
+.qs-code .num { color: var(--amber); }
 
-        .pkg {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-            background: var(--background);
-            transition: border-color 0.15s, box-shadow 0.15s;
-        }
+/* CTA */
+.cta-band {
+  max-width: 1200px; margin: 40px auto;
+  padding: 56px 48px;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--layer-protocol) 12%, var(--surface)),
+    color-mix(in srgb, var(--layer-knowledge) 12%, var(--surface)));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+}
+.cta-band h2 { font-size: 28px; letter-spacing: -0.02em; font-weight: 700; line-height: 1.2; }
+.cta-band p { color: var(--text-2); margin-top: 10px; font-size: 15px; max-width: 540px; }
+.cta-band .acts { display: flex; gap: 10px; }
 
-        .pkg:hover {
-            border-color: var(--primary);
-            box-shadow: 0 2px 8px rgba(26, 115, 232, 0.08);
-        }
+/* Footer */
+.foot {
+  max-width: 1200px; margin: 0 auto; padding: 56px 24px 80px;
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px;
+  font-size: 13px;
+}
+.foot h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 14px; font-weight: 600; }
+.foot ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.foot ul a { color: var(--text-2); }
+.foot ul a:hover { color: var(--text); }
+.foot .brand-block { color: var(--text-2); max-width: 280px; }
+.foot .brand-block .copyr { font-family: var(--mono); font-size: 11px; color: var(--text-3); margin-top: 18px; }
 
-        .pkg-name {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text);
-            margin-bottom: 6px;
-        }
-
-        .pkg-desc {
-            font-size: 13.5px;
-            color: var(--muted);
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-
-        .pkg-links {
-            display: flex;
-            gap: 12px;
-            font-size: 12px;
-        }
-
-        .pkg-links a {
-            color: var(--primary);
-            font-weight: 500;
-        }
-
-        /* Footer */
-        footer {
-            padding: 32px 0;
-            text-align: center;
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        footer a { margin: 0 12px; }
-
-        @media (max-width: 700px) {
-            .hero h1 { font-size: 28px; }
-            .nav-links { display: none; }
-            .arch pre { font-size: 11px; }
-        }
-    </style>
+/* Utilities & responsive */
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: 1fr; gap: 40px; padding: 56px 24px 40px; }
+  .hero h1 { font-size: 40px; }
+  .arch { grid-template-columns: 1fr; }
+  .arch-side { border-right: 0; border-bottom: 1px solid var(--border); flex-direction: row; flex-wrap: wrap; }
+  .layer-tab { flex: 1; min-width: 130px; }
+  .pkg-grid, .compo-grid { grid-template-columns: 1fr 1fr; }
+  .qs { grid-template-columns: 1fr; }
+  .qs-side { border-right: 0; border-bottom: 1px solid var(--border); flex-direction: row; overflow-x: auto; }
+  .qs-step { min-width: 200px; }
+  .arch-detail { grid-template-columns: 1fr; }
+  .cta-band { grid-template-columns: 1fr; }
+  .foot { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .hero h1 { font-size: 32px; }
+  .nav-links { display: none; }
+  .pkg-grid, .compo-grid { grid-template-columns: 1fr; }
+  section { padding: 56px 20px; }
+}
+</style>
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <nav>
-            <a href="/" class="logo-brand">makemind</a>
-            <ul class="nav-links">
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#architecture">Architecture</a></li>
-                <li><a href="#packages">Packages</a></li>
-                <li><a href="#composition">Composition</a></li>
-                <li><a href="https://github.com/app-appplayer">GitHub</a></li>
-            </ul>
-        </nav>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="brand">
+      <span class="glyph">m</span>
+      <span>makemind</span>
+    </a>
+    <div class="nav-links">
+      <a href="#architecture">Architecture</a>
+      <a href="#packages">Packages</a>
+      <a href="#composition">Composition</a>
+      <a href="#quickstart">Quickstart</a>
     </div>
+    <div class="nav-spacer"></div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg id="iconSun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg id="iconMoon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <a href="https://github.com/app-appplayer" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.79 23.4c.6.11.83-.26.83-.58v-2.04c-3.34.73-4.04-1.6-4.04-1.6-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.78.84 1.24 1.91 1.24 3.22 0 4.6-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <span class="hero-eyebrow"><span class="dot"></span>v1.0 · 32 packages on pub.dev</span>
+    <h1>The Model Context Protocol stack <em>for Dart and Flutter.</em></h1>
+    <p class="lede">A composable family of packages — bundle schema, MCP client/server, transport-agnostic IO, knowledge subsystem, and a Material 3 UI runtime. Each ships independently. None require ceremony.</p>
+    <div class="hero-cta">
+      <a href="#quickstart" class="btn-primary lg">
+        Get started
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://pub.dev/publishers/app-appplayer.com/packages" class="btn-secondary">
+        View on pub.dev
+      </a>
+    </div>
+    <div class="hero-meta">
+      <div><div class="k">Packages</div><div class="v">32</div></div>
+      <div><div class="k">Layers</div><div class="v">7</div></div>
+      <div><div class="k">Transports</div><div class="v">8</div></div>
+      <div><div class="k">License</div><div class="v">MIT</div></div>
+    </div>
+  </div>
+  <div class="hero-code">
+    <div class="code-head">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <span class="file">main.dart</span>
+      <div class="code-tabs">
+        <span class="code-tab active">client</span>
+        <span class="code-tab">server</span>
+        <span class="code-tab">ui</span>
+      </div>
+    </div>
+    <pre class="code-body"><span class="ln">1</span><span class="kw">import</span> <span class="st">'package:mcp_client/mcp_client.dart'</span>;
+<span class="ln">2</span><span class="kw">import</span> <span class="st">'package:flutter_mcp_ui_runtime/runtime.dart'</span>;
+<span class="ln">3</span>
+<span class="ln">4</span><span class="cm">// Connect through any supported transport.</span>
+<span class="ln">5</span><span class="kw">final</span> <span class="nm">client</span> = <span class="kw">await</span> <span class="fn">McpClient</span>.<span class="fn">connect</span>(
+<span class="ln">6</span>  transport: <span class="fn">StdioTransport</span>(),
+<span class="ln">7</span>);
+<span class="ln">8</span>
+<span class="ln">9</span><span class="cm">// Server publishes tools + a UI definition.</span>
+<span class="ln">10</span><span class="kw">final</span> <span class="nm">ui</span> = <span class="kw">await</span> <span class="nm">client</span>.<span class="fn">fetchUi</span>();
+<span class="ln">11</span>
+<span class="ln">12</span><span class="cm">// Render. Tool calls flow back from UI actions.</span>
+<span class="ln">13</span><span class="fn">runApp</span>(<span class="fn">McpUiRuntime</span>(
+<span class="ln">14</span>  client: <span class="nm">client</span>,
+<span class="ln">15</span>  definition: <span class="nm">ui</span>,
+<span class="ln">16</span>));</pre>
+  </div>
 </header>
 
-<section class="hero">
-    <div class="container">
-        <h1>A Dart and Flutter package family for the Model Context Protocol.</h1>
-        <p>The packages compose into a single stack: bundle schema and standard ports, MCP client/server with LLM provider integration, a knowledge subsystem, transport-agnostic IO adapters, domain helpers, a Material 3 UI runtime, and an application orchestrator.</p>
-    </div>
-</section>
-
-<section id="overview">
-    <div class="container">
-        <h2>Overview</h2>
-        <p>An MCP server publishes tools, resources, and a UI definition. A client connects through one of the supported transports and renders the UI; tool invocations originate from UI actions. The packages on this site provide the parts that make this loop work — protocol implementations, the bundle and port contract that lets servers describe themselves uniformly, IO adapters that bring physical and network devices under that contract, knowledge subsystems for fact recording and skill execution, and a Flutter UI runtime that renders MCP-served definitions.</p>
-        <p>Each package is published independently on pub.dev and can be used in isolation. The parts are designed to compose without ceremony.</p>
-    </div>
-</section>
-
 <section id="architecture">
-    <div class="container">
-        <h2>Architecture</h2>
-        <p class="muted">Lower layers do not depend on higher layers. Most packages depend only on <code>mcp_bundle</code>.</p>
-        <div class="arch"><pre>
-┌─ Application ───────────────────────────────────────────────────┐
-│  appplayer_core           flutter_mcp                            │
-├─ UI ──────────────────────────────────────────────────────────┤
-│  flutter_mcp_ui_core      flutter_mcp_ui_runtime                 │
-│  flutter_mcp_ui_generator                                        │
-├─ Knowledge ───────────────────────────────────────────────────┤
-│  mcp_knowledge   mcp_fact_graph     mcp_skill                    │
-│  mcp_profile     mcp_knowledge_ops  mcp_philosophy               │
-├─ Domain ──────────────────────────────────────────────────────┤
-│  mcp_channel  mcp_form    mcp_analysis   mcp_ingest              │
-│  mcp_browser  mcp_canvas  mcp_flow_runtime                       │
-├─ IO ──────────────────────────────────────────────────────────┤
-│  mcp_io                                                          │
-│  mcp_io_websocket  mcp_io_http     mcp_io_mqtt    mcp_io_serial  │
-│  mcp_io_can        mcp_io_modbus   mcp_io_opcua   mcp_io_scpi    │
-├─ Protocol ────────────────────────────────────────────────────┤
-│  mcp_client    mcp_server    mcp_llm    mcp_gateway              │
-├─ Foundation ──────────────────────────────────────────────────┤
-│  mcp_bundle  ·  schema · ports · expression · install            │
-└─────────────────────────────────────────────────────────────────┘</pre></div>
+  <div class="section-head">
+    <div class="eyebrow">Architecture</div>
+    <h2>Seven layers. Lower never depends on higher.</h2>
+    <p>Most packages depend only on <code>mcp_bundle</code>. There are no circular dependencies — pick the parts you need and compose without ceremony.</p>
+  </div>
+
+  <div class="arch">
+    <aside class="arch-side">
+      <div class="h">Filter</div>
+      <div class="layer-tab active" data-layer="all"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-protocol),var(--layer-knowledge))"></span>All layers <span class="count">32</span></div>
+      <div class="layer-tab" data-layer="application"><span class="swatch" style="background:var(--layer-app)"></span>Application <span class="count">2</span></div>
+      <div class="layer-tab" data-layer="ui"><span class="swatch" style="background:var(--layer-ui)"></span>UI <span class="count">3</span></div>
+      <div class="layer-tab" data-layer="knowledge"><span class="swatch" style="background:var(--layer-knowledge)"></span>Knowledge <span class="count">6</span></div>
+      <div class="layer-tab" data-layer="domain"><span class="swatch" style="background:var(--layer-domain)"></span>Domain <span class="count">7</span></div>
+      <div class="layer-tab" data-layer="io"><span class="swatch" style="background:var(--layer-io)"></span>IO <span class="count">9</span></div>
+      <div class="layer-tab" data-layer="protocol"><span class="swatch" style="background:var(--layer-protocol)"></span>Protocol <span class="count">4</span></div>
+      <div class="layer-tab" data-layer="foundation"><span class="swatch" style="background:var(--layer-foundation)"></span>Foundation <span class="count">1</span></div>
+    </aside>
+    <div class="arch-main">
+      <div class="arch-stack" id="archStack">
+        <div class="arch-row" data-layer="application" style="--row-color: var(--layer-app);">
+          <div class="label">
+            <span class="bar"></span>
+            <div>
+              <div class="name">Application</div>
+              <div class="desc">orchestration</div>
+            </div>
+          </div>
+          <div class="pkgs">
+            <a class="pkg-chip" href="#pkg-appplayer_core">appplayer_core</a>
+            <a class="pkg-chip" href="#pkg-flutter_mcp">flutter_mcp</a>
+          </div>
+        </div>
+        <div class="arch-row" data-layer="ui" style="--row-color: var(--layer-ui);">
+          <div class="label">
+            <span class="bar"></span>
+            <div>
+              <div class="name">UI</div>
+              <div class="desc">render · generate</div>
+            </div>
+          </div>
+          <div class="pkgs">
+            <a class="pkg-chip" href="#pkg-flutter_mcp_ui_core">flutter_mcp_ui_core</a>
+            <a class="pkg-chip" href="#pkg-flutter_mcp_ui_runtime">flutter_mcp_ui_runtime</a>
+            <a class="pkg-chip" href="#pkg-flutter_mcp_ui_generator">flutter_mcp_ui_generator</a>
+          </div>
+        </div>
+        <div class="arch-row" data-layer="knowledge" style="--row-color: var(--layer-knowledge);">
+          <div class="label">
+            <span class="bar"></span>
+            <div>
+              <div class="name">Knowledge</div>
+              <div class="desc">facts · skills · ethos</div>
+            </div>
+          </div>
+          <div class="pkgs">
+            <a class="pkg-chip" href="#pkg-mcp_knowledge">mcp_knowledge</a>
+            <a class="pkg-chip" href="#pkg-mcp_fact_graph">mcp_fact_graph</a>
+            <a class="pkg-chip" href="#pkg-mcp_skill">mcp_skill</a>
+            <a class="pkg-chip" href="#pkg-mcp_profile">mcp_profile</a>
+            <a class="pkg-chip" href="#pkg-mcp_knowledge_ops">mcp_knowledge_ops</a>
+            <a class="pkg-chip" href="#pkg-mcp_philosophy">mcp_philosophy</a>
+          </div>
+        </div>
+        <div class="arch-row" data-layer="domain" style="--row-color: var(--layer-domain);">
+          <div class="label">
+            <span class="bar"></span>
+            <div>
+              <div class="name">Domain</div>
+              <div class="desc">helpers</div>
+            </div>
+          </div>
+          <div class="pkgs">
+            <a class="pkg-chip" href="#pkg-mcp_channel">mcp_channel</a>
+            <a class="pkg-chip" href="#pkg-mcp_form">mcp_form</a>
+            <a class="pkg-chip" href="#pkg-mcp_analysis">mcp_analysis</a>
+            <a class="pkg-chip" href="#pkg-mcp_ingest">mcp_ingest</a>
+            <a class="pkg-chip" href="#pkg-mcp_browser">mcp_browser</a>
+            <a class="pkg-chip" href="#pkg-mcp_canvas">mcp_canvas</a>
+            <a class="pkg-chip" href="#pkg-mcp_flow_runtime">mcp_flow_runtime</a>
+          </div>
+        </div>
+        <div class="arch-row" data-layer="io" style="--row-color: var(--layer-io);">
+          <div class="label">
+            <span class="bar"></span>
+            <div>
+              <div class="name">IO</div>
+              <div class="desc">8 transports + core</div>
+            </div>
+          </div>
+          <div class="pkgs">
+            <a class="pkg-chip" href="#pkg-mcp_io">mcp_io</a>
+            <a class="pkg-chip" href="#pkg-mcp_io_websocket">websocket</a>
+            <a class="pkg-chip" href="#pkg-mcp_io_http">http</a>
+            <a class="pkg-chip" href="#pkg-mcp_io_mqtt">mqtt</a>
+            <a class="pkg-chip" href="#pkg-mcp_io_serial">serial</a>
+            <a class="pkg-chip" href="#pkg-mcp_io_can">can</a>
+            <a class="pkg-chip" href="#pkg-mcp_io_modbus">modbus</a>
+            <a class="pkg-chip" href="#pkg-mcp_io_opcua">opcua</a>
+            <a class="pkg-chip" href="#pkg-mcp_io_scpi">scpi</a>
+          </div>
+        </div>
+        <div class="arch-row" data-layer="protocol" style="--row-color: var(--layer-protocol);">
+          <div class="label">
+            <span class="bar"></span>
+            <div>
+              <div class="name">Protocol</div>
+              <div class="desc">client · server · llm · gateway</div>
+            </div>
+          </div>
+          <div class="pkgs">
+            <a class="pkg-chip" href="#pkg-mcp_client">mcp_client</a>
+            <a class="pkg-chip" href="#pkg-mcp_server">mcp_server</a>
+            <a class="pkg-chip" href="#pkg-mcp_llm">mcp_llm</a>
+            <a class="pkg-chip" href="#pkg-mcp_gateway">mcp_gateway</a>
+          </div>
+        </div>
+        <div class="arch-row" data-layer="foundation" style="--row-color: var(--layer-foundation);">
+          <div class="label">
+            <span class="bar"></span>
+            <div>
+              <div class="name">Foundation</div>
+              <div class="desc">schema · ports · expression</div>
+            </div>
+          </div>
+          <div class="pkgs">
+            <a class="pkg-chip" href="#pkg-mcp_bundle">mcp_bundle</a>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <section id="packages">
-    <div class="container">
-        <h2>Packages</h2>
+  <div class="section-head">
+    <div class="eyebrow">Packages</div>
+    <h2>32 packages. Each ships on its own.</h2>
+    <p>Pub.dev publication is independent — depend on what you need. Most depend only on <code>mcp_bundle</code>.</p>
+  </div>
 
-        <div class="layer">
-            <span class="layer-name">Foundation</span>
-            <div class="pkg-grid">
-                <div class="pkg">
-                    <div class="pkg-name">mcp_bundle</div>
-                    <div class="pkg-desc">Bundle schema, expression language, standard port catalog, and bundle install / sign / pack pipeline. The foundation other packages depend on.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_bundle">pub.dev</a><a href="https://github.com/app-appplayer/mcp_bundle">GitHub</a></div>
-                </div>
-            </div>
-        </div>
+  <div class="tier-filter" id="tierFilter">
+    <button class="on" data-filter="all">All</button>
+    <button data-filter="foundation">Foundation</button>
+    <button data-filter="protocol">Protocol</button>
+    <button data-filter="io">IO</button>
+    <button data-filter="domain">Domain</button>
+    <button data-filter="knowledge">Knowledge</button>
+    <button data-filter="ui">UI</button>
+    <button data-filter="application">Application</button>
+  </div>
 
-        <div class="layer">
-            <span class="layer-name">Protocol</span>
-            <div class="pkg-grid">
-                <div class="pkg">
-                    <div class="pkg-name">mcp_client</div>
-                    <div class="pkg-desc">Dart MCP client. Multiple transports, OAuth 2.1, JSON-RPC batch, deferred tool loading.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_client">pub.dev</a><a href="https://github.com/app-appplayer/mcp_client">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_server</div>
-                    <div class="pkg-desc">Dart MCP server. Tool / resource / prompt registration, multiple transports, OAuth.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_server">pub.dev</a><a href="https://github.com/app-appplayer/mcp_server">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_llm</div>
-                    <div class="pkg-desc">LLM provider integration (Claude, OpenAI, Gemini, Bedrock, Cohere, Mistral, Groq, Together, Vertex AI) with Vision, ASR, OCR, and storage adapters.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_llm">pub.dev</a><a href="https://github.com/app-appplayer/mcp_llm">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_gateway</div>
-                    <div class="pkg-desc">Multi-node MCP relay with namespace routing, session management, audit, and policy enforcement.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_gateway">pub.dev</a><a href="https://github.com/app-appplayer/mcp_gateway">GitHub</a></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="layer">
-            <span class="layer-name">IO</span>
-            <div class="pkg-grid">
-                <div class="pkg">
-                    <div class="pkg-name">mcp_io</div>
-                    <div class="pkg-desc">Universal I/O backbone — device registry, policy engine, audit trail, streaming, command queue, session manager.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_io_websocket</div>
-                    <div class="pkg-desc">WebSocket transport adapter — text/binary frame pub/sub.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_websocket">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_websocket">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_io_http</div>
-                    <div class="pkg-desc">HTTP REST transport adapter — GET/read, POST/PUT/PATCH/DELETE, polling subscribe.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_http">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_http">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_io_mqtt</div>
-                    <div class="pkg-desc">MQTT v3.1.1 transport adapter — QoS 0 pub/sub with topic wildcards.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_mqtt">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_mqtt">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_io_serial</div>
-                    <div class="pkg-desc">Serial port adapter — UART, RS-232, USB-Serial. Byte and line-delimited modes.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_serial">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_serial">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_io_can</div>
-                    <div class="pkg-desc">CAN bus adapter — Classic CAN 2.0A/B frame codec with SocketCAN layout.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_can">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_can">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_io_modbus</div>
-                    <div class="pkg-desc">Modbus TCP / RTU adapter — FC01 / FC03 / FC05 / FC06 / FC15 / FC16.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_modbus">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_modbus">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_io_opcua</div>
-                    <div class="pkg-desc">OPC UA Binary adapter — Hello/Ack transport codec and session abstraction.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_opcua">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_opcua">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_io_scpi</div>
-                    <div class="pkg-desc">SCPI adapter for instruments — text command/response over TCP.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_scpi">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_scpi">GitHub</a></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="layer">
-            <span class="layer-name">Domain</span>
-            <div class="pkg-grid">
-                <div class="pkg">
-                    <div class="pkg-name">mcp_channel</div>
-                    <div class="pkg-desc">Unified messaging connector across Slack, Discord, Telegram, Email, Kakao, and more. Sessions, idempotency, rate limit, retry, circuit breaker.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_channel">pub.dev</a><a href="https://github.com/app-appplayer/mcp_channel">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_form</div>
-                    <div class="pkg-desc">Form document creation, validation, and rendering — template / document / validator / binding subsystems.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_form">pub.dev</a><a href="https://github.com/app-appplayer/mcp_form">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_analysis</div>
-                    <div class="pkg-desc">Pipeline-based data analysis engine with pluggable functions, transforms, and multi-source data integration.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_analysis">pub.dev</a><a href="https://github.com/app-appplayer/mcp_analysis">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_ingest</div>
-                    <div class="pkg-desc">Document ingestion pipeline — converts files / bytes / URLs to a normalized document with chunking, OCR, and ASR ports.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_ingest">pub.dev</a><a href="https://github.com/app-appplayer/mcp_ingest">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_browser</div>
-                    <div class="pkg-desc">Headless browser automation backbone — direct CDP, authenticated sessions, structured search, crawl, and DOM extraction.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_browser">pub.dev</a><a href="https://github.com/app-appplayer/mcp_browser">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_canvas</div>
-                    <div class="pkg-desc">Definition-based canvas engine for 2D/3D rendering with a shape primitive set, layout algorithms, and Canvas Definition Language (CDL).</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_canvas">pub.dev</a><a href="https://github.com/app-appplayer/mcp_canvas">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_flow_runtime</div>
-                    <div class="pkg-desc">Declarative runtime for hardware control and IoT orchestration — process scheduler, hardware abstraction layer, state stores, expression engine.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_flow_runtime">pub.dev</a><a href="https://github.com/app-appplayer/mcp_flow_runtime">GitHub</a></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="layer">
-            <span class="layer-name">Knowledge</span>
-            <div class="pkg-grid">
-                <div class="pkg">
-                    <div class="pkg-name">mcp_knowledge</div>
-                    <div class="pkg-desc">Orchestration facade composing fact-graph, skill, profile, knowledge-ops, and philosophy runtimes behind a single entry point.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_knowledge">pub.dev</a><a href="https://github.com/app-appplayer/mcp_knowledge">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_fact_graph</div>
-                    <div class="pkg-desc">Temporal knowledge graph organized as Evidence → FactGraph → ContextOps → SkillOps layers, with entities, candidates, claims, and summaries.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_fact_graph">pub.dev</a><a href="https://github.com/app-appplayer/mcp_fact_graph">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_skill</div>
-                    <div class="pkg-desc">Typed skill definitions and runtime — JSON-Schema validation, multi-step procedures with branching, expression language, claim recording.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_skill">pub.dev</a><a href="https://github.com/app-appplayer/mcp_skill">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_profile</div>
-                    <div class="pkg-desc">AI persona definitions with appraisal, decision, and expression engines, plus standard port adapters for the bundle Contract Layer.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_profile">pub.dev</a><a href="https://github.com/app-appplayer/mcp_profile">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_knowledge_ops</div>
-                    <div class="pkg-desc">Stateless orchestration layer — execution engine, pipelines (curation, summary refresh, pattern mining, ingest, index rebuild), workflows, scheduler, runbooks.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_knowledge_ops">pub.dev</a><a href="https://github.com/app-appplayer/mcp_knowledge_ops">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">mcp_philosophy</div>
-                    <div class="pkg-desc">Value-principle / ethos layer — evaluation, prohibition checking, pipeline intervention, tension detection, ethos evolution.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_philosophy">pub.dev</a><a href="https://github.com/app-appplayer/mcp_philosophy">GitHub</a></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="layer">
-            <span class="layer-name">UI</span>
-            <div class="pkg-grid">
-                <div class="pkg">
-                    <div class="pkg-name">flutter_mcp_ui_core</div>
-                    <div class="pkg-desc">Core models, constants, and Material 3 theme system with DTCG (W3C Design Tokens) interchange. Shared foundation for runtime and generator.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/flutter_mcp_ui_core">pub.dev</a><a href="https://github.com/app-appplayer/flutter_mcp_ui_core">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">flutter_mcp_ui_runtime</div>
-                    <div class="pkg-desc">Dynamic Flutter UI runtime — renders MCP UI definitions, manages state, dispatches actions, integrates with Material 3 theming and responsive form factors.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/flutter_mcp_ui_runtime">pub.dev</a><a href="https://github.com/app-appplayer/flutter_mcp_ui_runtime">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">flutter_mcp_ui_generator</div>
-                    <div class="pkg-desc">Fluent JSON generation toolkit — programmatic UI construction with templates and helpers, including Material 3 theme builder helpers.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/flutter_mcp_ui_generator">pub.dev</a><a href="https://github.com/app-appplayer/flutter_mcp_ui_generator">GitHub</a></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="layer">
-            <span class="layer-name">Application</span>
-            <div class="pkg-grid">
-                <div class="pkg">
-                    <div class="pkg-name">appplayer_core</div>
-                    <div class="pkg-desc">Connection lifecycle, app and dashboard sessions, bundle install pipeline, tool dispatch, and the apps registry. The shared library that hosts build on.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/appplayer_core">pub.dev</a><a href="https://github.com/app-appplayer/appplayer_core">GitHub</a></div>
-                </div>
-                <div class="pkg">
-                    <div class="pkg-name">flutter_mcp</div>
-                    <div class="pkg-desc">Flutter plugin combining MCP client, server, and LLM with platform features — background execution, notifications, system tray, lifecycle, secure storage.</div>
-                    <div class="pkg-links"><a href="https://pub.dev/packages/flutter_mcp">pub.dev</a><a href="https://github.com/app-appplayer/flutter_mcp">GitHub</a></div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+  <div class="pkg-grid" id="pkgGrid"></div>
 </section>
 
 <section id="composition">
-    <div class="container">
-        <h2>Composition</h2>
-        <p>The packages do not require each other to be used together. Common compositions:</p>
-        <ul style="margin: 0 0 16px 24px; color: var(--text);">
-            <li style="margin-bottom: 8px;"><strong>Minimal client</strong> — <code>mcp_client</code> alone is enough to talk to any MCP server.</li>
-            <li style="margin-bottom: 8px;"><strong>Server with UI</strong> — <code>mcp_server</code> plus <code>mcp_bundle</code> describes tools and an MCP UI definition; clients render it through <code>flutter_mcp_ui_runtime</code>.</li>
-            <li style="margin-bottom: 8px;"><strong>Knowledge stack</strong> — <code>mcp_knowledge</code> composes <code>mcp_fact_graph</code> + <code>mcp_skill</code> + <code>mcp_profile</code> + <code>mcp_knowledge_ops</code> + <code>mcp_philosophy</code> behind one facade.</li>
-            <li style="margin-bottom: 8px;"><strong>Device control</strong> — <code>mcp_io</code> with one or more transport adapters (websocket, http, mqtt, serial, can, modbus, opcua, scpi) brings devices under a single contract; <code>mcp_flow_runtime</code> orchestrates control flows.</li>
-            <li style="margin-bottom: 8px;"><strong>Multi-node deployment</strong> — <code>mcp_gateway</code> routes between MCP servers and clients with namespace separation and policy.</li>
-            <li><strong>Application host</strong> — <code>appplayer_core</code> wires connection lifecycle, sessions, and bundle install on top of <code>mcp_client</code>, <code>mcp_bundle</code>, and the UI runtime.</li>
-        </ul>
-        <p class="muted">Most packages depend only on <code>mcp_bundle</code>. There are no circular dependencies.</p>
+  <div class="section-head">
+    <div class="eyebrow">Composition</div>
+    <h2>Compose without ceremony.</h2>
+    <p>The packages do not require each other to be used together. These are common compositions — start small, grow as you need.</p>
+  </div>
+
+  <div class="compo-grid">
+    <div class="compo">
+      <div class="compo-head"><span class="ico">→</span><h3>Minimal client</h3></div>
+      <p><code>mcp_client</code> alone is enough to talk to any MCP server. No UI, no bundle — just the wire.</p>
+      <div class="deps"><span class="pkg-chip">mcp_client</span></div>
     </div>
+    <div class="compo">
+      <div class="compo-head"><span class="ico">⌘</span><h3>Server with UI</h3></div>
+      <p>Describe tools and a Material 3 UI definition; clients render it through the runtime.</p>
+      <div class="deps">
+        <span class="pkg-chip">mcp_server</span>
+        <span class="pkg-chip">mcp_bundle</span>
+        <span class="pkg-chip">flutter_mcp_ui_runtime</span>
+      </div>
+    </div>
+    <div class="compo">
+      <div class="compo-head"><span class="ico">∞</span><h3>Knowledge stack</h3></div>
+      <p>Facts, skills, profile, ops, and philosophy behind one facade — for AI personas with memory and ethos.</p>
+      <div class="deps">
+        <span class="pkg-chip">mcp_knowledge</span>
+        <span class="pkg-chip">mcp_fact_graph</span>
+        <span class="pkg-chip">mcp_skill</span>
+        <span class="pkg-chip">mcp_profile</span>
+        <span class="pkg-chip">mcp_knowledge_ops</span>
+        <span class="pkg-chip">mcp_philosophy</span>
+      </div>
+    </div>
+    <div class="compo">
+      <div class="compo-head"><span class="ico">⚡</span><h3>Device control</h3></div>
+      <p>Bring physical and network devices under one contract — eight transports out of the box, orchestrated declaratively.</p>
+      <div class="deps">
+        <span class="pkg-chip">mcp_io</span>
+        <span class="pkg-chip">mcp_io_serial</span>
+        <span class="pkg-chip">mcp_io_modbus</span>
+        <span class="pkg-chip">mcp_flow_runtime</span>
+      </div>
+    </div>
+    <div class="compo">
+      <div class="compo-head"><span class="ico">⤧</span><h3>Multi-node deployment</h3></div>
+      <p>Route between MCP servers and clients with namespace separation, session, audit, and policy.</p>
+      <div class="deps">
+        <span class="pkg-chip">mcp_gateway</span>
+        <span class="pkg-chip">mcp_client</span>
+        <span class="pkg-chip">mcp_server</span>
+      </div>
+    </div>
+    <div class="compo">
+      <div class="compo-head"><span class="ico">★</span><h3>Application host</h3></div>
+      <p>Connection lifecycle, sessions, and bundle install on top of client, bundle, and the UI runtime.</p>
+      <div class="deps">
+        <span class="pkg-chip">appplayer_core</span>
+        <span class="pkg-chip">mcp_client</span>
+        <span class="pkg-chip">mcp_bundle</span>
+        <span class="pkg-chip">flutter_mcp_ui_runtime</span>
+      </div>
+    </div>
+  </div>
 </section>
 
-<footer>
-    <a href="https://github.com/app-appplayer">GitHub</a>
-    <a href="https://pub.dev/publishers/app-appplayer.com/packages">pub.dev</a>
-    <p style="margin-top: 12px;">© AppPlayer</p>
+<section id="quickstart">
+  <div class="section-head">
+    <div class="eyebrow">Quickstart</div>
+    <h2>From zero to your first MCP UI.</h2>
+    <p>Three steps. Less than five minutes if pub.dev cooperates.</p>
+  </div>
+
+  <div class="qs">
+    <aside class="qs-side">
+      <div class="h">Steps</div>
+      <div class="qs-step active" data-step="1">
+        <span class="num">1</span>
+        <div class="body"><div class="title">Install</div><div class="sub">add to pubspec.yaml</div></div>
+      </div>
+      <div class="qs-step" data-step="2">
+        <span class="num">2</span>
+        <div class="body"><div class="title">Connect</div><div class="sub">pick a transport</div></div>
+      </div>
+      <div class="qs-step" data-step="3">
+        <span class="num">3</span>
+        <div class="body"><div class="title">Render</div><div class="sub">mount the runtime</div></div>
+      </div>
+    </aside>
+    <div class="qs-main" id="qsMain"></div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div>
+    <h2>Build with the protocol of context.</h2>
+    <p>Each package is on pub.dev. The source is on GitHub. Issues, PRs, and questions welcome.</p>
+  </div>
+  <div class="acts">
+    <a href="https://github.com/app-appplayer" class="btn-primary lg">GitHub</a>
+    <a href="https://pub.dev/publishers/app-appplayer.com/packages" class="btn-secondary">pub.dev</a>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="brand-block">
+    <div class="brand"><span class="glyph">m</span><span>makemind</span></div>
+    <p style="margin-top:14px">A Dart and Flutter package family for the Model Context Protocol.</p>
+    <div class="copyr">© AppPlayer · MIT licensed</div>
+  </div>
+  <div>
+    <h4>Docs</h4>
+    <ul>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#composition">Composition</a></li>
+      <li><a href="#quickstart">Quickstart</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Resources</h4>
+    <ul>
+      <li><a href="https://pub.dev/publishers/app-appplayer.com/packages">pub.dev publisher</a></li>
+      <li><a href="https://github.com/app-appplayer">GitHub org</a></li>
+      <li><a href="https://modelcontextprotocol.io">Model Context Protocol</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Community</h4>
+    <ul>
+      <li><a href="https://github.com/app-appplayer/mcp_bundle/issues">Report an issue</a></li>
+      <li><a href="https://github.com/app-appplayer">Discussions</a></li>
+    </ul>
+  </div>
 </footer>
+
+<script>
+// ── Theme ────────────────────────────────────────────────────
+const html = document.documentElement;
+const tt = document.getElementById('themeToggle');
+const sun = document.getElementById('iconSun');
+const moon = document.getElementById('iconMoon');
+function setTheme(t) {
+  html.setAttribute('data-theme', t);
+  sun.style.display  = t === 'dark' ? 'block' : 'none';
+  moon.style.display = t === 'dark' ? 'none' : 'block';
+  try { localStorage.setItem('mm-theme', t); } catch (e) {}
+}
+const stored = (() => { try { return localStorage.getItem('mm-theme'); } catch (e) { return null; } })();
+setTheme(stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+tt.addEventListener('click', () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+
+// ── Architecture filter ──────────────────────────────────────
+const archTabs = document.querySelectorAll('.layer-tab');
+const archRows = document.querySelectorAll('.arch-row');
+archTabs.forEach(t => t.addEventListener('click', () => {
+  archTabs.forEach(x => x.classList.remove('active'));
+  t.classList.add('active');
+  const f = t.dataset.layer;
+  archRows.forEach(r => {
+    r.classList.remove('active', 'dimmed');
+    if (f === 'all') return;
+    if (r.dataset.layer === f) r.classList.add('active');
+    else r.classList.add('dimmed');
+  });
+}));
+
+// ── Packages ─────────────────────────────────────────────────
+const PACKAGES = [
+  { name: 'mcp_bundle', tier: 'foundation', desc: 'Bundle schema, expression language, standard port catalog, and bundle install / sign / pack pipeline.' },
+  { name: 'mcp_client', tier: 'protocol', desc: 'Dart MCP client. Multiple transports, OAuth 2.1, JSON-RPC batch, deferred tool loading.' },
+  { name: 'mcp_server', tier: 'protocol', desc: 'Dart MCP server. Tool / resource / prompt registration, multiple transports, OAuth.' },
+  { name: 'mcp_llm', tier: 'protocol', desc: 'LLM provider integration (Claude, OpenAI, Gemini, Bedrock, Cohere, Mistral, Groq, Together, Vertex AI).' },
+  { name: 'mcp_gateway', tier: 'protocol', desc: 'Multi-node MCP relay with namespace routing, session management, audit, and policy enforcement.' },
+  { name: 'mcp_io', tier: 'io', desc: 'Universal I/O backbone — device registry, policy engine, audit trail, streaming, command queue.' },
+  { name: 'mcp_io_websocket', tier: 'io', desc: 'WebSocket transport adapter — text/binary frame pub/sub.' },
+  { name: 'mcp_io_http', tier: 'io', desc: 'HTTP REST transport adapter — GET, POST, PUT, PATCH, DELETE, polling subscribe.' },
+  { name: 'mcp_io_mqtt', tier: 'io', desc: 'MQTT v3.1.1 transport adapter — QoS 0 pub/sub with topic wildcards.' },
+  { name: 'mcp_io_serial', tier: 'io', desc: 'Serial port adapter — UART, RS-232, USB-Serial. Byte and line-delimited modes.' },
+  { name: 'mcp_io_can', tier: 'io', desc: 'CAN bus adapter — Classic CAN 2.0A/B frame codec with SocketCAN layout.' },
+  { name: 'mcp_io_modbus', tier: 'io', desc: 'Modbus TCP / RTU adapter — FC01 / FC03 / FC05 / FC06 / FC15 / FC16.' },
+  { name: 'mcp_io_opcua', tier: 'io', desc: 'OPC UA Binary adapter — Hello/Ack transport codec and session abstraction.' },
+  { name: 'mcp_io_scpi', tier: 'io', desc: 'SCPI adapter for instruments — text command/response over TCP.' },
+  { name: 'mcp_channel', tier: 'domain', desc: 'Unified messaging connector across Slack, Discord, Telegram, Email, Kakao, and more.' },
+  { name: 'mcp_form', tier: 'domain', desc: 'Form document creation, validation, and rendering — template / document / validator subsystems.' },
+  { name: 'mcp_analysis', tier: 'domain', desc: 'Pipeline-based data analysis engine with pluggable functions and multi-source integration.' },
+  { name: 'mcp_ingest', tier: 'domain', desc: 'Document ingestion pipeline — files, bytes, URLs to a normalized document with chunking, OCR, ASR.' },
+  { name: 'mcp_browser', tier: 'domain', desc: 'Headless browser automation — direct CDP, authenticated sessions, search, crawl, DOM extraction.' },
+  { name: 'mcp_canvas', tier: 'domain', desc: 'Definition-based canvas engine for 2D/3D rendering with a Canvas Definition Language (CDL).' },
+  { name: 'mcp_flow_runtime', tier: 'domain', desc: 'Declarative runtime for hardware control and IoT orchestration — scheduler, HAL, expression engine.' },
+  { name: 'mcp_knowledge', tier: 'knowledge', desc: 'Orchestration facade composing fact-graph, skill, profile, ops, and philosophy behind one entry.' },
+  { name: 'mcp_fact_graph', tier: 'knowledge', desc: 'Temporal knowledge graph — Evidence → FactGraph → ContextOps → SkillOps layers.' },
+  { name: 'mcp_skill', tier: 'knowledge', desc: 'Typed skill definitions and runtime — JSON-Schema validation, multi-step procedures with branching.' },
+  { name: 'mcp_profile', tier: 'knowledge', desc: 'AI persona definitions with appraisal, decision, and expression engines.' },
+  { name: 'mcp_knowledge_ops', tier: 'knowledge', desc: 'Stateless orchestration — pipelines (curation, summary, mining, ingest), workflows, scheduler.' },
+  { name: 'mcp_philosophy', tier: 'knowledge', desc: 'Value-principle layer — evaluation, prohibition checks, tension detection, ethos evolution.' },
+  { name: 'flutter_mcp_ui_core', tier: 'ui', desc: 'Core models, constants, and Material 3 theme system with DTCG (W3C Design Tokens) interchange.' },
+  { name: 'flutter_mcp_ui_runtime', tier: 'ui', desc: 'Dynamic Flutter UI runtime — renders MCP UI definitions, manages state, dispatches actions.' },
+  { name: 'flutter_mcp_ui_generator', tier: 'ui', desc: 'Fluent JSON generation toolkit — programmatic UI construction with templates and helpers.' },
+  { name: 'appplayer_core', tier: 'application', desc: 'Connection lifecycle, app and dashboard sessions, bundle install pipeline, tool dispatch.' },
+  { name: 'flutter_mcp', tier: 'application', desc: 'Flutter plugin combining MCP client, server, and LLM with platform features.' },
+];
+const TIER_LABEL = {
+  foundation: 'Foundation',
+  protocol: 'Protocol',
+  io: 'IO',
+  domain: 'Domain',
+  knowledge: 'Knowledge',
+  ui: 'UI',
+  application: 'Application',
+};
+const TIER_COLOR = {
+  foundation: 'var(--layer-foundation)',
+  protocol: 'var(--layer-protocol)',
+  io: 'var(--layer-io)',
+  domain: 'var(--layer-domain)',
+  knowledge: 'var(--layer-knowledge)',
+  ui: 'var(--layer-ui)',
+  application: 'var(--layer-app)',
+};
+const grid = document.getElementById('pkgGrid');
+function renderPackages(filter) {
+  grid.innerHTML = '';
+  const list = filter === 'all' ? PACKAGES : PACKAGES.filter(p => p.tier === filter);
+  for (const p of list) {
+    const c = document.createElement('div');
+    c.className = 'pkg-card';
+    c.id = 'pkg-' + p.name;
+    c.style.setProperty('--card-color', TIER_COLOR[p.tier]);
+    c.innerHTML = `
+      <div class="pkg-head">
+        <span class="pkg-name">${p.name}</span>
+        <span class="pkg-tier">${TIER_LABEL[p.tier]}</span>
+      </div>
+      <p class="pkg-desc">${p.desc}</p>
+      <div class="pkg-links">
+        <a href="https://pub.dev/packages/${p.name}" target="_blank" rel="noopener">pub.dev →</a>
+        <a href="https://github.com/app-appplayer/${p.name}" target="_blank" rel="noopener">GitHub →</a>
+      </div>`;
+    grid.appendChild(c);
+  }
+}
+renderPackages('all');
+document.querySelectorAll('#tierFilter button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#tierFilter button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  renderPackages(b.dataset.filter);
+}));
+
+// ── Quickstart ───────────────────────────────────────────────
+const QS = {
+  1: {
+    title: 'Add the packages you need',
+    body: 'Each package ships independently. For a server-with-UI setup you typically need three.',
+    code: `<span class="cm"># pubspec.yaml</span>
+<span class="kw">dependencies</span>:
+  mcp_client: <span class="st">^1.0.0</span>
+  mcp_bundle: <span class="st">^1.0.0</span>
+  flutter_mcp_ui_runtime: <span class="st">^1.0.0</span>`,
+  },
+  2: {
+    title: 'Connect through any supported transport',
+    body: 'stdio, websocket, http, sse — all share the same client surface.',
+    code: `<span class="kw">import</span> <span class="st">'package:mcp_client/mcp_client.dart'</span>;
+
+<span class="kw">final</span> client = <span class="kw">await</span> <span class="fn">McpClient</span>.<span class="fn">connect</span>(
+  transport: <span class="fn">StdioTransport</span>(),
+);
+
+<span class="kw">final</span> tools = <span class="kw">await</span> client.<span class="fn">listTools</span>();
+<span class="cm">// → [Tool(name: 'lights.toggle'), Tool(name: 'thermostat.set'), ...]</span>`,
+  },
+  3: {
+    title: 'Mount the runtime — UI is server-driven',
+    body: 'The server publishes a UI definition; the runtime renders it. Tool calls flow back from UI actions.',
+    code: `<span class="kw">import</span> <span class="st">'package:flutter_mcp_ui_runtime/runtime.dart'</span>;
+
+<span class="kw">final</span> ui = <span class="kw">await</span> client.<span class="fn">fetchUi</span>();
+
+<span class="fn">runApp</span>(<span class="fn">McpUiRuntime</span>(
+  client: client,
+  definition: ui,
+  theme: <span class="fn">McpTheme</span>.<span class="fn">material3</span>(),
+));
+<span class="cm">// User taps a button → tool 'lights.toggle' fires on the server.</span>`,
+  },
+};
+const qsMain = document.getElementById('qsMain');
+function renderQs(step) {
+  const s = QS[step];
+  qsMain.innerHTML = `
+    <h3>${s.title}</h3>
+    <p>${s.body}</p>
+    <pre class="qs-code">${s.code}</pre>`;
+}
+renderQs(1);
+document.querySelectorAll('.qs-step').forEach(s => s.addEventListener('click', () => {
+  document.querySelectorAll('.qs-step').forEach(x => x.classList.remove('active'));
+  s.classList.add('active');
+  renderQs(s.dataset.step);
+}));
+</script>
 
 </body>
 </html>
