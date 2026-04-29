@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>makemind - Let AI Execute Anything</title>
+    <title>makemind — package family for the Model Context Protocol</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a73e8;
@@ -14,41 +14,43 @@
             --background: #ffffff;
             --surface: #f8f9fa;
             --text: #202124;
+            --muted: #5f6368;
             --border: #dadce0;
             --accent: #34a853;
-            --warning: #fbbc04;
-            --error: #ea4335;
+            --code-bg: #f4f5f7;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
+            line-height: 1.65;
             color: var(--text);
             background: var(--background);
         }
 
+        code, pre, .mono {
+            font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+        }
+
+        a { color: var(--primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         /* Header */
         header {
-            background: var(--surface);
             border-bottom: 1px solid var(--border);
-            padding: 20px 0;
+            padding: 18px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
         }
 
         nav {
@@ -58,1169 +60,454 @@
             gap: 20px;
         }
 
-        nav > div:first-child {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            flex: 1;
-        }
-
-        .logo {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-        }
-
         .logo-brand {
             font-family: 'Dancing Script', cursive;
-            font-size: 44px;
+            font-size: 36px;
             font-weight: 700;
             color: var(--primary);
-            letter-spacing: -1px;
             line-height: 1;
-        }
-
-        .logo-subtitle {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--secondary);
-            letter-spacing: 0.5px;
-            display: none;
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 24px;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--secondary);
-            text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 14px;
         }
 
-        .nav-links a:hover {
-            color: var(--primary);
-        }
+        .nav-links a:hover { color: var(--primary); text-decoration: none; }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
-            padding: 100px 0;
-            text-align: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 80px 0 60px;
+            border-bottom: 1px solid var(--border);
         }
 
         .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero .subtitle {
-            font-size: 24px;
-            color: var(--secondary);
-            margin-bottom: 20px;
-        }
-
-        .hero-description {
-            font-size: 18px;
-            color: var(--secondary);
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 8px;
-            text-decoration: none;
+            font-size: 36px;
             font-weight: 600;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            margin-bottom: 16px;
+            color: var(--text);
+            letter-spacing: -0.5px;
         }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
+        .hero p {
+            font-size: 18px;
+            color: var(--muted);
+            max-width: 720px;
         }
 
-        .btn-primary:hover {
-            background: #1557b0;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Section Styles */
+        /* Sections */
         section {
-            padding: 80px 0;
+            padding: 64px 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
+        section h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 24px;
             color: var(--text);
         }
 
-        .section-header p {
-            font-size: 18px;
-            color: var(--secondary);
-            max-width: 600px;
-            margin: 0 auto;
+        section p {
+            color: var(--text);
+            margin-bottom: 16px;
+            max-width: 820px;
         }
 
-        /* Architecture Diagram */
-        .architecture {
-            background: var(--surface);
-        }
+        section p.muted { color: var(--muted); }
 
-        .arch-diagram {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        /* Architecture diagram */
+        .arch {
+            background: var(--code-bg);
+            border-radius: 8px;
+            padding: 24px;
             overflow-x: auto;
-            display: flex;
-            justify-content: center;
         }
 
-        .arch-diagram pre {
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 1.4;
+        .arch pre {
+            font-size: 13px;
+            line-height: 1.55;
             color: var(--text);
-            margin: 0;
             white-space: pre;
-            overflow-x: auto;
-            letter-spacing: 0;
-            text-align: left;
-        }
-        
-        @media (max-width: 768px) {
-            .arch-diagram {
-                padding: 20px;
-            }
-            .arch-diagram pre {
-                font-size: 12px;
-            }
         }
 
-        /* Package Grid */
-        .packages {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
+        /* Package catalog */
+        .layer {
+            margin-bottom: 36px;
         }
 
-        .package-card {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .package-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
-
-        .package-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-        }
-
-        .package-header {
-            margin-bottom: 15px;
-        }
-
-        .package-links {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-top: auto;
-            align-self: flex-end;
-            padding-top: 20px;
-        }
-
-        .package-links a {
-            padding: 4px 10px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .package-links a.github-link {
-            background: #24292e;
-            color: white;
-        }
-
-        .package-links a.github-link:hover {
-            background: #1a1e22;
-        }
-
-        .package-links a.pubdev-link {
-            background: #1976d2;
-            color: white;
-        }
-
-        .package-links a.pubdev-link:hover {
-            background: #1565c0;
-        }
-
-        .package-name {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .package-version {
-            font-size: 14px;
-            color: var(--secondary);
-            background: var(--surface);
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
-
-        .package-description {
-            color: var(--secondary);
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .package-features {
-            list-style: none;
-        }
-
-        .package-features li {
-            padding: 8px 0;
-            padding-left: 24px;
-            position: relative;
-            color: var(--text);
-        }
-
-        .package-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .package-status {
+        .layer-name {
             display: inline-block;
-            margin-top: 15px;
-            padding: 6px 16px;
-            border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
-        }
-
-        .status-production {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-
-        .status-beta {
-            background: #fff3e0;
-            color: #f57c00;
-        }
-
-        /* Use Cases */
-        .use-cases {
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            padding: 4px 10px;
             background: var(--surface);
+            border-radius: 4px;
         }
 
-        .use-case-grid {
+        .pkg-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
         }
 
-        .use-case {
-            text-align: center;
+        .pkg {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            background: var(--background);
+            transition: border-color 0.15s, box-shadow 0.15s;
         }
 
-        .use-case-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 36px;
-            color: white;
+        .pkg:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(26, 115, 232, 0.08);
         }
 
-        .use-case h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
+        .pkg-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 500;
             color: var(--text);
+            margin-bottom: 6px;
         }
 
-        .use-case p {
-            color: var(--secondary);
-            line-height: 1.6;
+        .pkg-desc {
+            font-size: 13.5px;
+            color: var(--muted);
+            line-height: 1.5;
+            margin-bottom: 10px;
         }
 
-        /* Integration Flow */
-        .integration-flow {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            margin-top: 60px;
-        }
-
-        .flow-steps {
+        .pkg-links {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            gap: 12px;
+            font-size: 12px;
         }
 
-        .flow-step {
-            flex: 1;
-            min-width: 200px;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .flow-step-number {
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .flow-arrow {
-            font-size: 30px;
-            color: var(--border);
+        .pkg-links a {
+            color: var(--primary);
+            font-weight: 500;
         }
 
         /* Footer */
         footer {
-            background: var(--text);
-            color: white;
-            padding: 40px 0;
+            padding: 32px 0;
             text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .footer-links a {
-            color: #9aa0a6;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .hero .subtitle {
-                font-size: 18px;
-            }
-
-            .hero-description {
-                font-size: 16px;
-                padding: 0 20px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .packages {
-                grid-template-columns: 1fr;
-            }
-
-            .flow-arrow {
-                transform: rotate(90deg);
-            }
-        }
-
-        /* Code Highlighting */
-        .code-snippet {
-            background: #f5f5f5;
-            border-radius: 8px;
-            padding: 20px;
-            overflow-x: auto;
-            margin: 20px 0;
-        }
-
-        .code-snippet code {
-            font-family: 'Monaco', 'Courier New', monospace;
+            color: var(--muted);
             font-size: 14px;
-            line-height: 1.5;
         }
 
-        /* Badges */
-        .badges {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
+        footer a { margin: 0 12px; }
 
-        .badge {
-            padding: 4px 12px;
-            background: var(--surface);
-            border-radius: 20px;
-            font-size: 12px;
-            color: var(--secondary);
-            font-weight: 500;
-        }
-
-        /* Language Selector */
-        .language-selector {
-            position: relative;
-            margin-left: auto;
-        }
-
-        .language-selector select {
-            padding: 8px 30px 8px 15px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: white;
-            color: var(--text);
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235f6368' d='M2 4l4 4 4-4z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-        }
-
-        .language-selector select:hover {
-            border-color: var(--primary);
-        }
-
-        .language-selector select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .language-selector {
-                margin-top: 10px;
-            }
-            
-            .logo-brand {
-                font-size: 32px;
-            }
-            
-            .logo-subtitle {
-                font-size: 12px;
-            }
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 28px; }
+            .nav-links { display: none; }
+            .arch pre { font-size: 11px; }
         }
     </style>
-    <script>
-        // Translation data
-        const translations = {
-            en: {
-                // Navigation
-                "nav.philosophy": "Philosophy",
-                "nav.autoStudio": "FlowStudio",
-                "nav.technology": "Technology",
-                "nav.packages": "Packages",
-                "nav.useCases": "Use Cases",
-                "nav.viewOnGitHub": "View on GitHub",
-                
-                // Hero
-                "hero.title": "Let AI Execute Anything",
-                "hero.subtitle": "Control everything with natural language. Every app is a server.",
-                "hero.description": "Transform your ideas into reality instantly. From controlling smart home devices to building complex applications, makemind empowers you to command any device or service using simple words. No coding required - just describe what you want, and watch as AI executes your vision across smartphones, IoT sensors, cloud services, and beyond.",
-                "hero.getStarted": "Get Started",
-                "hero.tryFlowStudio": "Try FlowStudio",
-                "hero.github": "View on GitHub",
-                
-                // Philosophy
-                "ecosystem.title": "makemind Philosophy",
-                "ecosystem.subtitle": "A philosophy that transforms any device into an AI-controllable execution platform based on user's imagination and commands",
-                "ecosystem.workflow": "How It Works",
-                "ecosystem.step1.title": "Run MCP Server",
-                "ecosystem.step1.desc": "Server providing UI + Tools + Resources",
-                "ecosystem.step2.title": "AppPlayer Connect",
-                "ecosystem.step2.desc": "Connect to server as MCP Client",
-                "ecosystem.step3.title": "Dynamic UI Render",
-                "ecosystem.step3.desc": "Real-time rendering of server's UI definition",
-                "ecosystem.step4.title": "Execute Tools & Control",
-                "ecosystem.step4.desc": "Execute server tools through UI actions",
-                
-                // Architecture
-                "architecture.title": "System Architecture",
-                "architecture.subtitle": "Unified architecture spanning from embedded to cloud platforms",
-                
-                // Packages
-                "packages.title": "Core Packages",
-                "packages.subtitle": "Perfect harmony of specialized packages for each layer",
-                
-                // Package descriptions
-                "package.mcp_client.desc": "Client implementation for connecting Flutter/Dart applications to MCP servers",
-                "package.mcp_server.desc": "Server implementation for exposing data and functionality from Flutter apps to AI",
-                "package.mcp_llm.desc": "Advanced package for integration with various LLM providers",
-                "package.flutter_mcp.desc": "Complete agent system integrating MCP components",
-                "package.flutter_mcp_ui_runtime.desc": "Runtime engine for rendering dynamic UI from JSON definitions",
-                "package.mcp_ui_builder.desc": "Visual builder for creating MCP UI with drag and drop",
-                "package.flowstudio_embedded.desc": "MCP implementation for embedded systems",
-                
-                // Features
-                "feature.mcp2025": "MCP 2025-03-26 standard support",
-                "feature.oauth": "Built-in OAuth 2.1 authentication",
-                "feature.transport": "Multiple transport types (STDIO, SSE, HTTP)",
-                "feature.subscription": "Real-time resource subscriptions",
-                "feature.expose": "Expose Resources, Tools, Prompts",
-                "feature.session": "Session management and event streams",
-                "feature.monitoring": "Performance monitoring and metrics",
-                "feature.multiVersion": "Multiple protocol version support",
-                "feature.providers": "Claude, OpenAI, Together AI support",
-                "feature.batch": "40-60% performance improvement with batch processing",
-                "feature.loadBalance": "Multi-client load balancing",
-                "feature.rag": "RAG capabilities and vector search",
-                "feature.background": "Background service execution",
-                "feature.systemTray": "System tray support (desktop)",
-                "feature.security": "Secure storage and encryption",
-                "feature.native": "Platform-specific native implementation",
-                "feature.widgets": "65+ Flutter widget support",
-                "feature.reactive": "Reactive state management",
-                "feature.expression": "Expression binding",
-                "feature.mcpReady": "MCP protocol ready",
-                "feature.preview": "Real-time preview",
-                "feature.property": "Property editor",
-                "feature.jsonExport": "JSON import/export",
-                "feature.templates": "Template library",
-                "feature.arduino": "Arduino, ESP32, STM32 support",
-                "feature.tier": "5-tier architecture",
-                "feature.docker": "Docker-based unified build",
-                "feature.hal": "Hardware abstraction layer",
-                
-                // Status
-                "status.production": "Production Ready",
-                "status.beta": "Beta",
-                "status.application": "Application",
-                
-                // Use Cases
-                "useCases.title": "Innovative Use Cases",
-                "useCases.subtitle": "New possibilities enabled by the MCP ecosystem",
-                "useCase.aiApp.title": "AI Autonomous App Development",
-                "useCase.aiApp.desc": "AI automatically generates entire applications from requirements. Fully automated development experience from UI to logic.",
-                "useCase.smartHome.title": "Smart Home Integration",
-                "useCase.smartHome.desc": "AI analyzes IoT sensor data and generates dashboards in real-time. Automatically optimizes UI by learning user patterns.",
-                "useCase.enterprise.title": "Enterprise AI Agent",
-                "useCase.enterprise.desc": "Securely connects enterprise data to AI and automatically generates custom reports and dashboards. Provides real-time business insights.",
-                "useCase.adaptiveUI.title": "Adaptive Mobile UI",
-                "useCase.adaptiveUI.desc": "Provides UI that changes in real-time based on user behavior. Can instantly modify UI from server without app updates.",
-                "useCase.industrial.title": "Industrial IoT Monitoring",
-                "useCase.industrial.desc": "Connects all IoT devices from factory equipment to agricultural sensors with AI. Detects and responds to anomalies in real-time.",
-                "useCase.education.title": "Education Platform",
-                "useCase.education.desc": "AI dynamically adjusts curriculum and UI based on learner's level and progress. Provides personalized learning experience.",
-                
-                // AppPlayer
-                "appPlayer.title": "AppPlayer & AppPlayer Pro",
-                "appPlayer.subtitle": "Client app that connects to MCP servers to render UI and control",
-                "appPlayer.desc": "Basic player that runs MCP servers like apps",
-                "appPlayer.feature1": "Connect and run MCP servers",
-                "appPlayer.feature2": "Dynamic UI rendering",
-                "appPlayer.feature3": "Real-time tool execution",
-                "appPlayer.feature4": "Cross-platform support",
-                "appPlayerPro.desc": "Includes store features, anyone can register and distribute MCP servers as apps",
-                "appPlayerPro.feature1": "MCP server store",
-                "appPlayerPro.feature2": "App search and install",
-                "appPlayerPro.feature3": "Server registration and distribution",
-                "appPlayerPro.feature4": "Community sharing",
-                
-                // MCP Servers
-                "mcpServers.desc": "Apps with UI + Tools + Resources",
-                "mcpServers.feature1": "Server is a complete app",
-                "mcpServers.feature2": "UI definition + tools + prompts included",
-                "mcpServers.feature3": "LLM understandable and controllable",
-                "mcpServers.feature4": "Real-time update support",
-                
-                // Development Tools
-                "devTools.desc": "Integrated tools for MCP server development, management, and deployment",
-                "devTools.feature1": "Visual UI builder",
-                "devTools.feature2": "Server creation wizard",
-                "devTools.feature3": "Real-time preview and testing",
-                "devTools.feature4": "One-click deployment and sharing",
-                
-                // makemind UI DSL Packages
-                "makemind.core.desc": "Core models, constants, and utilities for Flutter MCP UI system",
-                "makemind.core.feature1": "77 widgets in 9 categories support",
-                "makemind.core.feature2": "Comprehensive validation framework",
-                "makemind.core.feature3": "Type-safe constants and property definitions",
-                "makemind.core.feature4": "DSL version management (v1.0.0)",
-                
-                "makemind.runtime.desc": "Runtime engine for rendering dynamic UI from JSON specifications",
-                "makemind.runtime.feature1": "Complete widget rendering system",
-                "makemind.runtime.feature2": "State management with computed properties",
-                "makemind.runtime.feature3": "Action system (tool, state, navigation, batch)",
-                "makemind.runtime.feature4": "Light/dark/system theme support",
-                "makemind.runtime.feature5": "Multi-language i18n support",
-                "makemind.runtime.feature6": "Background service support",
-                
-                "makemind.generator.desc": "JSON generation toolkit for creating UI definitions",
-                "makemind.generator.feature1": "Fluent API for UI generation",
-                "makemind.generator.feature2": "Templates for common patterns",
-                "makemind.generator.feature3": "Example applications included",
-                "makemind.generator.feature4": "Type-safe JSON generation",
-                
-                "appPlayer.workflow": "App Execution Flow",
-                "appPlayer.step1": "Browse Apps",
-                "appPlayer.step2": "Install",
-                "appPlayer.step3": "Run",
-
-                // FlowStudio
-                "flowStudio.title": "FlowStudio - makemind Implementation",
-                "flowStudio.subtitle": "Complete implementation ecosystem realizing the makemind philosophy",
-                "flowStudio.desc": "Flutter-based automatic code generation and IDE automation video generation tool",
-                "flowStudio.feature1": "Code input → execution → subtitle generation automated video creation",
-                "flowStudio.feature2": "Flutter/Dart project automation",
-                "flowStudio.feature3": "AI-based code generation",
-                "flowStudio.feature4": "Real-time preview",
-                "flowStudioEmbedded.desc": "C-based MCP server running on IoT devices",
-                "flowStudioEmbedded.feature1": "ESP32, STM32, Arduino support",
-                "flowStudioEmbedded.feature2": "5-tier architecture",
-                "flowStudioEmbedded.feature3": "Remote UI control",
-                "flowStudioEmbedded.feature4": "Ultra-lightweight MCP implementation",
-
-                // Technology
-                "technology.title": "Core Technology",
-                "technology.subtitle": "The core technology stack that powers FlowStudio",
-                "mcpServer.workflow": "Server Creation Flow",
-                "mcpServer.step1.title": "Natural Language Command",
-                "mcpServer.step1.desc": "Describe desired functionality",
-                "mcpServer.step2.title": "Server Generation",
-                "mcpServer.step2.desc": "AI auto-generates",
-                "mcpServer.step3.title": "AppPlayer Execution",
-                "mcpServer.step3.desc": "Instantly runnable",
-
-                // Getting Started
-                "getStarted.title": "Usage Guide",
-                "getStarted.subtitle": "Start with makemind ecosystem",
-                "guide.appPlayer.title": "Install AppPlayer",
-                "guide.appPlayer.desc": "Download AppPlayer from app store and connect to MCP servers",
-                "guide.serverConnect.title": "Connect to Server",
-                "guide.serverConnect.desc": "Connect instantly to MCP server by entering URL or QR code",
-                "guide.appRegister.title": "Register App (Pro)",
-                "guide.appRegister.desc": "Register and share your MCP server as an app in AppPlayer Pro",
-                "guide.installNow": "Install Now",
-                "guide.viewDocs": "View Full Documentation",
-                
-                // Community
-                "community.title": "Building the Ecosystem Together",
-                "community.subtitle": "Creating the future of AI with the open source community",
-                "community.packages": "Active Packages",
-                "community.compliance": "Standard Compliance",
-                "community.platforms": "Supported Platforms",
-                "community.possibilities": "Possibilities",
-                
-                // Footer
-                "footer.docs": "Documentation",
-                "footer.contact": "Contact",
-                "footer.vision": "\"makemind realizes all imagined control. AppPlayer is its first executor.\"",
-                "footer.copyright": "© 2025 makemind. Open source project."
-            }
-        };
-
-        // Apply English translations to all [data-i18n] elements.
-        document.addEventListener('DOMContentLoaded', () => {
-            document.documentElement.lang = 'en';
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                const translation = translations.en[key];
-                if (translation == null) return;
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    element.placeholder = translation;
-                } else {
-                    element.textContent = translation;
-                }
-            });
-        });
-    </script>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <div>
-                <div class="logo">
-                    <span class="logo-brand">makemind</span>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#ecosystem" data-i18n="nav.philosophy">Philosophy</a></li>
-                    <li><a href="#flowstudio" data-i18n="nav.autoStudio">FlowStudio</a></li>
-                    <li><a href="#makemind-dsl" data-i18n="nav.technology">Technology</a></li>
-                    <li><a href="#packages" data-i18n="nav.packages">Packages</a></li>
-                    <li><a href="#use-cases" data-i18n="nav.useCases">Use Cases</a></li>
-                    <li><a href="https://github.com/app-appplayer/makemind" data-i18n="nav.viewOnGitHub">View on GitHub</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1 data-i18n="hero.title">Let AI Execute Anything</h1>
-            <p class="subtitle" data-i18n="hero.subtitle">Control everything with natural language. Every app is a server.</p>
-            <p class="hero-description" data-i18n="hero.description">Transform your ideas into reality instantly. From controlling smart home devices to building complex applications, makemind empowers you to command any device or service using simple words. No coding required - just describe what you want, and watch as AI executes your vision across smartphones, IoT sensors, cloud services, and beyond.</p>
-        </div>
-    </section>
-
-    <!-- Ecosystem Overview Section -->
-    <section id="ecosystem" class="container">
-        <div class="section-header">
-            <h2 data-i18n="ecosystem.title">makemind Philosophy</h2>
-            <p data-i18n="ecosystem.subtitle">A philosophy that transforms any device into an AI-controllable execution platform based on user's imagination and commands</p>
-        </div>
-
-        <div class="arch-diagram">
-            <pre>
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         makemind Philosophy                             │
-│          "Control everything with natural language.                     │
-│                  Every app is a server."                                │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│                    ┌─────────────────────────────┐                      │
-│                    │         FlowStudio          │                      │
-│                    │  (makemind implementation)  │                      │
-│                    └──────────────┬──────────────┘                      │
-│                                   │                                     │
-│               ┌───────────────────┼───────────────────┐                 │
-│               │                   │                   │                 │
-│      ┌────────▼────────┐  ┌───────▼────────┐  ┌───────▼────────┐        │
-│      │   AppPlayer     │  │  MCP Servers   │  │ Development    │        │
-│      │                 │  │                │  │   Tools        │        │
-│      │ Universal MCP   │  │  Apps with     │  │                │        │
-│      │ Client & UI     │  │  UI + Tools    │  │ IDE, Builder,  │        │
-│      │ Renderer        │  │  + Resources   │  │ Manager        │        │
-│      └─────────────────┘  └────────────────┘  └────────────────┘        │
-│               │                   │                   │                 │
-│               └───────────────────┴───────────────────┘                 │
-│                                   │                                     │
-│      ┌────────────────────────────▼────────────────────────────┐        │
-│      │                  Core Technology Stack                  │        │
-│      ├─────────────────────────────────────────────────────────┤        │
-│      │  MCP Packages: mcp_client, mcp_server, mcp_llm          │        │
-│      │  Integration: flutter_mcp                               │        │
-│      │  UI DSL: flutter_mcp_ui_core/runtime/generator          │        │
-│      └─────────────────────────────────────────────────────────┘        │
-│                                                                         │
-│    User → Natural Language → FlowStudio Ecosystem → Execute Control     │
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘
-            </pre>
-        </div>
-
-        <div class="integration-flow">
-            <h3 style="text-align: center; margin-bottom: 40px;" data-i18n="ecosystem.workflow">How It Works</h3>
-            <div class="flow-steps">
-                <div class="flow-step">
-                    <div class="flow-step-number">1</div>
-                    <h4 data-i18n="ecosystem.step1.title">Run MCP Server</h4>
-                    <p data-i18n="ecosystem.step1.desc">Server providing UI + Tools + Resources</p>
-                </div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">
-                    <div class="flow-step-number">2</div>
-                    <h4 data-i18n="ecosystem.step2.title">AppPlayer Connect</h4>
-                    <p data-i18n="ecosystem.step2.desc">Connect to server as MCP Client</p>
-                </div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">
-                    <div class="flow-step-number">3</div>
-                    <h4 data-i18n="ecosystem.step3.title">Dynamic UI Render</h4>
-                    <p data-i18n="ecosystem.step3.desc">Real-time rendering of server's UI definition</p>
-                </div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">
-                    <div class="flow-step-number">4</div>
-                    <h4 data-i18n="ecosystem.step4.title">Execute Tools & Control</h4>
-                    <p data-i18n="ecosystem.step4.desc">Execute server tools through UI actions</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FlowStudio Section -->
-    <section id="flowstudio" class="container">
-        <div class="section-header">
-            <h2 data-i18n="flowStudio.title">FlowStudio - makemind Implementation</h2>
-            <p data-i18n="flowStudio.subtitle">Complete implementation ecosystem that realizes the makemind philosophy</p>
-        </div>
-
-        <div class="integration-flow" style="margin-bottom: 60px;">
-            <p style="text-align: center; font-size: 18px; color: var(--secondary); line-height: 1.8;">
-                FlowStudio is a complete implementation ecosystem that realizes makemind's philosophy of<br>
-                "Control everything with natural language. Every app is a server." including AppPlayer, MCP Servers, and development tools.
-            </p>
-        </div>
-
-        <div class="packages">
-            <div class="package-card">
-                <div class="package-header">
-                    <h3 class="package-name">AppPlayer</h3>
-                    <span class="package-version">Universal MCP Client</span>
-                </div>
-                <p class="package-description" data-i18n="appPlayer.desc">
-                    Universal player that runs all MCP servers like apps and renders dynamic UI
-                </p>
-                <ul class="package-features">
-                    <li data-i18n="appPlayer.feature1">Auto-discover and connect MCP servers</li>
-                    <li data-i18n="appPlayer.feature2">Real-time makemind UI DSL rendering</li>
-                    <li data-i18n="appPlayer.feature3">Multi-transport protocol support (STDIO, SSE, HTTP)</li>
-                    <li data-i18n="appPlayer.feature4">Cross-platform (iOS, Android, Desktop)</li>
-                </ul>
-                <div class="package-links">
-                    <a href="https://github.com/app-appplayer/app_player" class="github-link">GitHub</a>
-                </div>
-            </div>
-
-            <div class="package-card">
-                <div class="package-header">
-                    <h3 class="package-name">MCP Servers</h3>
-                    <span class="package-version">Apps as Servers</span>
-                </div>
-                <p class="package-description" data-i18n="mcpServers.desc">
-                    Server with UI + Tools + Resources = App structure
-                </p>
-                <ul class="package-features">
-                    <li data-i18n="mcpServers.feature1">Server is a complete app</li>
-                    <li data-i18n="mcpServers.feature2">UI definition + tools + prompts included</li>
-                    <li data-i18n="mcpServers.feature3">LLM understandable and controllable</li>
-                    <li data-i18n="mcpServers.feature4">Real-time update support</li>
-                </ul>
-            </div>
-
-            <div class="package-card">
-                <div class="package-header">
-                    <h3 class="package-name">Development Tools</h3>
-                    <span class="package-version">IDE & Builder</span>
-                </div>
-                <p class="package-description" data-i18n="devTools.desc">
-                    Integrated tools for MCP server development, management, and deployment
-                </p>
-                <ul class="package-features">
-                    <li data-i18n="devTools.feature1">Visual UI builder</li>
-                    <li data-i18n="devTools.feature2">Server creation wizard</li>
-                    <li data-i18n="devTools.feature3">Real-time preview and testing</li>
-                    <li data-i18n="devTools.feature4">One-click deployment and sharing</li>
-                </ul>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- Technology Section -->
-    <section id="makemind-dsl" class="architecture">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-i18n="technology.title">Core Technology</h2>
-                <p data-i18n="technology.subtitle">Core technology stack powering FlowStudio</p>
-            </div>
-
-            <div class="packages">
-                <div class="package-card">
-                    <div class="package-header">
-                        <h3 class="package-name">flutter_mcp_ui_core</h3>
-                    </div>
-                    <p class="package-description" data-i18n="makemind.core.desc">
-                        Core models, constants, and utilities for Flutter MCP UI system
-                    </p>
-                    <ul class="package-features">
-                        <li data-i18n="makemind.core.feature1">77 widgets in 9 categories support</li>
-                        <li data-i18n="makemind.core.feature2">Comprehensive validation framework</li>
-                        <li data-i18n="makemind.core.feature3">Type-safe constants and property definitions</li>
-                        <li data-i18n="makemind.core.feature4">DSL version management (v1.0.0)</li>
-                    </ul>
-                    <div class="badges">
-                        <span class="badge">pub.dev</span>
-                        <span class="badge">Flutter</span>
-                        <span class="badge">DSL</span>
-                    </div>
-                    <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
-                    <div class="package-links">
-                        <a href="https://github.com/app-appplayer/flutter_mcp_ui_core" class="github-link">GitHub</a>
-                        <a href="https://pub.dev/packages/flutter_mcp_ui_core" class="pubdev-link">pub.dev</a>
-                    </div>
-                </div>
-
-                <div class="package-card">
-                    <div class="package-header">
-                        <h3 class="package-name">flutter_mcp_ui_runtime</h3>
-                    </div>
-                    <p class="package-description" data-i18n="makemind.runtime.desc">
-                        Runtime engine for rendering dynamic UI from JSON specifications
-                    </p>
-                    <ul class="package-features">
-                        <li data-i18n="makemind.runtime.feature1">Complete widget rendering system</li>
-                        <li data-i18n="makemind.runtime.feature2">State management with computed properties</li>
-                        <li data-i18n="makemind.runtime.feature3">Action system (tool, state, navigation, batch)</li>
-                        <li data-i18n="makemind.runtime.feature4">Light/dark/system theme support</li>
-                        <li data-i18n="makemind.runtime.feature5">Multi-language i18n support</li>
-                        <li data-i18n="makemind.runtime.feature6">Background service support</li>
-                    </ul>
-                    <div class="badges">
-                        <span class="badge">pub.dev</span>
-                    </div>
-                    <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
-                    <div class="package-links">
-                        <a href="https://github.com/app-appplayer/flutter_mcp_ui_runtime" class="github-link">GitHub</a>
-                        <a href="https://pub.dev/packages/flutter_mcp_ui_runtime" class="pubdev-link">pub.dev</a>
-                    </div>
-                </div>
-
-                <div class="package-card">
-                    <div class="package-header">
-                        <h3 class="package-name">flutter_mcp_ui_generator</h3>
-                    </div>
-                    <p class="package-description" data-i18n="makemind.generator.desc">
-                        JSON generation toolkit for creating UI definitions
-                    </p>
-                    <ul class="package-features">
-                        <li data-i18n="makemind.generator.feature1">Fluent API for UI generation</li>
-                        <li data-i18n="makemind.generator.feature2">Templates for common patterns</li>
-                        <li data-i18n="makemind.generator.feature3">Example applications included</li>
-                        <li data-i18n="makemind.generator.feature4">Type-safe JSON generation</li>
-                    </ul>
-                    <div class="badges">
-                        <span class="badge">pub.dev</span>
-                        <span class="badge">Tools</span>
-                    </div>
-                    <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
-                    <div class="package-links">
-                        <a href="https://github.com/app-appplayer/flutter_mcp_ui_generator" class="github-link">GitHub</a>
-                        <a href="https://pub.dev/packages/flutter_mcp_ui_generator" class="pubdev-link">pub.dev</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Packages Section -->
-    <section id="packages" class="container">
-        <div class="section-header">
-            <h2 data-i18n="packages.title">MCP Package Family</h2>
-            <p data-i18n="packages.subtitle">Complete package ecosystem of Model Context Protocol from foundation to application</p>
-        </div>
-
-        <h3 style="text-align: center; margin: 40px 0 30px; color: var(--secondary);">Core MCP Packages</h3>
-        <div class="packages">
-            <div class="package-card">
-                <div class="package-header">
-                    <h3 class="package-name">mcp_client</h3>
-                </div>
-                <p class="package-description" data-i18n="package.mcp_client.desc">
-                    Client implementation for connecting Flutter/Dart applications to MCP servers
-                </p>
-                <ul class="package-features">
-                    <li data-i18n="feature.mcp2025">Full MCP 2025-03-26 standard support</li>
-                    <li data-i18n="feature.oauth">Built-in OAuth 2.1 authentication</li>
-                    <li data-i18n="feature.transport">Multiple transport types (STDIO, SSE, HTTP)</li>
-                    <li data-i18n="feature.subscription">Real-time resource subscriptions</li>
-                </ul>
-                <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
-                <div class="package-links">
-                    <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
-                    <a href="https://pub.dev/packages/mcp_client" class="pubdev-link">pub.dev</a>
-                </div>
-            </div>
-
-            <div class="package-card">
-                <div class="package-header">
-                    <h3 class="package-name">mcp_server</h3>
-                </div>
-                <p class="package-description" data-i18n="package.mcp_server.desc">
-                    Expose tools, resources, and prompts from Flutter/Dart applications to LLM
-                </p>
-                <ul class="package-features">
-                    <li data-i18n="feature.expose">Expose Resources, Tools, Prompts</li>
-                    <li data-i18n="feature.session">Session management and event streams</li>
-                    <li data-i18n="feature.monitoring">Performance monitoring and metrics</li>
-                    <li data-i18n="feature.multiVersion">Multiple protocol version support</li>
-                </ul>
-                <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
-                <div class="package-links">
-                    <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
-                    <a href="https://pub.dev/packages/mcp_server" class="pubdev-link">pub.dev</a>
-                </div>
-            </div>
-
-            <div class="package-card">
-                <div class="package-header">
-                    <h3 class="package-name">mcp_llm</h3>
-                </div>
-                <p class="package-description" data-i18n="package.mcp_llm.desc">
-                    Bridge connecting LLMs (Claude, OpenAI, etc.) to MCP client/server
-                </p>
-                <ul class="package-features">
-                    <li data-i18n="feature.providers">Claude, OpenAI, Together AI support</li>
-                    <li data-i18n="feature.batch">40-60% performance improvement with batch processing</li>
-                    <li data-i18n="feature.loadBalance">Multi-client load balancing</li>
-                    <li data-i18n="feature.rag">RAG capabilities and vector search</li>
-                </ul>
-                <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
-                <div class="package-links">
-                    <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
-                    <a href="https://pub.dev/packages/mcp_llm" class="pubdev-link">pub.dev</a>
-                </div>
-            </div>
-        </div>
-
-        <h3 style="text-align: center; margin: 60px 0 30px; color: var(--secondary);">Integration Package</h3>
-        <div class="packages" style="max-width: 600px; margin: 0 auto;">
-            <div class="package-card">
-                <div class="package-header">
-                    <h3 class="package-name">flutter_mcp</h3>
-                </div>
-                <p class="package-description" data-i18n="package.flutter_mcp.desc">
-                    Complete Flutter plugin integrating all MCP components above
-                </p>
-                <ul class="package-features">
-                    <li data-i18n="feature.background">Background service execution</li>
-                    <li data-i18n="feature.systemTray">System tray support (desktop)</li>
-                    <li data-i18n="feature.security">Secure storage and encryption</li>
-                    <li data-i18n="feature.native">Platform-specific native implementation</li>
-                </ul>
-                <span class="package-status status-production" data-i18n="status.production">Production Ready</span>
-                <div class="package-links">
-                    <a href="https://github.com/juancastillo0/mcp_dart" class="github-link">GitHub</a>
-                    <a href="https://pub.dev/packages/flutter_mcp" class="pubdev-link">pub.dev</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Use Cases Section -->
-    <section id="use-cases" class="use-cases">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-i18n="useCases.title">Innovative Use Cases</h2>
-                <p data-i18n="useCases.subtitle">New possibilities enabled by the MCP ecosystem</p>
-            </div>
-
-            <div class="use-case-grid">
-                <div class="use-case">
-                    <div class="use-case-icon">🤖</div>
-                    <h3 data-i18n="useCase.aiApp.title">AI Autonomous App Development</h3>
-                    <p data-i18n="useCase.aiApp.desc">AI automatically generates entire applications from requirements. Fully automated development experience from UI to logic.</p>
-                </div>
-
-                <div class="use-case">
-                    <div class="use-case-icon">🏠</div>
-                    <h3 data-i18n="useCase.smartHome.title">Smart Home Integration</h3>
-                    <p data-i18n="useCase.smartHome.desc">AI analyzes IoT sensor data and generates dashboards in real-time. Automatically optimizes UI by learning user patterns.</p>
-                </div>
-
-                <div class="use-case">
-                    <div class="use-case-icon">🏢</div>
-                    <h3 data-i18n="useCase.enterprise.title">Enterprise AI Agent</h3>
-                    <p data-i18n="useCase.enterprise.desc">Securely connects enterprise data to AI and automatically generates custom reports and dashboards. Provides real-time business insights.</p>
-                </div>
-
-                <div class="use-case">
-                    <div class="use-case-icon">📱</div>
-                    <h3 data-i18n="useCase.adaptiveUI.title">Adaptive Mobile UI</h3>
-                    <p data-i18n="useCase.adaptiveUI.desc">Provides UI that changes in real-time based on user behavior. Can instantly modify UI from server without app updates.</p>
-                </div>
-
-                <div class="use-case">
-                    <div class="use-case-icon">🔧</div>
-                    <h3 data-i18n="useCase.industrial.title">Industrial IoT Monitoring</h3>
-                    <p data-i18n="useCase.industrial.desc">Connects all IoT devices from factory equipment to agricultural sensors with AI. Detects and responds to anomalies in real-time.</p>
-                </div>
-
-                <div class="use-case">
-                    <div class="use-case-icon">🎓</div>
-                    <h3 data-i18n="useCase.education.title">Education Platform</h3>
-                    <p data-i18n="useCase.education.desc">AI dynamically adjusts curriculum and UI based on learner's level and progress. Provides personalized learning experience.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <ul class="footer-links">
+<header>
+    <div class="container">
+        <nav>
+            <a href="/" class="logo-brand">makemind</a>
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#packages">Packages</a></li>
+                <li><a href="#composition">Composition</a></li>
                 <li><a href="https://github.com/app-appplayer">GitHub</a></li>
-                <li><a href="https://pub.dev/publishers/app-appplayer.com/packages">pub.dev</a></li>
             </ul>
-            <p data-i18n="footer.vision" style="font-style: italic; margin-bottom: 20px;">"makemind realizes all imagined control. AppPlayer is its first executor."</p>
-            <p data-i18n="footer.copyright">&copy; 2025 makemind. Open source project.</p>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1>A Dart and Flutter package family for the Model Context Protocol.</h1>
+        <p>The packages compose into a single stack: bundle schema and standard ports, MCP client/server with LLM provider integration, a knowledge subsystem, transport-agnostic IO adapters, domain helpers, a Material 3 UI runtime, and an application orchestrator.</p>
+    </div>
+</section>
+
+<section id="overview">
+    <div class="container">
+        <h2>Overview</h2>
+        <p>An MCP server publishes tools, resources, and a UI definition. A client connects through one of the supported transports and renders the UI; tool invocations originate from UI actions. The packages on this site provide the parts that make this loop work — protocol implementations, the bundle and port contract that lets servers describe themselves uniformly, IO adapters that bring physical and network devices under that contract, knowledge subsystems for fact recording and skill execution, and a Flutter UI runtime that renders MCP-served definitions.</p>
+        <p>Each package is published independently on pub.dev and can be used in isolation. The parts are designed to compose without ceremony.</p>
+    </div>
+</section>
+
+<section id="architecture">
+    <div class="container">
+        <h2>Architecture</h2>
+        <p class="muted">Lower layers do not depend on higher layers. Most packages depend only on <code>mcp_bundle</code>.</p>
+        <div class="arch"><pre>
+┌─ Application ───────────────────────────────────────────────────┐
+│  appplayer_core           flutter_mcp                            │
+├─ UI ──────────────────────────────────────────────────────────┤
+│  flutter_mcp_ui_core      flutter_mcp_ui_runtime                 │
+│  flutter_mcp_ui_generator                                        │
+├─ Knowledge ───────────────────────────────────────────────────┤
+│  mcp_knowledge   mcp_fact_graph     mcp_skill                    │
+│  mcp_profile     mcp_knowledge_ops  mcp_philosophy               │
+├─ Domain ──────────────────────────────────────────────────────┤
+│  mcp_channel  mcp_form    mcp_analysis   mcp_ingest              │
+│  mcp_browser  mcp_canvas  mcp_flow_runtime                       │
+├─ IO ──────────────────────────────────────────────────────────┤
+│  mcp_io                                                          │
+│  mcp_io_websocket  mcp_io_http     mcp_io_mqtt    mcp_io_serial  │
+│  mcp_io_can        mcp_io_modbus   mcp_io_opcua   mcp_io_scpi    │
+├─ Protocol ────────────────────────────────────────────────────┤
+│  mcp_client    mcp_server    mcp_llm    mcp_gateway              │
+├─ Foundation ──────────────────────────────────────────────────┤
+│  mcp_bundle  ·  schema · ports · expression · install            │
+└─────────────────────────────────────────────────────────────────┘</pre></div>
+    </div>
+</section>
+
+<section id="packages">
+    <div class="container">
+        <h2>Packages</h2>
+
+        <div class="layer">
+            <span class="layer-name">Foundation</span>
+            <div class="pkg-grid">
+                <div class="pkg">
+                    <div class="pkg-name">mcp_bundle</div>
+                    <div class="pkg-desc">Bundle schema, expression language, standard port catalog, and bundle install / sign / pack pipeline. The foundation other packages depend on.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_bundle">pub.dev</a><a href="https://github.com/app-appplayer/mcp_bundle">GitHub</a></div>
+                </div>
+            </div>
         </div>
-    </footer>
+
+        <div class="layer">
+            <span class="layer-name">Protocol</span>
+            <div class="pkg-grid">
+                <div class="pkg">
+                    <div class="pkg-name">mcp_client</div>
+                    <div class="pkg-desc">Dart MCP client. Multiple transports, OAuth 2.1, JSON-RPC batch, deferred tool loading.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_client">pub.dev</a><a href="https://github.com/app-appplayer/mcp_client">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_server</div>
+                    <div class="pkg-desc">Dart MCP server. Tool / resource / prompt registration, multiple transports, OAuth.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_server">pub.dev</a><a href="https://github.com/app-appplayer/mcp_server">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_llm</div>
+                    <div class="pkg-desc">LLM provider integration (Claude, OpenAI, Gemini, Bedrock, Cohere, Mistral, Groq, Together, Vertex AI) with Vision, ASR, OCR, and storage adapters.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_llm">pub.dev</a><a href="https://github.com/app-appplayer/mcp_llm">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_gateway</div>
+                    <div class="pkg-desc">Multi-node MCP relay with namespace routing, session management, audit, and policy enforcement.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_gateway">pub.dev</a><a href="https://github.com/app-appplayer/mcp_gateway">GitHub</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layer">
+            <span class="layer-name">IO</span>
+            <div class="pkg-grid">
+                <div class="pkg">
+                    <div class="pkg-name">mcp_io</div>
+                    <div class="pkg-desc">Universal I/O backbone — device registry, policy engine, audit trail, streaming, command queue, session manager.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_io_websocket</div>
+                    <div class="pkg-desc">WebSocket transport adapter — text/binary frame pub/sub.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_websocket">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_websocket">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_io_http</div>
+                    <div class="pkg-desc">HTTP REST transport adapter — GET/read, POST/PUT/PATCH/DELETE, polling subscribe.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_http">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_http">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_io_mqtt</div>
+                    <div class="pkg-desc">MQTT v3.1.1 transport adapter — QoS 0 pub/sub with topic wildcards.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_mqtt">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_mqtt">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_io_serial</div>
+                    <div class="pkg-desc">Serial port adapter — UART, RS-232, USB-Serial. Byte and line-delimited modes.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_serial">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_serial">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_io_can</div>
+                    <div class="pkg-desc">CAN bus adapter — Classic CAN 2.0A/B frame codec with SocketCAN layout.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_can">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_can">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_io_modbus</div>
+                    <div class="pkg-desc">Modbus TCP / RTU adapter — FC01 / FC03 / FC05 / FC06 / FC15 / FC16.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_modbus">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_modbus">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_io_opcua</div>
+                    <div class="pkg-desc">OPC UA Binary adapter — Hello/Ack transport codec and session abstraction.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_opcua">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_opcua">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_io_scpi</div>
+                    <div class="pkg-desc">SCPI adapter for instruments — text command/response over TCP.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_io_scpi">pub.dev</a><a href="https://github.com/app-appplayer/mcp_io_scpi">GitHub</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layer">
+            <span class="layer-name">Domain</span>
+            <div class="pkg-grid">
+                <div class="pkg">
+                    <div class="pkg-name">mcp_channel</div>
+                    <div class="pkg-desc">Unified messaging connector across Slack, Discord, Telegram, Email, Kakao, and more. Sessions, idempotency, rate limit, retry, circuit breaker.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_channel">pub.dev</a><a href="https://github.com/app-appplayer/mcp_channel">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_form</div>
+                    <div class="pkg-desc">Form document creation, validation, and rendering — template / document / validator / binding subsystems.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_form">pub.dev</a><a href="https://github.com/app-appplayer/mcp_form">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_analysis</div>
+                    <div class="pkg-desc">Pipeline-based data analysis engine with pluggable functions, transforms, and multi-source data integration.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_analysis">pub.dev</a><a href="https://github.com/app-appplayer/mcp_analysis">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_ingest</div>
+                    <div class="pkg-desc">Document ingestion pipeline — converts files / bytes / URLs to a normalized document with chunking, OCR, and ASR ports.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_ingest">pub.dev</a><a href="https://github.com/app-appplayer/mcp_ingest">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_browser</div>
+                    <div class="pkg-desc">Headless browser automation backbone — direct CDP, authenticated sessions, structured search, crawl, and DOM extraction.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_browser">pub.dev</a><a href="https://github.com/app-appplayer/mcp_browser">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_canvas</div>
+                    <div class="pkg-desc">Definition-based canvas engine for 2D/3D rendering with a shape primitive set, layout algorithms, and Canvas Definition Language (CDL).</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_canvas">pub.dev</a><a href="https://github.com/app-appplayer/mcp_canvas">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_flow_runtime</div>
+                    <div class="pkg-desc">Declarative runtime for hardware control and IoT orchestration — process scheduler, hardware abstraction layer, state stores, expression engine.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_flow_runtime">pub.dev</a><a href="https://github.com/app-appplayer/mcp_flow_runtime">GitHub</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layer">
+            <span class="layer-name">Knowledge</span>
+            <div class="pkg-grid">
+                <div class="pkg">
+                    <div class="pkg-name">mcp_knowledge</div>
+                    <div class="pkg-desc">Orchestration facade composing fact-graph, skill, profile, knowledge-ops, and philosophy runtimes behind a single entry point.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_knowledge">pub.dev</a><a href="https://github.com/app-appplayer/mcp_knowledge">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_fact_graph</div>
+                    <div class="pkg-desc">Temporal knowledge graph organized as Evidence → FactGraph → ContextOps → SkillOps layers, with entities, candidates, claims, and summaries.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_fact_graph">pub.dev</a><a href="https://github.com/app-appplayer/mcp_fact_graph">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_skill</div>
+                    <div class="pkg-desc">Typed skill definitions and runtime — JSON-Schema validation, multi-step procedures with branching, expression language, claim recording.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_skill">pub.dev</a><a href="https://github.com/app-appplayer/mcp_skill">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_profile</div>
+                    <div class="pkg-desc">AI persona definitions with appraisal, decision, and expression engines, plus standard port adapters for the bundle Contract Layer.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_profile">pub.dev</a><a href="https://github.com/app-appplayer/mcp_profile">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_knowledge_ops</div>
+                    <div class="pkg-desc">Stateless orchestration layer — execution engine, pipelines (curation, summary refresh, pattern mining, ingest, index rebuild), workflows, scheduler, runbooks.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_knowledge_ops">pub.dev</a><a href="https://github.com/app-appplayer/mcp_knowledge_ops">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">mcp_philosophy</div>
+                    <div class="pkg-desc">Value-principle / ethos layer — evaluation, prohibition checking, pipeline intervention, tension detection, ethos evolution.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/mcp_philosophy">pub.dev</a><a href="https://github.com/app-appplayer/mcp_philosophy">GitHub</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layer">
+            <span class="layer-name">UI</span>
+            <div class="pkg-grid">
+                <div class="pkg">
+                    <div class="pkg-name">flutter_mcp_ui_core</div>
+                    <div class="pkg-desc">Core models, constants, and Material 3 theme system with DTCG (W3C Design Tokens) interchange. Shared foundation for runtime and generator.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/flutter_mcp_ui_core">pub.dev</a><a href="https://github.com/app-appplayer/flutter_mcp_ui_core">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">flutter_mcp_ui_runtime</div>
+                    <div class="pkg-desc">Dynamic Flutter UI runtime — renders MCP UI definitions, manages state, dispatches actions, integrates with Material 3 theming and responsive form factors.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/flutter_mcp_ui_runtime">pub.dev</a><a href="https://github.com/app-appplayer/flutter_mcp_ui_runtime">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">flutter_mcp_ui_generator</div>
+                    <div class="pkg-desc">Fluent JSON generation toolkit — programmatic UI construction with templates and helpers, including Material 3 theme builder helpers.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/flutter_mcp_ui_generator">pub.dev</a><a href="https://github.com/app-appplayer/flutter_mcp_ui_generator">GitHub</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layer">
+            <span class="layer-name">Application</span>
+            <div class="pkg-grid">
+                <div class="pkg">
+                    <div class="pkg-name">appplayer_core</div>
+                    <div class="pkg-desc">Connection lifecycle, app and dashboard sessions, bundle install pipeline, tool dispatch, and the apps registry. The shared library that hosts build on.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/appplayer_core">pub.dev</a><a href="https://github.com/app-appplayer/appplayer_core">GitHub</a></div>
+                </div>
+                <div class="pkg">
+                    <div class="pkg-name">flutter_mcp</div>
+                    <div class="pkg-desc">Flutter plugin combining MCP client, server, and LLM with platform features — background execution, notifications, system tray, lifecycle, secure storage.</div>
+                    <div class="pkg-links"><a href="https://pub.dev/packages/flutter_mcp">pub.dev</a><a href="https://github.com/app-appplayer/flutter_mcp">GitHub</a></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="composition">
+    <div class="container">
+        <h2>Composition</h2>
+        <p>The packages do not require each other to be used together. Common compositions:</p>
+        <ul style="margin: 0 0 16px 24px; color: var(--text);">
+            <li style="margin-bottom: 8px;"><strong>Minimal client</strong> — <code>mcp_client</code> alone is enough to talk to any MCP server.</li>
+            <li style="margin-bottom: 8px;"><strong>Server with UI</strong> — <code>mcp_server</code> plus <code>mcp_bundle</code> describes tools and an MCP UI definition; clients render it through <code>flutter_mcp_ui_runtime</code>.</li>
+            <li style="margin-bottom: 8px;"><strong>Knowledge stack</strong> — <code>mcp_knowledge</code> composes <code>mcp_fact_graph</code> + <code>mcp_skill</code> + <code>mcp_profile</code> + <code>mcp_knowledge_ops</code> + <code>mcp_philosophy</code> behind one facade.</li>
+            <li style="margin-bottom: 8px;"><strong>Device control</strong> — <code>mcp_io</code> with one or more transport adapters (websocket, http, mqtt, serial, can, modbus, opcua, scpi) brings devices under a single contract; <code>mcp_flow_runtime</code> orchestrates control flows.</li>
+            <li style="margin-bottom: 8px;"><strong>Multi-node deployment</strong> — <code>mcp_gateway</code> routes between MCP servers and clients with namespace separation and policy.</li>
+            <li><strong>Application host</strong> — <code>appplayer_core</code> wires connection lifecycle, sessions, and bundle install on top of <code>mcp_client</code>, <code>mcp_bundle</code>, and the UI runtime.</li>
+        </ul>
+        <p class="muted">Most packages depend only on <code>mcp_bundle</code>. There are no circular dependencies.</p>
+    </div>
+</section>
+
+<footer>
+    <a href="https://github.com/app-appplayer">GitHub</a>
+    <a href="https://pub.dev/publishers/app-appplayer.com/packages">pub.dev</a>
+    <p style="margin-top: 12px;">© AppPlayer</p>
+</footer>
+
 </body>
 </html>
