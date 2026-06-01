@@ -23,7 +23,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="makemind" />
-<meta name="twitter:description" content="Dart & Flutter for the Model Context Protocol — 31 packages, 4 specs, 3 runtime cores, 1 standard app." />
+<meta name="twitter:description" content="Dart & Flutter for the Model Context Protocol — 31 packages, 4 specs, 3 runtime cores, 1 app." />
 <meta name="twitter:image" content="https://app-appplayer.github.io/makemind/og.png" />
 
 <!-- Favicon -->
@@ -542,7 +542,7 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
       <a href="#packages">Packages</a>
       <a href="#specifications">Specs</a>
       <a href="#core">Core</a>
-      <a href="#standard">App</a>
+      <a href="#apps">Apps</a>
       <a href="#composition">Composition</a>
       <a href="#quickstart">Quickstart</a>
     </div>
@@ -618,14 +618,14 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
   <div class="section-head">
     <div class="eyebrow">Architecture</div>
     <h2>From contract to app. Lower never depends on higher.</h2>
-    <p>Open specs at the base, the Standard app at the top, the package layers between. Most packages depend only on <code>mcp_bundle</code> — no circular dependencies.</p>
+    <p>Open specs at the base, the apps at the top, the package layers between. Most packages depend only on <code>mcp_bundle</code> — no circular dependencies.</p>
   </div>
 
   <div class="arch">
     <aside class="arch-side">
       <div class="h">Filter</div>
       <div class="layer-tab active" data-layer="all"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-protocol),var(--layer-knowledge))"></span>All layers <span class="count">39</span></div>
-      <div class="layer-tab" data-layer="standard"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-app),var(--layer-domain))"></span>Standard App <span class="count">1</span></div>
+      <div class="layer-tab" data-layer="apps"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-app),var(--layer-domain))"></span>Apps <span class="count">1</span></div>
       <div class="layer-tab" data-layer="runtime"><span class="swatch" style="background:var(--layer-app)"></span>Runtime · Core <span class="count">4</span></div>
       <div class="layer-tab" data-layer="ui"><span class="swatch" style="background:var(--layer-ui)"></span>UI <span class="count">3</span></div>
       <div class="layer-tab" data-layer="knowledge"><span class="swatch" style="background:var(--layer-knowledge)"></span>Knowledge <span class="count">6</span></div>
@@ -637,16 +637,16 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
     </aside>
     <div class="arch-main">
       <div class="arch-stack" id="archStack">
-        <div class="arch-row" data-layer="standard" style="--row-color: var(--layer-domain);">
+        <div class="arch-row" data-layer="apps" style="--row-color: var(--layer-domain);">
           <div class="label">
             <span class="bar"></span>
             <div>
-              <div class="name">Standard App</div>
-              <div class="desc">installable product · 6 platforms</div>
+              <div class="name">Apps</div>
+              <div class="desc">installable products</div>
             </div>
           </div>
           <div class="pkgs">
-            <a class="pkg-chip" href="#standard">AppPlayer Standard</a>
+            <a class="pkg-chip" href="#apps">AppPlayer Standard</a>
           </div>
         </div>
         <div class="arch-row" data-layer="runtime" style="--row-color: var(--layer-app);">
@@ -819,13 +819,13 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
   <div class="pkg-grid" id="coreGrid"></div>
 </section>
 
-<section id="standard">
+<section id="apps">
   <div class="section-head">
-    <div class="eyebrow">Standard App</div>
-    <h2>AppPlayer Standard.</h2>
-    <p>The installable reference app — one Flutter codebase across six platforms.</p>
+    <div class="eyebrow">Apps</div>
+    <h2>Installable apps.</h2>
+    <p>Finished, installable apps built on the stack — not libraries. AppPlayer Standard is the open reference edition: one Flutter codebase across six platforms.</p>
   </div>
-  <div class="pkg-grid" id="standardGrid"></div>
+  <div class="pkg-grid" id="appsGrid"></div>
 </section>
 
 <section id="composition">
@@ -1076,7 +1076,7 @@ document.querySelectorAll('#tierFilter button').forEach(b => b.addEventListener(
   renderPackages(b.dataset.filter);
 }));
 
-// ── Specifications · OS·Core · Standard App ──────────────────
+// ── Specifications · OS·Core · Apps ──────────────────
 const SPECS = [
   { name: 'ui_dsl',   desc: 'Server-driven UI — a JSON DSL the client renders into an interface.' },
   { name: 'bundle',   desc: 'App packaging — a manifest plus sections that define a bundle.' },
@@ -1108,7 +1108,7 @@ function bundleCard(label, desc, color, linksHTML) {
   SPECS.forEach(s => sg.appendChild(bundleCard(s.name, s.desc, 'var(--layer-foundation)', ghLink('specs'))));
   const cg = document.getElementById('coreGrid');
   CORE.forEach(c => cg.appendChild(bundleCard(c.name, c.desc, 'var(--layer-app)', pubLink(c.name) + ghLink(c.name))));
-  const stg = document.getElementById('standardGrid');
+  const stg = document.getElementById('appsGrid');
   STANDARD.forEach(s => stg.appendChild(bundleCard(s.label, s.desc, 'var(--layer-ui)', ghLink(s.name))));
 }
 

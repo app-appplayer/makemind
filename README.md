@@ -61,9 +61,11 @@ Runtime kernels the apps run on. Each ships on pub.dev.
 - [`flowbrain`](https://pub.dev/packages/flowbrain) — FlowBrain runtime core: declarative flow orchestration kernel.
 - [`brain_kernel`](https://pub.dev/packages/brain_kernel) — Knowledge and agent runtime kernel.
 
-## Standard App
+## Apps
 
-- **AppPlayer Standard** — [github.com/app-appplayer/appplayer](https://github.com/app-appplayer/appplayer) — the installable reference app on the stack; one Flutter codebase across Android, iOS, Linux, macOS, Web, Windows.
+Installable apps built on the stack — not libraries.
+
+- **AppPlayer Standard** — [github.com/app-appplayer/appplayer](https://github.com/app-appplayer/appplayer) — the open reference edition; one Flutter codebase across Android, iOS, Linux, macOS, Web, Windows.
 
 ## How It Works
 
