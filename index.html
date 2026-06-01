@@ -617,15 +617,17 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
 <section id="architecture">
   <div class="section-head">
     <div class="eyebrow">Architecture</div>
-    <h2>Seven layers. Lower never depends on higher.</h2>
+    <h2>Nine layers, bottom to top. Lower never depends on higher.</h2>
     <p>Most packages depend only on <code>mcp_bundle</code>. There are no circular dependencies — pick the parts you need and compose without ceremony.</p>
   </div>
 
   <div class="arch">
     <aside class="arch-side">
       <div class="h">Filter</div>
-      <div class="layer-tab active" data-layer="all"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-protocol),var(--layer-knowledge))"></span>All layers <span class="count">32</span></div>
-      <div class="layer-tab" data-layer="application"><span class="swatch" style="background:var(--layer-app)"></span>Application <span class="count">2</span></div>
+      <div class="layer-tab active" data-layer="all"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-protocol),var(--layer-knowledge))"></span>All layers <span class="count">35</span></div>
+      <div class="layer-tab" data-layer="standard"><span class="swatch" style="background:var(--layer-ui)"></span>Standard App <span class="count">1</span></div>
+      <div class="layer-tab" data-layer="core"><span class="swatch" style="background:var(--layer-knowledge)"></span>OS · Core <span class="count">3</span></div>
+      <div class="layer-tab" data-layer="application"><span class="swatch" style="background:var(--layer-app)"></span>Application <span class="count">1</span></div>
       <div class="layer-tab" data-layer="ui"><span class="swatch" style="background:var(--layer-ui)"></span>UI <span class="count">3</span></div>
       <div class="layer-tab" data-layer="knowledge"><span class="swatch" style="background:var(--layer-knowledge)"></span>Knowledge <span class="count">6</span></div>
       <div class="layer-tab" data-layer="domain"><span class="swatch" style="background:var(--layer-domain)"></span>Domain <span class="count">7</span></div>
@@ -635,6 +637,32 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
     </aside>
     <div class="arch-main">
       <div class="arch-stack" id="archStack">
+        <div class="arch-row" data-layer="standard" style="--row-color: var(--layer-ui);">
+          <div class="label">
+            <span class="bar"></span>
+            <div>
+              <div class="name">Standard App</div>
+              <div class="desc">installable · 6 platforms</div>
+            </div>
+          </div>
+          <div class="pkgs">
+            <a class="pkg-chip" href="#standard">AppPlayer Standard</a>
+          </div>
+        </div>
+        <div class="arch-row" data-layer="core" style="--row-color: var(--layer-knowledge);">
+          <div class="label">
+            <span class="bar"></span>
+            <div>
+              <div class="name">OS · Core</div>
+              <div class="desc">runtime kernels</div>
+            </div>
+          </div>
+          <div class="pkgs">
+            <a class="pkg-chip" href="#core">appplayer_core</a>
+            <a class="pkg-chip" href="#core">flowbrain</a>
+            <a class="pkg-chip" href="#core">brain_kernel</a>
+          </div>
+        </div>
         <div class="arch-row" data-layer="application" style="--row-color: var(--layer-app);">
           <div class="label">
             <span class="bar"></span>
@@ -644,7 +672,6 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
             </div>
           </div>
           <div class="pkgs">
-            <a class="pkg-chip" href="#pkg-appplayer_core">appplayer_core</a>
             <a class="pkg-chip" href="#pkg-flutter_mcp">flutter_mcp</a>
           </div>
         </div>
