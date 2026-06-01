@@ -617,61 +617,50 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
 <section id="architecture">
   <div class="section-head">
     <div class="eyebrow">Architecture</div>
-    <h2>Nine layers, bottom to top. Lower never depends on higher.</h2>
-    <p>Most packages depend only on <code>mcp_bundle</code>. There are no circular dependencies — pick the parts you need and compose without ceremony.</p>
+    <h2>From contract to app. Lower never depends on higher.</h2>
+    <p>Open specs at the base, the Standard app at the top, the package layers between. Most packages depend only on <code>mcp_bundle</code> — no circular dependencies.</p>
   </div>
 
   <div class="arch">
     <aside class="arch-side">
       <div class="h">Filter</div>
-      <div class="layer-tab active" data-layer="all"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-protocol),var(--layer-knowledge))"></span>All layers <span class="count">35</span></div>
-      <div class="layer-tab" data-layer="standard"><span class="swatch" style="background:var(--layer-ui)"></span>Standard App <span class="count">1</span></div>
-      <div class="layer-tab" data-layer="core"><span class="swatch" style="background:var(--layer-knowledge)"></span>OS · Core <span class="count">3</span></div>
-      <div class="layer-tab" data-layer="application"><span class="swatch" style="background:var(--layer-app)"></span>Application <span class="count">1</span></div>
+      <div class="layer-tab active" data-layer="all"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-protocol),var(--layer-knowledge))"></span>All layers <span class="count">39</span></div>
+      <div class="layer-tab" data-layer="standard"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-app),var(--layer-domain))"></span>Standard App <span class="count">1</span></div>
+      <div class="layer-tab" data-layer="runtime"><span class="swatch" style="background:var(--layer-app)"></span>Runtime · Core <span class="count">4</span></div>
       <div class="layer-tab" data-layer="ui"><span class="swatch" style="background:var(--layer-ui)"></span>UI <span class="count">3</span></div>
       <div class="layer-tab" data-layer="knowledge"><span class="swatch" style="background:var(--layer-knowledge)"></span>Knowledge <span class="count">6</span></div>
       <div class="layer-tab" data-layer="domain"><span class="swatch" style="background:var(--layer-domain)"></span>Domain <span class="count">7</span></div>
       <div class="layer-tab" data-layer="io"><span class="swatch" style="background:var(--layer-io)"></span>IO <span class="count">9</span></div>
       <div class="layer-tab" data-layer="protocol"><span class="swatch" style="background:var(--layer-protocol)"></span>Protocol <span class="count">4</span></div>
       <div class="layer-tab" data-layer="foundation"><span class="swatch" style="background:var(--layer-foundation)"></span>Foundation <span class="count">1</span></div>
+      <div class="layer-tab" data-layer="specs"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-io),var(--layer-knowledge))"></span>Specifications <span class="count">4</span></div>
     </aside>
     <div class="arch-main">
       <div class="arch-stack" id="archStack">
-        <div class="arch-row" data-layer="standard" style="--row-color: var(--layer-ui);">
+        <div class="arch-row" data-layer="standard" style="--row-color: var(--layer-domain);">
           <div class="label">
             <span class="bar"></span>
             <div>
               <div class="name">Standard App</div>
-              <div class="desc">installable · 6 platforms</div>
+              <div class="desc">installable product · 6 platforms</div>
             </div>
           </div>
           <div class="pkgs">
             <a class="pkg-chip" href="#standard">AppPlayer Standard</a>
           </div>
         </div>
-        <div class="arch-row" data-layer="core" style="--row-color: var(--layer-knowledge);">
+        <div class="arch-row" data-layer="runtime" style="--row-color: var(--layer-app);">
           <div class="label">
             <span class="bar"></span>
             <div>
-              <div class="name">OS · Core</div>
-              <div class="desc">runtime kernels</div>
+              <div class="name">Runtime · Core</div>
+              <div class="desc">kernels + orchestration</div>
             </div>
           </div>
           <div class="pkgs">
             <a class="pkg-chip" href="#core">appplayer_core</a>
             <a class="pkg-chip" href="#core">flowbrain</a>
             <a class="pkg-chip" href="#core">brain_kernel</a>
-          </div>
-        </div>
-        <div class="arch-row" data-layer="application" style="--row-color: var(--layer-app);">
-          <div class="label">
-            <span class="bar"></span>
-            <div>
-              <div class="name">Application</div>
-              <div class="desc">orchestration</div>
-            </div>
-          </div>
-          <div class="pkgs">
             <a class="pkg-chip" href="#pkg-flutter_mcp">flutter_mcp</a>
           </div>
         </div>
@@ -769,6 +758,21 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
           </div>
           <div class="pkgs">
             <a class="pkg-chip" href="#pkg-mcp_bundle">mcp_bundle</a>
+          </div>
+        </div>
+        <div class="arch-row" data-layer="specs" style="--row-color: var(--layer-protocol);">
+          <div class="label">
+            <span class="bar"></span>
+            <div>
+              <div class="name">Specifications</div>
+              <div class="desc">the contracts · documents</div>
+            </div>
+          </div>
+          <div class="pkgs">
+            <a class="pkg-chip" href="#specifications">ui_dsl</a>
+            <a class="pkg-chip" href="#specifications">bundle</a>
+            <a class="pkg-chip" href="#specifications">serving</a>
+            <a class="pkg-chip" href="#specifications">platform</a>
           </div>
         </div>
       </div>
