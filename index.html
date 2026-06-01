@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>makemind — A Dart and Flutter package family for the Model Context Protocol</title>
-<meta name="description" content="A Dart and Flutter package family for the Model Context Protocol. 32 packages across 7 layers — bundle schema, MCP client/server, transport-agnostic IO, knowledge subsystem, and a Material 3 UI runtime." />
+<meta name="description" content="Open-source Dart & Flutter building blocks for the Model Context Protocol — 39 components: 31 packages across 7 layers, 4 specifications, 3 runtime cores, and the AppPlayer Standard app. Composable without ceremony." />
 <meta name="theme-color" content="#FAFAF9" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0B0C10" media="(prefers-color-scheme: dark)" />
 <link rel="canonical" href="https://app-appplayer.github.io/makemind/" />
@@ -13,17 +13,17 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="makemind" />
 <meta property="og:title" content="makemind — Dart & Flutter packages for the Model Context Protocol" />
-<meta property="og:description" content="32 packages. 7 layers. Bundle schema, MCP client/server, IO adapters, knowledge subsystem, and a Material 3 UI runtime — composable without ceremony." />
+<meta property="og:description" content="39 open-source components — 31 packages across 7 layers, 4 specs, 3 runtime cores, and the AppPlayer Standard app. Composable without ceremony." />
 <meta property="og:url" content="https://app-appplayer.github.io/makemind/" />
 <meta property="og:image" content="https://app-appplayer.github.io/makemind/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="makemind — 32 packages across 7 layers" />
+<meta property="og:image:alt" content="makemind — 39 open-source components" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="makemind" />
-<meta name="twitter:description" content="A Dart and Flutter package family for the Model Context Protocol. 32 packages, 7 layers." />
+<meta name="twitter:description" content="Dart & Flutter for the Model Context Protocol — 31 packages, 4 specs, 3 runtime cores, 1 standard app." />
 <meta name="twitter:image" content="https://app-appplayer.github.io/makemind/og.png" />
 
 <!-- Favicon -->
@@ -540,6 +540,9 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
     <div class="nav-links">
       <a href="#architecture">Architecture</a>
       <a href="#packages">Packages</a>
+      <a href="#specifications">Specs</a>
+      <a href="#core">Core</a>
+      <a href="#standard">App</a>
       <a href="#composition">Composition</a>
       <a href="#quickstart">Quickstart</a>
     </div>
@@ -563,7 +566,7 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
 
 <header class="hero">
   <div>
-    <span class="hero-eyebrow"><span class="dot"></span>v1.0 · 32 packages on pub.dev</span>
+    <span class="hero-eyebrow"><span class="dot"></span>v1.0 · 34 packages on pub.dev</span>
     <h1>The Model Context Protocol stack <em>for Dart and Flutter.</em></h1>
     <p class="lede">A composable family of packages — bundle schema, MCP client/server, transport-agnostic IO, knowledge subsystem, and a Material 3 UI runtime. Each ships independently. None require ceremony.</p>
     <div class="hero-cta">
@@ -576,7 +579,7 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
       </a>
     </div>
     <div class="hero-meta">
-      <div><div class="k">Packages</div><div class="v">32</div></div>
+      <div><div class="k">Components</div><div class="v">39</div></div>
       <div><div class="k">Layers</div><div class="v">7</div></div>
       <div><div class="k">Transports</div><div class="v">8</div></div>
       <div><div class="k">License</div><div class="v">MIT</div></div>
@@ -749,7 +752,7 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
 <section id="packages">
   <div class="section-head">
     <div class="eyebrow">Packages</div>
-    <h2>32 packages. Each ships on its own.</h2>
+    <h2>31 packages. Each ships on its own.</h2>
     <p>Pub.dev publication is independent — depend on what you need. Most depend only on <code>mcp_bundle</code>.</p>
   </div>
 
@@ -765,6 +768,33 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
   </div>
 
   <div class="pkg-grid" id="pkgGrid"></div>
+</section>
+
+<section id="specifications">
+  <div class="section-head">
+    <div class="eyebrow">Specifications</div>
+    <h2>4 specifications.</h2>
+    <p>Specs are documents, not code — the formats and contracts the runtime implements. Open at <code>github.com/app-appplayer/specs</code> (MIT).</p>
+  </div>
+  <div class="pkg-grid" id="specGrid"></div>
+</section>
+
+<section id="core">
+  <div class="section-head">
+    <div class="eyebrow">OS · Core</div>
+    <h2>3 runtime cores.</h2>
+    <p>The kernels the apps run on. Each ships independently on pub.dev.</p>
+  </div>
+  <div class="pkg-grid" id="coreGrid"></div>
+</section>
+
+<section id="standard">
+  <div class="section-head">
+    <div class="eyebrow">Standard App</div>
+    <h2>AppPlayer Standard.</h2>
+    <p>The installable reference app — one Flutter codebase across six platforms.</p>
+  </div>
+  <div class="pkg-grid" id="standardGrid"></div>
 </section>
 
 <section id="composition">
@@ -966,7 +996,6 @@ const PACKAGES = [
   { name: 'flutter_mcp_ui_core', tier: 'ui', desc: 'Core models, constants, and Material 3 theme system with DTCG (W3C Design Tokens) interchange.' },
   { name: 'flutter_mcp_ui_runtime', tier: 'ui', desc: 'Dynamic Flutter UI runtime — renders MCP UI definitions, manages state, dispatches actions.' },
   { name: 'flutter_mcp_ui_generator', tier: 'ui', desc: 'Fluent JSON generation toolkit — programmatic UI construction with templates and helpers.' },
-  { name: 'appplayer_core', tier: 'application', desc: 'Connection lifecycle, app and dashboard sessions, bundle install pipeline, tool dispatch.' },
   { name: 'flutter_mcp', tier: 'application', desc: 'Flutter plugin combining MCP client, server, and LLM with platform features.' },
 ];
 const TIER_LABEL = {
@@ -1015,6 +1044,42 @@ document.querySelectorAll('#tierFilter button').forEach(b => b.addEventListener(
   b.classList.add('on');
   renderPackages(b.dataset.filter);
 }));
+
+// ── Specifications · OS·Core · Standard App ──────────────────
+const SPECS = [
+  { name: 'ui_dsl',   desc: 'Server-driven UI — a JSON DSL the client renders into an interface.' },
+  { name: 'bundle',   desc: 'App packaging — a manifest plus sections that define a bundle.' },
+  { name: 'serving',  desc: 'Bundle MCP serving — run a bundle like a local app.' },
+  { name: 'platform', desc: 'Composition contract — how UI, bundle, and kernel fit together.' },
+];
+const CORE = [
+  { name: 'appplayer_core', desc: 'AppPlayer runtime core — connection lifecycle, app/dashboard sessions, bundle install, tool dispatch.' },
+  { name: 'flowbrain',      desc: 'FlowBrain runtime core — declarative flow orchestration kernel.' },
+  { name: 'brain_kernel',   desc: 'Knowledge and agent runtime kernel.' },
+];
+const STANDARD = [
+  { name: 'appplayer', label: 'AppPlayer Standard', desc: 'Installable reference app on the stack — one Flutter codebase across Android, iOS, Linux, macOS, Web, Windows.' },
+];
+const ghLink  = (repo) => `<a href="https://github.com/app-appplayer/${repo}" target="_blank" rel="noopener">GitHub →</a>`;
+const pubLink = (name) => `<a href="https://pub.dev/packages/${name}" target="_blank" rel="noopener">pub.dev →</a>`;
+function bundleCard(label, desc, color, linksHTML) {
+  const c = document.createElement('div');
+  c.className = 'pkg-card';
+  c.style.setProperty('--card-color', color);
+  c.innerHTML = `
+    <div class="pkg-head"><span class="pkg-name">${label}</span></div>
+    <p class="pkg-desc">${desc}</p>
+    <div class="pkg-links">${linksHTML}</div>`;
+  return c;
+}
+{
+  const sg = document.getElementById('specGrid');
+  SPECS.forEach(s => sg.appendChild(bundleCard(s.name, s.desc, 'var(--layer-foundation)', ghLink('specs'))));
+  const cg = document.getElementById('coreGrid');
+  CORE.forEach(c => cg.appendChild(bundleCard(c.name, c.desc, 'var(--layer-app)', pubLink(c.name) + ghLink(c.name))));
+  const stg = document.getElementById('standardGrid');
+  STANDARD.forEach(s => stg.appendChild(bundleCard(s.label, s.desc, 'var(--layer-ui)', ghLink(s.name))));
+}
 
 // ── Quickstart ───────────────────────────────────────────────
 const QS = {

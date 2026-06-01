@@ -2,14 +2,13 @@
 
 **Control everything with natural language. Every MCP server is an app.**
 
-makemind is the introduction site for the AppPlayer ecosystem of pub-published Dart and Flutter packages — the runtime, contract, knowledge, IO, and UI packages that turn any MCP server into a controllable app.
+makemind is the introduction site for the open-source AppPlayer ecosystem — Dart & Flutter packages, the specifications they implement, the runtime cores, and the AppPlayer Standard app. Everything that turns any MCP server into a controllable app.
 
 Live site: [app-appplayer.github.io/makemind](https://app-appplayer.github.io/makemind)
 
 ## Published Packages
 
 ### Core runtime / orchestration
-- [`appplayer_core`](https://pub.dev/packages/appplayer_core) — Shared Flutter library for MCP connection, bundle handling, and UI runtime orchestration.
 - [`mcp_bundle`](https://pub.dev/packages/mcp_bundle) — Bundle schema, expression language, standard port catalog (40+), and install pipeline.
 - [`mcp_gateway`](https://pub.dev/packages/mcp_gateway) — Multi-node MCP relay with namespace routing, session management, and policy.
 - [`mcp_canvas`](https://pub.dev/packages/mcp_canvas) — Universal definition-based canvas for 2D/3D rendering with CDL.
@@ -44,6 +43,27 @@ Live site: [app-appplayer.github.io/makemind](https://app-appplayer.github.io/ma
 - [`flutter_mcp_ui_core`](https://pub.dev/packages/flutter_mcp_ui_core) — Core models, constants, M3 14-domain theme, DTCG codec.
 - [`flutter_mcp_ui_runtime`](https://pub.dev/packages/flutter_mcp_ui_runtime) — Dynamic UI runtime with M3 theming, responsive form factors, MCP integration.
 - [`flutter_mcp_ui_generator`](https://pub.dev/packages/flutter_mcp_ui_generator) — Fluent JSON generation toolkit.
+
+## Specifications
+
+Specs are documents, not code — the formats and contracts the runtime implements. Published at [github.com/app-appplayer/specs](https://github.com/app-appplayer/specs) (MIT).
+
+- `ui_dsl` — Server-driven UI: a JSON DSL the client renders into an interface.
+- `bundle` — App packaging: a manifest plus sections that define a bundle.
+- `serving` — Bundle MCP serving: run a bundle like a local app.
+- `platform` — Composition contract: how UI, bundle, and kernel fit together.
+
+## OS · Core
+
+Runtime kernels the apps run on. Each ships on pub.dev.
+
+- [`appplayer_core`](https://pub.dev/packages/appplayer_core) — AppPlayer runtime core: connection lifecycle, app/dashboard sessions, bundle install, tool dispatch.
+- [`flowbrain`](https://pub.dev/packages/flowbrain) — FlowBrain runtime core: declarative flow orchestration kernel.
+- [`brain_kernel`](https://pub.dev/packages/brain_kernel) — Knowledge and agent runtime kernel.
+
+## Standard App
+
+- **AppPlayer Standard** — [github.com/app-appplayer/appplayer](https://github.com/app-appplayer/appplayer) — the installable reference app on the stack; one Flutter codebase across Android, iOS, Linux, macOS, Web, Windows.
 
 ## How It Works
 
