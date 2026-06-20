@@ -71,6 +71,7 @@ Runtime kernels the apps run on. Each ships on pub.dev.
 Installable apps built on the stack — not libraries.
 
 - **AppPlayer Standard** — [github.com/app-appplayer/appplayer](https://github.com/app-appplayer/appplayer) — the open reference edition; one Flutter codebase across Android, iOS, Linux, macOS, Web, Windows.
+- **AppPlayer Studio** — [github.com/app-appplayer/appplayer_studio](https://github.com/app-appplayer/appplayer_studio) — the desktop host (macOS, Windows, Linux) that loads any installed domain bundle (`.mcpb`) into a workspace; built-in App Builder, Ops, and Scene Builder, with bundles serving their own MCP endpoints and DSL UI.
 
 ## How It Works
 
