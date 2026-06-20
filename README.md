@@ -82,7 +82,7 @@ Installable apps built on the stack — not libraries.
 ## Links
 
 - GitHub organization: [github.com/app-appplayer](https://github.com/app-appplayer)
-- pub.dev publisher: [pub.dev/publishers/app-appplayer.com/packages](https://pub.dev/publishers/app-appplayer.com/packages)
+- pub.dev publisher: [pub.dev/publishers/makemind.dev/packages](https://pub.dev/publishers/makemind.dev/packages)
 
 ---
 
