@@ -44,6 +44,11 @@ Live site: [app-appplayer.github.io/makemind](https://app-appplayer.github.io/ma
 - [`flutter_mcp_ui_runtime`](https://pub.dev/packages/flutter_mcp_ui_runtime) — Dynamic UI runtime with M3 theming, responsive form factors, MCP integration.
 - [`flutter_mcp_ui_generator`](https://pub.dev/packages/flutter_mcp_ui_generator) — Fluent JSON generation toolkit.
 
+### Utilities
+- [`appplayer_secure`](https://pub.dev/packages/appplayer_secure) — AppPlayer security library: signing, secure storage, AEAD / hash / KDF, trust chain, audit, mutual auth, biometric primitives, plus domain roles / events / facade.
+- [`appplayer_ui_view`](https://pub.dev/packages/appplayer_ui_view) — Target-native read-only UI viewer (Flutter, LVGL, Qt …) with per-target `UiRuntimePort` and device frame.
+- [`appplayer_claude_code_provider`](https://pub.dev/packages/appplayer_claude_code_provider) — Runs Claude Code as a live interactive session (no `-p`) as a brain_kernel LLM provider. Desktop only.
+
 ## Specifications
 
 Specs are documents, not code — the formats and contracts the runtime implements. Published at [github.com/app-appplayer/specs](https://github.com/app-appplayer/specs) (MIT).
@@ -58,7 +63,7 @@ Specs are documents, not code — the formats and contracts the runtime implemen
 Runtime kernels the apps run on. Each ships on pub.dev.
 
 - [`appplayer_core`](https://pub.dev/packages/appplayer_core) — AppPlayer runtime core: connection lifecycle, app/dashboard sessions, bundle install, tool dispatch.
-- [`flowbrain`](https://pub.dev/packages/flowbrain) — FlowBrain runtime core: declarative flow orchestration kernel.
+- [`flowbrain_core`](https://pub.dev/packages/flowbrain_core) — FlowBrain runtime core: declarative flow orchestration kernel.
 - [`brain_kernel`](https://pub.dev/packages/brain_kernel) — Knowledge and agent runtime kernel.
 
 ## Apps

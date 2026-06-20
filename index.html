@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>makemind — A Dart and Flutter package family for the Model Context Protocol</title>
-<meta name="description" content="Open-source Dart & Flutter building blocks for the Model Context Protocol — 39 components: 31 packages across 7 layers, 4 specifications, 3 runtime cores, and the AppPlayer Standard app. Composable without ceremony." />
+<meta name="description" content="Open-source Dart & Flutter building blocks for the Model Context Protocol — 42 components: 34 packages across 8 layers, 4 specifications, 3 runtime cores, and the AppPlayer Standard app. Composable without ceremony." />
 <meta name="theme-color" content="#FAFAF9" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0B0C10" media="(prefers-color-scheme: dark)" />
 <link rel="canonical" href="https://app-appplayer.github.io/makemind/" />
@@ -13,17 +13,17 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="makemind" />
 <meta property="og:title" content="makemind — Dart & Flutter packages for the Model Context Protocol" />
-<meta property="og:description" content="39 open-source components — 31 packages across 7 layers, 4 specs, 3 runtime cores, and the AppPlayer Standard app. Composable without ceremony." />
+<meta property="og:description" content="42 open-source components — 34 packages across 8 layers, 4 specs, 3 runtime cores, and the AppPlayer Standard app. Composable without ceremony." />
 <meta property="og:url" content="https://app-appplayer.github.io/makemind/" />
 <meta property="og:image" content="https://app-appplayer.github.io/makemind/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="makemind — 39 open-source components" />
+<meta property="og:image:alt" content="makemind — 42 open-source components" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="makemind" />
-<meta name="twitter:description" content="Dart & Flutter for the Model Context Protocol — 31 packages, 4 specs, 3 runtime cores, 1 app." />
+<meta name="twitter:description" content="Dart & Flutter for the Model Context Protocol — 34 packages, 4 specs, 3 runtime cores, 1 app." />
 <meta name="twitter:image" content="https://app-appplayer.github.io/makemind/og.png" />
 
 <!-- Favicon -->
@@ -63,6 +63,7 @@
   --layer-knowledge:  #7B5BD9;
   --layer-ui:         #C26A9E;
   --layer-app:        #D86A5A;
+  --layer-utility:    #6B7280;
 
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -566,7 +567,7 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
 
 <header class="hero">
   <div>
-    <span class="hero-eyebrow"><span class="dot"></span>v1.0 · 34 packages on pub.dev</span>
+    <span class="hero-eyebrow"><span class="dot"></span>v1.0 · 42 components</span>
     <h1>The Model Context Protocol stack <em>for Dart and Flutter.</em></h1>
     <p class="lede">A composable family of packages — bundle schema, MCP client/server, transport-agnostic IO, knowledge subsystem, and a Material 3 UI runtime. Each ships independently. None require ceremony.</p>
     <div class="hero-cta">
@@ -624,9 +625,10 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
   <div class="arch">
     <aside class="arch-side">
       <div class="h">Filter</div>
-      <div class="layer-tab active" data-layer="all"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-protocol),var(--layer-knowledge))"></span>All layers <span class="count">39</span></div>
+      <div class="layer-tab active" data-layer="all"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-protocol),var(--layer-knowledge))"></span>All layers <span class="count">42</span></div>
       <div class="layer-tab" data-layer="apps"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-app),var(--layer-domain))"></span>Apps <span class="count">1</span></div>
       <div class="layer-tab" data-layer="runtime"><span class="swatch" style="background:var(--layer-app)"></span>Runtime · Core <span class="count">4</span></div>
+      <div class="layer-tab" data-layer="utility"><span class="swatch" style="background:var(--layer-utility)"></span>Utilities <span class="count">3</span></div>
       <div class="layer-tab" data-layer="ui"><span class="swatch" style="background:var(--layer-ui)"></span>UI <span class="count">3</span></div>
       <div class="layer-tab" data-layer="knowledge"><span class="swatch" style="background:var(--layer-knowledge)"></span>Knowledge <span class="count">6</span></div>
       <div class="layer-tab" data-layer="domain"><span class="swatch" style="background:var(--layer-domain)"></span>Domain <span class="count">7</span></div>
@@ -659,9 +661,23 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
           </div>
           <div class="pkgs">
             <a class="pkg-chip" href="#core">appplayer_core</a>
-            <a class="pkg-chip" href="#core">flowbrain</a>
+            <a class="pkg-chip" href="#core">flowbrain_core</a>
             <a class="pkg-chip" href="#core">brain_kernel</a>
             <a class="pkg-chip" href="#pkg-flutter_mcp">flutter_mcp</a>
+          </div>
+        </div>
+        <div class="arch-row" data-layer="utility" style="--row-color: var(--layer-utility);">
+          <div class="label">
+            <span class="bar"></span>
+            <div>
+              <div class="name">Utilities</div>
+              <div class="desc">secure · view · provider</div>
+            </div>
+          </div>
+          <div class="pkgs">
+            <a class="pkg-chip" href="#pkg-appplayer_secure">appplayer_secure</a>
+            <a class="pkg-chip" href="#pkg-appplayer_ui_view">appplayer_ui_view</a>
+            <a class="pkg-chip" href="#pkg-appplayer_claude_code_provider">appplayer_claude_code_provider</a>
           </div>
         </div>
         <div class="arch-row" data-layer="ui" style="--row-color: var(--layer-ui);">
@@ -783,7 +799,7 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
 <section id="packages">
   <div class="section-head">
     <div class="eyebrow">Packages</div>
-    <h2>31 packages. Each ships on its own.</h2>
+    <h2>34 packages. Each ships on its own.</h2>
     <p>Pub.dev publication is independent — depend on what you need. Most depend only on <code>mcp_bundle</code>.</p>
   </div>
 
@@ -796,6 +812,7 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
     <button data-filter="knowledge">Knowledge</button>
     <button data-filter="ui">UI</button>
     <button data-filter="application">Application</button>
+    <button data-filter="utility">Utilities</button>
   </div>
 
   <div class="pkg-grid" id="pkgGrid"></div>
@@ -1028,6 +1045,9 @@ const PACKAGES = [
   { name: 'flutter_mcp_ui_runtime', tier: 'ui', desc: 'Dynamic Flutter UI runtime — renders MCP UI definitions, manages state, dispatches actions.' },
   { name: 'flutter_mcp_ui_generator', tier: 'ui', desc: 'Fluent JSON generation toolkit — programmatic UI construction with templates and helpers.' },
   { name: 'flutter_mcp', tier: 'application', desc: 'Flutter plugin combining MCP client, server, and LLM with platform features.' },
+  { name: 'appplayer_secure', tier: 'utility', desc: 'AppPlayer security library — signing, secure storage, AEAD / hash / KDF, trust chain, audit, mutual auth, biometric primitives, plus domain roles / events / facade.' },
+  { name: 'appplayer_ui_view', tier: 'utility', desc: 'Target-native read-only UI viewer (Flutter, LVGL, Qt …) — per-target UiRuntimePort with device frame.' },
+  { name: 'appplayer_claude_code_provider', tier: 'utility', desc: 'Runs Claude Code as a live interactive session (no -p) as a brain_kernel LLM provider. Desktop only.' },
 ];
 const TIER_LABEL = {
   foundation: 'Foundation',
@@ -1037,6 +1057,7 @@ const TIER_LABEL = {
   knowledge: 'Knowledge',
   ui: 'UI',
   application: 'Application',
+  utility: 'Utilities',
 };
 const TIER_COLOR = {
   foundation: 'var(--layer-foundation)',
@@ -1046,6 +1067,7 @@ const TIER_COLOR = {
   knowledge: 'var(--layer-knowledge)',
   ui: 'var(--layer-ui)',
   application: 'var(--layer-app)',
+  utility: 'var(--layer-utility)',
 };
 const grid = document.getElementById('pkgGrid');
 function renderPackages(filter) {
@@ -1085,7 +1107,7 @@ const SPECS = [
 ];
 const CORE = [
   { name: 'appplayer_core', desc: 'AppPlayer runtime core — connection lifecycle, app/dashboard sessions, bundle install, tool dispatch.' },
-  { name: 'flowbrain',      desc: 'FlowBrain runtime core — declarative flow orchestration kernel.' },
+  { name: 'flowbrain_core', desc: 'FlowBrain runtime core — declarative flow orchestration kernel.' },
   { name: 'brain_kernel',   desc: 'Knowledge and agent runtime kernel.' },
 ];
 const STANDARD = [
