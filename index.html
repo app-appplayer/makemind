@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>makemind — A Dart and Flutter package family for the Model Context Protocol</title>
-<meta name="description" content="Open-source Dart & Flutter building blocks for the Model Context Protocol — 42 components: 34 packages across 8 layers, 4 specifications, 3 runtime cores, and the AppPlayer Standard app. Composable without ceremony." />
+<meta name="description" content="Open-source Dart & Flutter building blocks for the Model Context Protocol — 43 components: 34 packages across 8 layers, 4 specifications, 3 runtime cores, and 2 AppPlayer Standard apps (player + studio). Composable without ceremony." />
 <meta name="theme-color" content="#FAFAF9" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0B0C10" media="(prefers-color-scheme: dark)" />
 <link rel="canonical" href="https://app-appplayer.github.io/makemind/" />
@@ -13,17 +13,17 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="makemind" />
 <meta property="og:title" content="makemind — Dart & Flutter packages for the Model Context Protocol" />
-<meta property="og:description" content="42 open-source components — 34 packages across 8 layers, 4 specs, 3 runtime cores, and the AppPlayer Standard app. Composable without ceremony." />
+<meta property="og:description" content="43 open-source components — 34 packages across 8 layers, 4 specs, 3 runtime cores, and 2 AppPlayer Standard apps (player + studio). Composable without ceremony." />
 <meta property="og:url" content="https://app-appplayer.github.io/makemind/" />
 <meta property="og:image" content="https://app-appplayer.github.io/makemind/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="makemind — 42 open-source components" />
+<meta property="og:image:alt" content="makemind — 43 open-source components" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="makemind" />
-<meta name="twitter:description" content="Dart & Flutter for the Model Context Protocol — 34 packages, 4 specs, 3 runtime cores, 1 app." />
+<meta name="twitter:description" content="Dart & Flutter for the Model Context Protocol — 34 packages, 4 specs, 3 runtime cores, 2 apps." />
 <meta name="twitter:image" content="https://app-appplayer.github.io/makemind/og.png" />
 
 <!-- Favicon -->
@@ -567,7 +567,7 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
 
 <header class="hero">
   <div>
-    <span class="hero-eyebrow"><span class="dot"></span>v1.0 · 42 components</span>
+    <span class="hero-eyebrow"><span class="dot"></span>v1.0 · 43 components</span>
     <h1>The Model Context Protocol stack <em>for Dart and Flutter.</em></h1>
     <p class="lede">A composable family of packages — bundle schema, MCP client/server, transport-agnostic IO, knowledge subsystem, and a Material 3 UI runtime. Each ships independently. None require ceremony.</p>
     <div class="hero-cta">
@@ -580,7 +580,7 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
       </a>
     </div>
     <div class="hero-meta">
-      <div><div class="k">Components</div><div class="v">42</div></div>
+      <div><div class="k">Components</div><div class="v">43</div></div>
       <div><div class="k">Layers</div><div class="v">8</div></div>
       <div><div class="k">Transports</div><div class="v">8</div></div>
       <div><div class="k">License</div><div class="v">MIT</div></div>
@@ -625,8 +625,8 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
   <div class="arch">
     <aside class="arch-side">
       <div class="h">Filter</div>
-      <div class="layer-tab active" data-layer="all"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-protocol),var(--layer-knowledge))"></span>All layers <span class="count">42</span></div>
-      <div class="layer-tab" data-layer="apps"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-app),var(--layer-domain))"></span>Apps <span class="count">1</span></div>
+      <div class="layer-tab active" data-layer="all"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-protocol),var(--layer-knowledge))"></span>All layers <span class="count">43</span></div>
+      <div class="layer-tab" data-layer="apps"><span class="swatch" style="background:linear-gradient(135deg,var(--layer-app),var(--layer-domain))"></span>Apps <span class="count">2</span></div>
       <div class="layer-tab" data-layer="runtime"><span class="swatch" style="background:var(--layer-app)"></span>Runtime · Core <span class="count">4</span></div>
       <div class="layer-tab" data-layer="utility"><span class="swatch" style="background:var(--layer-utility)"></span>Utilities <span class="count">3</span></div>
       <div class="layer-tab" data-layer="ui"><span class="swatch" style="background:var(--layer-ui)"></span>UI <span class="count">3</span></div>
@@ -649,6 +649,7 @@ section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
           </div>
           <div class="pkgs">
             <a class="pkg-chip" href="#apps">AppPlayer Standard</a>
+            <a class="pkg-chip" href="#apps">AppPlayer Studio Standard</a>
           </div>
         </div>
         <div class="arch-row" data-layer="runtime" style="--row-color: var(--layer-app);">
@@ -1112,7 +1113,7 @@ const CORE = [
 ];
 const STANDARD = [
   { name: 'appplayer', label: 'AppPlayer Standard', desc: 'Installable reference app on the stack — one Flutter codebase across Android, iOS, Linux, macOS, Web, Windows.' },
-  { name: 'appplayer_studio', label: 'AppPlayer Studio', desc: 'Desktop host (macOS, Windows, Linux) that loads any installed domain bundle (.mcpb) into a workspace — built-in App Builder, Ops, and Scene Builder, with bundles serving their own MCP endpoints and DSL UI.' },
+  { name: 'appplayer_studio', label: 'AppPlayer Studio Standard', desc: 'Desktop host (macOS, Windows, Linux) that loads any installed domain bundle (.mcpb) into a workspace — built-in App Builder, Ops, and Scene Builder, with bundles serving their own MCP endpoints and DSL UI.' },
 ];
 const ghLink  = (repo) => `<a href="https://github.com/app-appplayer/${repo}" target="_blank" rel="noopener">GitHub →</a>`;
 const pubLink = (name) => `<a href="https://pub.dev/packages/${name}" target="_blank" rel="noopener">pub.dev →</a>`;
