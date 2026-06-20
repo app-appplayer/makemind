@@ -6,6 +6,15 @@ makemind is the introduction site for the open-source AppPlayer ecosystem — Da
 
 Live site: [app-appplayer.github.io/makemind](https://app-appplayer.github.io/makemind)
 
+## Specifications
+
+Specs are documents, not code — the formats and contracts the runtime implements. Published at [github.com/app-appplayer/specs](https://github.com/app-appplayer/specs) (MIT).
+
+- `ui_dsl` — Server-driven UI: a JSON DSL the client renders into an interface.
+- `bundle` — App packaging: a manifest plus sections that define a bundle.
+- `serving` — Bundle MCP serving: run a bundle like a local app.
+- `platform` — Composition contract: how UI, bundle, and kernel fit together.
+
 ## Published Packages
 
 ### Core runtime / orchestration
@@ -48,15 +57,6 @@ Live site: [app-appplayer.github.io/makemind](https://app-appplayer.github.io/ma
 - [`appplayer_secure`](https://pub.dev/packages/appplayer_secure) — AppPlayer security library: signing, secure storage, AEAD / hash / KDF, trust chain, audit, mutual auth, biometric primitives, plus domain roles / events / facade.
 - [`appplayer_ui_view`](https://pub.dev/packages/appplayer_ui_view) — Target-native read-only UI viewer (Flutter, LVGL, Qt …) with per-target `UiRuntimePort` and device frame.
 - [`appplayer_claude_code_provider`](https://pub.dev/packages/appplayer_claude_code_provider) — Runs Claude Code as a live interactive session (no `-p`) as a brain_kernel LLM provider. Desktop only.
-
-## Specifications
-
-Specs are documents, not code — the formats and contracts the runtime implements. Published at [github.com/app-appplayer/specs](https://github.com/app-appplayer/specs) (MIT).
-
-- `ui_dsl` — Server-driven UI: a JSON DSL the client renders into an interface.
-- `bundle` — App packaging: a manifest plus sections that define a bundle.
-- `serving` — Bundle MCP serving: run a bundle like a local app.
-- `platform` — Composition contract: how UI, bundle, and kernel fit together.
 
 ## OS · Core
 
