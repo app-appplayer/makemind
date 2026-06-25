@@ -43,10 +43,13 @@ Specs are documents, not code — the formats and contracts the runtime implemen
 - [`mcp_analysis`](https://pub.dev/packages/mcp_analysis) — Analysis pipeline engine.
 - [`mcp_ingest`](https://pub.dev/packages/mcp_ingest) — Document ingestion with chunking, OCR, ASR.
 - [`mcp_browser`](https://pub.dev/packages/mcp_browser) — Universal Web Automation Backbone (CDP-direct).
+- [`mcp_datastore`](https://pub.dev/packages/mcp_datastore) — Policy-gated data interface: `fs.*` file ops and `db.*` query / exec / tx over persistent stores, with deny-by-default policy, path jail, and plan → commit.
+- [`mcp_datastore_sqlite`](https://pub.dev/packages/mcp_datastore_sqlite) — SQLite adapter for `mcp_datastore`, driving `db.*` against a file-backed or in-memory database.
 
 ### IO adapters
 - [`mcp_io`](https://pub.dev/packages/mcp_io) — Universal I/O Backbone with device registry, policy engine, audit trail.
 - [`mcp_io_websocket`](https://pub.dev/packages/mcp_io_websocket), [`mcp_io_http`](https://pub.dev/packages/mcp_io_http), [`mcp_io_mqtt`](https://pub.dev/packages/mcp_io_mqtt), [`mcp_io_serial`](https://pub.dev/packages/mcp_io_serial), [`mcp_io_can`](https://pub.dev/packages/mcp_io_can), [`mcp_io_modbus`](https://pub.dev/packages/mcp_io_modbus), [`mcp_io_opcua`](https://pub.dev/packages/mcp_io_opcua), [`mcp_io_scpi`](https://pub.dev/packages/mcp_io_scpi)
+- [`mcp_io_process`](https://pub.dev/packages/mcp_io_process) — Process adapter: spawn, stream, and control OS processes (stdin / stdout / stderr) over the mcp_io backbone. Desktop.
 
 ### UI
 - [`flutter_mcp_ui_core`](https://pub.dev/packages/flutter_mcp_ui_core) — Core models, constants, M3 14-domain theme, DTCG codec.
